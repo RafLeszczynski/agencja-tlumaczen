@@ -31,3 +31,7 @@ node_modules
 
 # build directory
 tmp/*
+
+#OSX
+.DS_Store
+
