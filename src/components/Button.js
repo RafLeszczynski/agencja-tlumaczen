@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class Button extends React.Component {
 
     setStyle() {
@@ -12,7 +11,8 @@ class Button extends React.Component {
             borderRadius: 1,
             color: color,
             cursor: 'pointer',
-            font: '14px/20px Roboto, sans-serif',
+            fontSize: '14px',
+            lineHeight: '20px',
             outline: 'none',
             padding: '10px 15px',
             textTransform: 'uppercase'
