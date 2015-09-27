@@ -2,6 +2,7 @@
 
 var webpack = require('webpack'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
+    TransferWebpackPlugin = require('transfer-webpack-plugin'),
     path = require('path'),
     nodeModulesPath = path.resolve(__dirname, 'node_modules'),
     srcPath = path.join(__dirname, 'src');
@@ -49,6 +50,10 @@ module.exports = {
             inject: true,
             template: 'src/index.html'
         }),
+        new TransferWebpackPlugin([
+            { from: 'src/fonts', to: 'fonts' },
+            { from: 'src/styles'}
+        ]),
         new webpack.NoErrorsPlugin()
     ],
     debug: true,
