@@ -40,7 +40,11 @@ module.exports = {
             {
                 test: /\.js?$/,
                 exclude: [nodeModulesPath],
-                loader: 'babel?cacheDirectory'
+                loader: 'babel',
+                query: {
+                    cacheDirectory: true,
+                    optional: ['es7.decorators', 'es7.classProperties']
+                }
             }
         ]
     },
@@ -51,8 +55,7 @@ module.exports = {
             template: 'src/index.html'
         }),
         new TransferWebpackPlugin([
-            { from: 'src/fonts', to: 'fonts' },
-            { from: 'src/styles'}
+            { from: 'src/fonts', to: 'fonts' }
         ]),
         new webpack.NoErrorsPlugin()
     ],
