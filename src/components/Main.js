@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Header from 'components/Header';
 import Section from 'components/Section';
 import OfficeAddress from 'components/OfficeAddress';
@@ -13,6 +12,7 @@ class Main extends React.Component {
     render() {
         let styles = {
             color: theme.brandingColor,
+            fontFamily: 'Roboto, sans-serif',
             fontSize: theme.baselineFontSize,
             lineHeight: theme.baselineLineHeight
         };
@@ -23,7 +23,6 @@ class Main extends React.Component {
                     title={messages.pageTitle}
                     subtitle={messages.pageSubtitle}
                     actionButtonName={messages.showOfferDetails}
-                    collapsedNav={true}
                 />
 
                 <Section
@@ -31,10 +30,9 @@ class Main extends React.Component {
                     id='office'
                 >
                     {messages.offices.map((address) => {
+                        let {...addressData} = address;
                         return  (
-                            <OfficeAddress
-                                address={address}
-                                showLocation={messages.showLocation}
+                            <OfficeAddress {...addressData} showLocation={messages.showLocation}
                             />
                         );
                     })}
@@ -43,7 +41,7 @@ class Main extends React.Component {
                 <Section
                     title={messages.contactSectionHeader}
                     id='contact'
-                    bgColor={theme.secondaryColor}
+                    even={true}
                 >
                     {messages.phones.map((number) => {
                         return (
@@ -70,7 +68,7 @@ class Main extends React.Component {
                     title={messages.languageSectionHeader}
                     id='language'
                     description={messages.languageSectionDescription}
-                    bgColor={theme.secondaryColor}
+                    even={true}
                 >
                     <Languages languages={messages.languages}/>
                     <p>{messages.otherLanguagesDescription}</p>
@@ -89,7 +87,7 @@ class Main extends React.Component {
                     title={messages.docsSectionHeader}
                     id='docs'
                     description={messages.docsSectionDescription}
-                    bgColor={theme.secondaryColor}
+                    even={true}
 
                     >
                 </Section>
