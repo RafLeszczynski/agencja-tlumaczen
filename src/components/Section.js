@@ -12,7 +12,7 @@ class Section extends React.Component {
         description: React.PropTypes.string
     };
     render() {
-        let {id, title, description, even} = this.props,
+        let {id, title, description, even, flexLayout} = this.props,
             sectionDescription ;
 
         if (description) {
@@ -23,7 +23,7 @@ class Section extends React.Component {
             <section id={id} style={[styles.base, even && styles.backgroundEven]}>
                 <SectionHeader title={title} even={even}/>
                 {sectionDescription}
-                {this.props.children}
+                <div style={[flexLayout && styles.contentLayout]}>{this.props.children}</div>
             </section>
         );
     }
@@ -31,8 +31,20 @@ class Section extends React.Component {
 
 const styles = {
     base: {
-        padding: `48px ${theme.sidePadding} 72px`
+        padding: `48px ${theme.sidePadding} 72px`,
 
+        '@media (min-width: 768px)': {
+            padding: `72px ${theme.sidePadding} 106px`
+
+        },
+        '@media (min-width: 1024px)': {
+            padding: `86px ${theme.sidePadding} 130px`
+        }
+    },
+    contentLayout: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
     },
     backgroundEven: {
         backgroundColor: theme.secondaryColor
