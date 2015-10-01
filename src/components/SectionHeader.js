@@ -30,6 +30,7 @@ const styles = {
 
         '@media (min-width: 768px)': {
             margin: '0 auto',
+            paddingBottom: 72,
             width: 504
         },
         '@media (min-width: 1024px)': {
@@ -38,7 +39,7 @@ const styles = {
     },
     text: {
         display: `block`,
-        fontSize: '16px',
+        fontSize: 16,
         fontWeight: 'normal',
         position: 'relative',
         margin: '0 55px',
@@ -47,6 +48,7 @@ const styles = {
         top: '-10px',
 
         '@media (min-width: 768px)': {
+            fontSize: 20,
             margin: '0 150px'
         },
         '@media (min-width: 1024px)': {
