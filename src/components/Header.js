@@ -32,7 +32,6 @@ class Header extends React.Component {
                         styles.letterSpacingBase,
                         styles.title,
                         fixedHeader && styles.fixedTitle,
-                        fixedHeader && this.state.fadeOut && style.fadeOut
                     ]}>{title}</h1>
                     <h2 style={[styles.letterSpacingBase, styles.subTitle]}>{subtitle}</h2>
                 </hgroup>
@@ -95,11 +94,6 @@ const styles = {
             position: 'absolute',
             left: 30,
             zIndex: 3
-        }
-    },
-    fadeOut: {
-        '@media (min-width: 1024px)': {
-            animation: `${fadeOutKeyFrames} 1s ease 0s 1`
         }
     },
     subTitle: {
