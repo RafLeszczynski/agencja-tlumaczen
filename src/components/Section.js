@@ -1,5 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
+import {Element} from 'react-scroll';
 import SectionHeader from 'components/SectionHeader';
 import Button from 'components/Button';
 import theme from 'theme';
@@ -16,14 +17,16 @@ class Section extends React.Component {
             sectionDescription ;
 
         if (description) {
-            sectionDescription = <p>{description}</p>;
+            sectionDescription = <p style={[styles.descriptionLayout]}>{description}</p>;
         }
 
         return (
-            <section id={id} style={[styles.base, even && styles.backgroundEven]}>
-                <SectionHeader title={title} even={even}/>
-                {sectionDescription}
-                <div style={[flexLayout && styles.contentLayout]}>{this.props.children}</div>
+            <section style={[styles.base, even && styles.backgroundEven]}>
+                <Element name={id}>
+                    <SectionHeader title={title} even={even}/>
+                    {sectionDescription}
+                    <div style={[flexLayout && styles.contentLayout]}>{this.props.children}</div>
+                </Element>
             </section>
         );
     }
@@ -48,6 +51,11 @@ const styles = {
     },
     backgroundEven: {
         backgroundColor: theme.secondaryColor
+    },
+    descriptionLayout: {
+        color: theme.brandingLightColor,
+        textAlign: 'center',
+        margin: '0 0 48px'
     }
 };
 

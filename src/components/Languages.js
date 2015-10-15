@@ -1,6 +1,15 @@
 import React from 'react';
+import Radium from 'radium';
+import LanguageGroup from 'components/LanguageGroup';
+import theme from 'theme';
 
+@Radium
 class Languages extends React.Component {
+    static propTypes = {
+        languages: React.PropTypes.array.isRequired,
+        sideNote: React.PropTypes.string.isRequired
+    };
+
     /**
      * @desc groups languages by letter
      * @param {Array} languages
@@ -30,22 +39,49 @@ class Languages extends React.Component {
     }
 
     render() {
-        let groupedLanguages = this.groupLanguagesByLetter(this.props.languages);
+        let {languages, sideNote} = this.props,
+            groupedLanguages = this.groupLanguagesByLetter(languages),
+            columnBreakIndex = groupedLanguages.length / 2 + 1;
 
         return (
-            <ol>
-                {groupedLanguages.map((languageGroup) => {
-                    return (
-                        <li>
-                            {languageGroup.map((language) => {
-                                return <p>{language}</p>;
-                            })}
-                        </li>
-                    );
-                })}
-            </ol>
+            <div>
+                <ul style={[styles.listPosition, styles.columns]}>
+                    {groupedLanguages.map((languageGroup, index) => {
+                        return <LanguageGroup alignment={index < columnBreakIndex ? 'left' : 'right'} languages={languageGroup} />
+                    })}
+                </ul>
+                <p style={[styles.sideNote]}>{sideNote}</p>
+            </div>
+
         );
     }
 }
+
+const styles = {
+    listPosition: {
+        padding: 0,
+        margin: '0 auto',
+        width: 288,
+
+        '@media (min-width: 768px)': {
+            width: 450
+
+        }
+    },
+    columns: {
+        columnCount: 2,
+        columnGap: 0,
+        listStyle: 'none',
+        '@media (min-width: 768px)': {
+            columnGap: 150
+        }
+    },
+    sideNote: {
+        color: theme.brandingLightColor,
+        margin: '48px 0 0',
+        textAlign: 'center',
+        textTransform: 'uppercase'
+    }
+};
 
 export default Languages;
