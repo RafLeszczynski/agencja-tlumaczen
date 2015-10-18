@@ -2,23 +2,30 @@ import React from 'react';
 import Radium from 'radium';
 import {Link} from 'react-scroll';
 
-@Radium
-class Navigation extends React.Component {
+@Radium class Navigation extends React.Component {
     static propTypes = {
         links: React.PropTypes.array.isRequired,
-        fixedNav: React.PropTypes.bool.isRequired
+        fixedNav: React.PropTypes.bool.isRequired,
+        scrollOffset: React.PropTypes.number.isRequired,
+        scrollDuration: React.PropTypes.number.isRequired
+
+    };
+    static defaultProps = {
+        scrollOffset: -142,
+        scrollDuration: 500
     };
 
-    render () {
-        let {links, fixedNav} = this.props;
+    render() {
+        let {links, fixedNav, scrollDuration, scrollOffset, expandMenu} = this.props;
 
         return (
-            <nav style={[styles.spacing, fixedNav && styles.fixedNav]}>
+            <nav style={[styles.spacing, fixedNav && styles.fixedNav, expandMenu && styles.expandMenu]}>
                 <ul style={[styles.listStyle]}>
                     {links.map((link) => {
                         return (
-                            <li style={[styles.listItemStyle]}>
-                                <Link to={link.id} spy={true} smooth={true} offset={-142} duration={500}>{link.title}</Link>
+                            <li style={[styles.listItemStyle, expandMenu && styles.expandMenuList]}>
+                                <Link to={link.id} spy={true} smooth={true} offset={scrollOffset}
+                                      duration={scrollDuration}>{link.title}</Link>
                             </li>
                         )
                     })}
@@ -29,9 +36,19 @@ class Navigation extends React.Component {
 }
 
 let fadeInKeyFrames = Radium.keyframes({
-    '0%': {opacity: 0},
-    '100%': {opacity: 1}
-}, 'Header');
+        '0%': {opacity: 0},
+        '100%': {opacity: 1}
+    }, 'Header'),
+    expandKeyFrame = Radium.keyframes({
+        '0%': {
+            opacity: 0,
+            height: 300
+        },
+        '100%': {
+            opacity: 1,
+            height: 1000
+        }
+    }, 'Navigation');
 
 const styles = {
     listStyle: {
@@ -44,17 +61,32 @@ const styles = {
         textTransform: 'uppercase'
     },
     spacing: {
-        marginBottom: 116,
-        width: '100%'
+        display: 'none',
+
+        '@media (min-width: 1024px)': {
+            bottom: 20,
+            display: 'block',
+            marginBottom: 116,
+            right: 0,
+            width: '100%',
+            zIndex: 3
+        }
     },
     fixedNav: {
-        animation: `${fadeInKeyFrames} 1s ease 0s 1`,
-        bottom: 20,
-        marginBottom: 0,
-        position: 'absolute',
-        right: 30,
-        textAlign: 'right',
-        zIndex: 3
+        '@media (min-width: 1024px)': {
+            animation: `${fadeInKeyFrames} 1s ease 0s 1`,
+            marginBottom: 0,
+            position: 'absolute',
+            textAlign: 'right'
+        }
+    },
+    expandMenu: {
+        display: 'block',
+        animation: `${expandKeyFrame} 1s ease 0s 1`,
+        height: 1000
+    },
+    expandMenuList: {
+        display: 'block'gg
     }
 };
 
