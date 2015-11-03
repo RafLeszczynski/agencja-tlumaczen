@@ -2,28 +2,39 @@ import React from 'react';
 import Radium from 'radium';
 import {Link} from 'react-scroll';
 
+import theme from 'theme';
+
 @Radium class Navigation extends React.Component {
     static propTypes = {
+        fixedHeader: React.PropTypes.bool.isRequired,
+        isMenuExpanded: React.PropTypes.bool.isRequired,
         links: React.PropTypes.array.isRequired,
-        fixedNav: React.PropTypes.bool.isRequired,
         scrollOffset: React.PropTypes.number.isRequired,
         scrollDuration: React.PropTypes.number.isRequired
 
     };
+
     static defaultProps = {
         scrollOffset: -142,
         scrollDuration: 500
     };
 
     render() {
-        let {links, fixedNav, scrollDuration, scrollOffset, expandMenu} = this.props;
+        let {fixedHeader, isMenuExpanded, links, scrollDuration, scrollOffset} = this.props,
+
+        // styles
+            position = [
+                styles.position,
+                fixedHeader && styles.fixedHeaderPosition,
+                isMenuExpanded && styles.inMenuPosition
+            ];
 
         return (
-            <nav style={[styles.spacing, fixedNav && styles.fixedNav, expandMenu && styles.expandMenu]}>
-                <ul style={[styles.listStyle]}>
+            <nav style={position}>
+                <ul style={styles.list}>
                     {links.map((link) => {
                         return (
-                            <li style={[styles.listItemStyle, expandMenu && styles.expandMenuList]}>
+                            <li key={link.id} style={styles.listItem}>
                                 <Link to={link.id} spy={true} smooth={true} offset={scrollOffset}
                                       duration={scrollDuration}>{link.title}</Link>
                             </li>
@@ -36,57 +47,60 @@ import {Link} from 'react-scroll';
 }
 
 let fadeInKeyFrames = Radium.keyframes({
-        '0%': {opacity: 0},
-        '100%': {opacity: 1}
-    }, 'Header'),
-    expandKeyFrame = Radium.keyframes({
-        '0%': {
-            opacity: 0,
-            height: 300
-        },
-        '100%': {
-            opacity: 1,
-            height: 1000
-        }
-    }, 'Navigation');
+    '0%': {
+        opacity: 0
+    },
+    '100%': {
+        opacity: 1
+    }
+}, 'Navigation');
 
 const styles = {
-    listStyle: {
+    list: {
+        color: theme.secondaryColor,
         listStyle: 'none',
-        margin: 0
+        margin: 0,
+        padding: 0
     },
-    listItemStyle: {
-        display: 'inline',
-        padding: '0 30px',
-        textTransform: 'uppercase'
-    },
-    spacing: {
-        display: 'none',
+    listItem: {
+        display: 'block',
+        padding: '10px',
+        textTransform: 'uppercase',
 
         '@media (min-width: 1024px)': {
-            bottom: 20,
-            display: 'block',
-            marginBottom: 116,
-            right: 0,
-            width: '100%',
-            zIndex: 3
+            display: 'inline',
+            padding: '0 30px'
         }
     },
-    fixedNav: {
+    position: {
+        display: 'none',
+        position: 'absolute',
+        left: 0,
+        textAlign: 'center',
+        width: '100%',
+        zIndex: 3,
+
         '@media (min-width: 1024px)': {
-            animation: `${fadeInKeyFrames} 1s ease 0s 1`,
-            marginBottom: 0,
-            position: 'absolute',
-            textAlign: 'right'
+            opacity: 1,
+            top: 20,
+            display: 'block'
         }
     },
-    expandMenu: {
+    inMenuPosition: {
+        animation: `${fadeInKeyFrames} 0.5s ease 0s 1`,
         display: 'block',
-        animation: `${expandKeyFrame} 1s ease 0s 1`,
-        height: 1000
+        opacity: 1
     },
-    expandMenuList: {
-        display: 'block'gg
+    fixedHeaderPosition: {
+        bottom: 40,
+
+        '@media (min-width: 1024px)': {
+            animation: `${fadeInKeyFrames} 0.5s ease 0s 1`,
+            bottom: 20,
+            opacity: 1,
+            textAlign: 'right',
+            top: 'auto'
+        }
     }
 };
 
