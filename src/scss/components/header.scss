@@ -15,6 +15,7 @@
 	color: $secondaryColor;
 	box-sizing: border-box;
 	height: $headerHeight;
+	overflow: hidden;
 	padding: 115px 16px 72px;
 	transition: height 1s ease, top 1s ease;
 	width: 100%;
