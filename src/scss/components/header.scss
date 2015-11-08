@@ -127,6 +127,10 @@
 	width: 100%;
 	z-index: 4;
 
+	a {
+		cursor: pointer;
+	}
+
 	.header--fixed &,
 	.header--expanded & {
 		display: block;
@@ -261,4 +265,12 @@
 		line-height: 27px;
 		margin: 0 0 96px;
 	}
+}
+
+.see-more-icon {
+	display: block;
+	fill: $secondaryColor;
+	height: 24px;
+	margin: 60px auto 0;
+	width: 24px;
 }

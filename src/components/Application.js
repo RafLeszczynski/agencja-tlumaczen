@@ -17,7 +17,8 @@ export default class Application extends React.Component {
 				<Header
 					title={messages.pageTitle}
 					subtitle={messages.pageSubtitle}
-					actionButtonName={messages.showOfferDetails}
+					goToPromoSectionName={messages.showOfferDetails}
+					goToPromoSectionId='offer'
 					navLinks={messages.links}
 				/>
 
