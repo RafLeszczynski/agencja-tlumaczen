@@ -1,19 +1,4 @@
-$breakPointLarge: 1024px;
-$breakPointMedium: 767px;
-
-$brandingColor: rgba(66, 21, 54, 1);
-$secondaryColor: #FFF9F5;
-$highlightColor: white;
-
-$headerHeight: 484px;
-$headerHeightLargeBreakPoint: 576px;
-
-$fixedHeaderHeight: 56px;
-
-body {
-	color: $brandingColor;
-	font: 14px/20px 'Roboto', sans-serif;
-}
+@import '../variables';
 
 .header-wrapper {
 	height: $headerHeight;

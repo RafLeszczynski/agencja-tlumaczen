@@ -1,4 +1,4 @@
-require('../scss/header.scss');
+require('../scss/components/header.scss');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,21 +10,25 @@ import Navigation from 'components/Navigation';
 import Hero from 'components/Hero';
 
 export default class Header extends React.Component {
-	static collapsedHeaderHeight = 56;
-	static id = 'header';
-
 	static propTypes = {
-		title: React.PropTypes.string.isRequired,
-		subtitle: React.PropTypes.string.isRequired,
 		actionButtonName: React.PropTypes.string.isRequired,
-		navLinks: React.PropTypes.arrayOf(React.PropTypes.objectOf(React.PropTypes.string)).isRequired
+		collapsedHeaderHeight: React.PropTypes.number.isRequired,
+		id: React.PropTypes.string.isRequired,
+		navLinks: React.PropTypes.arrayOf(React.PropTypes.objectOf(React.PropTypes.string)).isRequired,
+		scrollDuration: React.PropTypes.number.isRequired,
+		subtitle: React.PropTypes.string.isRequired,
+		title: React.PropTypes.string.isRequired
+	};
+
+	static defaultProps = {
+		id: 'header',
+		collapsedHeaderHeight: 56,
+		scrollDuration: 500
 	};
 
 	state = {
 		fixedHeader: false,
-		isMenuExpended: false,
-		scrollOffset: -142,
-		scrollDuration: 500
+		isMenuExpended: false
 	};
 
 	constructor(props) {
@@ -53,7 +57,7 @@ export default class Header extends React.Component {
 	 */
 	toggleHeaderPosition() {
 		let componentHeight = ReactDOM.findDOMNode(this).offsetHeight,
-			fixedOffset = componentHeight - Header.collapsedHeaderHeight,
+			fixedOffset = componentHeight - this.props.collapsedHeaderHeight,
 			shouldBeFixed = window.scrollY >= fixedOffset;
 
 		if (this.state.fixedHeader !== shouldBeFixed) {
@@ -75,7 +79,7 @@ export default class Header extends React.Component {
 	}
 
 	render() {
-		let {actionButtonName, navLinks, subtitle, title} = this.props,
+		let {actionButtonName, collapsedHeaderHeight, id, navLinks, scrollDuration, subtitle, title} = this.props,
 
 			fixedHeader = this.state.fixedHeader,
 			isMenuExpanded = this.state.isMenuExpended,
@@ -88,16 +92,13 @@ export default class Header extends React.Component {
 
 		return (
 			<div className="header-wrapper">
-				<Element name={Header.id}>
+				<Element name={id}>
 					<header className={headerClasses} style={isMenuExpanded ? {height: window.innerHeight} : {}}>
-						<HamburgerIcon toggleMenu={this.toggleMenuDisplay.bind(this)} fixedHeader={fixedHeader}/>
-
-						<div className="header__home-link">
-							<Link to={Header.id} spy={true} smooth={true} offset={this.state.scrollOffset}
-							      duration={this.state.scrollDuration}>{title}</Link>
-						</div>
-
-						<Navigation links={navLinks}/>
+						<HamburgerIcon toggleMenu={this.toggleMenuDisplay.bind(this)}/>
+						<Link to={id} spy={true} smooth={true} offset={-collapsedHeaderHeight}
+						      duration={scrollDuration} className="header__home-link">{title}</Link>
+						<Navigation links={navLinks} scrollOffset={-collapsedHeaderHeight}
+						            scrollDuration={scrollDuration}/>
 						<Hero title={title} subtitle={subtitle} actionButton={actionButtonName}/>
 					</header>
 				</Element>
