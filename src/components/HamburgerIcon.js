@@ -1,15 +1,23 @@
-import React from 'react';
+require('../scss/components/hamburgerIcon.scss');
 
-//TODO: toggle open class base on a prop passed to the component
-//TODO: create separate stylessheet for this icon
+import React from 'react';
+import classNames from 'classnames';
+
 export default class MenuButton extends React.Component {
 	static propTypes = {
+		isMenuExpanded: React.PropTypes.bool,
 		toggleMenu: React.PropTypes.func.isRequired
 	};
 
 	render() {
+		let {isMenuExpanded, toggleMenu} = this.props,
+			buttonClasses = classNames({
+			'menu-button': true,
+			'menu-button--active': isMenuExpanded
+		});
+
 		return (
-			<div className='menu-button' onClick={this.props.toggleMenu}>
+			<div className={buttonClasses} onClick={toggleMenu}>
 				<span/>
 				<span/>
 				<span/>

@@ -1,3 +1,5 @@
+require('../scss/components/navigation.scss');
+
 import React from 'react';
 import {Link} from 'react-scroll';
 
