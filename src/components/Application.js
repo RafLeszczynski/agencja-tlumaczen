@@ -28,7 +28,7 @@ export default class Application extends React.Component {
 					})}
 				</Section>
 
-				<Section title={messages.contactSectionHeader} id='contact' even={true}>
+				<Section title={messages.contactSectionHeader} id='contact'>
 					<Contact {...messages.contactDetails} contactUs={messages.contactUs}/>
 				</Section>
 
@@ -39,7 +39,7 @@ export default class Application extends React.Component {
 				</Section>
 
 				<Section title={messages.languageSectionHeader} id='languages'
-				         description={messages.languageSectionDescription} even={true}>
+				         description={messages.languageSectionDescription}>
 					<Languages languages={messages.languages} sideNote={messages.otherLanguagesDescription}/>
 				</Section>
 
@@ -49,8 +49,7 @@ export default class Application extends React.Component {
 					})}
 				</Section>
 
-				<Section title={messages.docsSectionHeader} id='docs' description={messages.docsSectionDescription}
-				         even={true}>
+				<Section title={messages.docsSectionHeader} id='docs' description={messages.docsSectionDescription}>
 				</Section>
 			</div>
 		);

@@ -8,11 +8,6 @@ export default class Navigation extends React.Component {
 		scrollDuration: React.PropTypes.number.isRequired
 	};
 
-	static defaultProps = {
-		scrollOffset: -142,
-		scrollDuration: 500
-	};
-
 	render() {
 		let {links, scrollDuration, scrollOffset} = this.props;
 
