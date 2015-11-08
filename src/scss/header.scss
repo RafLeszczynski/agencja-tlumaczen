@@ -3,20 +3,12 @@ $breakPointMedium: 767px;
 
 $brandingColor: rgba(66, 21, 54, 1);
 $secondaryColor: #FFF9F5;
+$highlightColor: white;
 
 $headerHeight: 484px;
 $headerHeightLargeBreakPoint: 576px;
 
 $fixedHeaderHeight: 56px;
-
-@keyframes navigationFadeIn {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
 
 .header-wrapper {
 	height: $headerHeight;
@@ -61,6 +53,8 @@ $fixedHeaderHeight: 56px;
 	top: 0
 }
 
+// ********** Navigation ********** //
+
 .menu-button {
 	color: $secondaryColor;
 	display: block;
@@ -78,56 +72,23 @@ $fixedHeaderHeight: 56px;
 	}
 }
 
-.header__navigation {
-	position: fixed;
-	left: 0;
-	height: 0;
-	opacity: 0;
-	text-align: center;
-	top: 150px;
-	transition: opacity .5s ease;
-	width: 100%;
-	z-index: 3;
-
-	.header--expanded & {
-		height: auto;
-		opacity: 1;
-	}
-
-	@media(min-width: $breakPointLarge) {
-		height: auto;
-		opacity: 1;
-		position: absolute;
-		top: 20px;
-
-		.header--fixed & {
-			animation: navigationFadeIn .5s ease;
-			bottom: 20px;
-			opacity: 1;
-			text-align: right;
-			top: auto;
-		}
-	}
-}
-
 .header__home-link {
+	cursor: pointer;
 	font-family: 'Caviar Dreams', sans-serif;
 	font-size: 20px;
 	letter-spacing: 2px;
 	left: 0;
 	line-height: 24px;
-	opacity: 0;
+	display: none;
 	position: fixed;
 	text-align: center;
-	transition: opacity .5s ease;
 	top: 15px;
 	width: 100%;
-	z-index: -1;
+	z-index: 4;
 
 	.header--fixed &,
 	.header--expanded & {
-		opacity: 1;
-		z-index: 4;
+		display: block;
 	}
 
 	@media (min-width: $breakPointLarge) {
@@ -136,31 +97,85 @@ $fixedHeaderHeight: 56px;
 	}
 }
 
+.header__navigation {
+	position: fixed;
+	left: 0;
+	display: none;
+	text-align: center;
+	top: 150px;
+	width: 100%;
+	z-index: 3;
+
+	.header--expanded & {
+		display: block;
+		top: 150px;
+	}
+
+	@media(min-width: $breakPointLarge) {
+		display: block;
+		position: absolute;
+		top: 20px;
+
+		.header--fixed & {
+			bottom: 20px;
+			text-align: right;
+			top: auto;
+		}
+	}
+}
+
 .header__navigation-list {
-	listStyle: none;
+	list-style: none;
 	margin: 0;
 	padding: 0;
+
+	@media(min-width: $breakPointLarge) {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: center;
+
+		.header--fixed & {
+			justify-content: flex-end;
+		}
+	}
 }
 
 .header__navigation-list__list-item {
 	display: block;
-	padding: 10px;
+	padding: 15px;
 	text-transform: uppercase;
 
 	@media(min-width: $breakPointLarge) {
 		display: inline;
 		padding: 0 30px;
 	}
+
+	a {
+		cursor: pointer;
+		position: relative;
+
+		&:hover,
+		&.active {
+			&:after {
+				content: '•';
+				display: block;
+				left: 0;
+				position: absolute;
+				top: 14px;
+				text-align: center;
+				width: 100%;
+			}
+		}
+	}
 }
 
 .header__hero {
-	opacity: 1;
 	text-align: center;
-	transition: opacity .5s ease;
 
 	.header--fixed &,
 	.header--expanded & {
-		opacity: 0;
+		display: none;
 	}
 }
 
