@@ -11,12 +11,12 @@ export default class MenuButton extends React.Component {
 		let {toggleMenu} = this.props;
 
 		return (
-			<a href='' title='menu' className='menu-button' onClick={toggleMenu}>
+			<div className='menu-button' onClick={toggleMenu}>
 				<span></span>
 				<span></span>
 				<span></span>
 				<span></span>
-			</a>
+			</div>
 		);
 	}
 }
