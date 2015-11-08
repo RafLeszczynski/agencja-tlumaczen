@@ -11,6 +11,7 @@ export default class Navigation extends React.Component {
 	render() {
 		let {links, scrollDuration, scrollOffset} = this.props;
 
+		// TODO: Move home link to navigation
 		return (
 			<nav className='header__navigation'>
 				<ul className='header__navigation-list'>
