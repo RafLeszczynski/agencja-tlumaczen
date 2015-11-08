@@ -12,7 +12,7 @@ module.exports = {
     cache: true,
     entry: {
         app: path.join(srcPath, 'app.js'),
-        common: ['react', 'react-router', 'alt']
+        common: ['react']
     },
     resolve: {
         root: srcPath,
@@ -45,6 +45,10 @@ module.exports = {
                     cacheDirectory: true,
                     optional: ['es7.decorators', 'es7.classProperties']
                 }
+            },
+            {
+                test: /\.scss$/,
+                loaders: ['style', 'css', 'sass']
             }
         ]
     },
