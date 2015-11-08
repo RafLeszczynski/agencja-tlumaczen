@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Button from 'components/Button'
 
 export default class Hero extends React.Component {
@@ -18,7 +17,7 @@ export default class Hero extends React.Component {
 					<h1 className='header__hero__title'>{title}</h1>
 					<h2 className='header__hero__sub-title'>{subtitle}</h2>
 				</hgroup>
-				<Button name={actionButton} altColor={true} big={true}/>
+				<Button name={actionButton} secondary={true} big={true}/>
 			</div>
 		);
 	}

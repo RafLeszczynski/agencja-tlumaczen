@@ -1,0 +1,24 @@
+@import '../variables';
+
+.button {
+	background-color: transparent;
+	color: $brandingColor;
+	border: 1px solid $brandingColor;
+	border-radius: 1px;
+	cursor: pointer;
+	font: 14px/20px;
+	outline: none;
+	padding: 8px 15px;
+	text-transform: uppercase;
+
+	&.button--secondary {
+		color: $secondaryColor;
+		border-color: $secondaryColor;
+	}
+
+	&.button--big {
+		@media (min-width: $breakPointMedium) {
+			font-size: 16px;
+		}
+	}
+}
