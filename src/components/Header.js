@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import {Link, Element} from 'react-scroll';
 
-import MenuButton from 'components/MenuButton';
+import HamburgerIcon from 'components/HamburgerIcon';
 import Navigation from 'components/Navigation';
 import Hero from 'components/Hero';
 
@@ -90,7 +90,7 @@ export default class Header extends React.Component {
 			<div className="header-wrapper">
 				<Element name={Header.id}>
 					<header className={headerClasses} style={isMenuExpanded ? {height: window.innerHeight} : {}}>
-						<MenuButton toggleMenu={this.toggleMenuDisplay.bind(this)} fixedHeader={fixedHeader}/>
+						<HamburgerIcon toggleMenu={this.toggleMenuDisplay.bind(this)} fixedHeader={fixedHeader}/>
 
 						<div className="header__home-link">
 							<Link to={Header.id} spy={true} smooth={true} offset={this.state.scrollOffset}
