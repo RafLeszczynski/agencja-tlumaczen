@@ -1,6 +1,8 @@
+// global dependencies
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Radium from 'radium';
+
+// react components
 import Header from 'components/Header';
 import Section from 'components/Section';
 import OfficeAddress from 'components/OfficeAddress';
@@ -8,6 +10,8 @@ import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
 import Contact from 'components/Contact';
+
+// local dependencies
 import messages from 'messages';
 import theme from 'theme';
 
@@ -17,41 +21,36 @@ class Main extends React.Component {
         super(props);
 
         this.state = {
-            fixedHeader: false
+            expendedNav: false,
+            pagesScrollPos: 0
         };
     }
 
-    componentDidMount() {
-        window.addEventListener('scroll', this.alterHeaderPosition.bind(this));
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.alterHeaderPosition.bind(this));
-    }
-
-    alterHeaderPosition() {
-        let headerComponent = this.refs.header,
-            collapsedHeaderHeight = 56,
-            fixedOffset = ReactDOM.findDOMNode(headerComponent).offsetHeight - collapsedHeaderHeight,
-            shouldBeFixed = window.scrollY >= fixedOffset;
-
-        if (this.state.fixedHeader !== shouldBeFixed) {
-            this.setState({
-                fixedHeader: shouldBeFixed
-            });
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.pagesScrollPos !== 0) {
+            window.scrollTo(0, prevState.pagesScrollPos);
         }
+    }
+
+    handleExpendedNaV() {
+        let isExpended = this.state.expendedNav,
+            pageScrollPos = window.scrollY;
+
+        this.setState({
+            expendedNav: !isExpended,
+            pagesScrollPos: window.scrollY
+        });
     }
 
     render() {
         return (
-            <div style={[styles.fontStyles, this.state.fixedHeader && styles.fixedHeaderPadding]}>
+            <div style={[styles.fontStyles, this.state.expendedNav && styles.expendedMenu, this.state.expendedNav && {top: -this.state.pagesScrollPos}]}>
                 <Header
-                    ref="header"
                     title={messages.pageTitle}
                     subtitle={messages.pageSubtitle}
                     actionButtonName={messages.showOfferDetails}
-                    fixedHeader={this.state.fixedHeader}
                     navLinks={messages.links}
+                    expendedNavHandler={this.handleExpendedNaV.bind(this)}
                 />
 
                 <Section title={messages.officeSectionHeader} id='office' flexLayout={true}>
@@ -97,8 +96,10 @@ const styles = {
         fontSize: theme.baselineFontSize,
         lineHeight: theme.baselineLineHeight
     },
-    fixedHeaderPadding: {
-        paddingTop: 514
+    expendedMenu: {
+        position: 'fixed',
+        height: '100%',
+        width: '100%'
     }
 };
 
