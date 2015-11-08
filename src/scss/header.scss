@@ -10,6 +10,11 @@ $headerHeightLargeBreakPoint: 576px;
 
 $fixedHeaderHeight: 56px;
 
+body {
+	color: $brandingColor;
+	font: 14px/20px 'Roboto', sans-serif;
+}
+
 .header-wrapper {
 	height: $headerHeight;
 	position: relative;
