@@ -1,4 +1,5 @@
 require('../scss/components/header.scss');
+require('../scss/components/button.scss');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -7,13 +8,13 @@ import {Link, Element} from 'react-scroll';
 
 import HamburgerIcon from 'components/HamburgerIcon';
 import Navigation from 'components/Navigation';
-import Hero from 'components/Hero';
 
 export default class Header extends React.Component {
 	static propTypes = {
-		actionButtonName: React.PropTypes.string.isRequired,
 		collapsedHeaderHeight: React.PropTypes.number.isRequired,
 		id: React.PropTypes.string.isRequired,
+		goToPromoSectionId: React.PropTypes.string.isRequired,
+		goToPromoSectionName: React.PropTypes.string.isRequired,
 		navLinks: React.PropTypes.arrayOf(React.PropTypes.objectOf(React.PropTypes.string)).isRequired,
 		scrollDuration: React.PropTypes.number.isRequired,
 		subtitle: React.PropTypes.string.isRequired,
@@ -79,7 +80,8 @@ export default class Header extends React.Component {
 	}
 
 	render() {
-		let {actionButtonName, collapsedHeaderHeight, id, navLinks, scrollDuration, subtitle, title} = this.props,
+		let {collapsedHeaderHeight, id, goToPromoSectionId, goToPromoSectionName, navLinks, scrollDuration, subtitle,
+				title} = this.props,
 
 			fixedHeader = this.state.fixedHeader,
 			isMenuExpanded = this.state.isMenuExpended,
@@ -88,6 +90,11 @@ export default class Header extends React.Component {
 				header: true,
 				'header--fixed': fixedHeader || isMenuExpanded,
 				'header--expanded': isMenuExpanded
+			}),
+			buttonClasses = classNames({
+				button: true,
+				'button--secondary': true,
+				'button--big': true
 			});
 
 		return (
@@ -95,11 +102,24 @@ export default class Header extends React.Component {
 				<Element name={id}>
 					<header className={headerClasses} style={isMenuExpanded ? {height: window.innerHeight} : {}}>
 						<HamburgerIcon toggleMenu={this.toggleMenuDisplay.bind(this)}/>
-						<Link to={id} spy={true} smooth={true} offset={-collapsedHeaderHeight}
-						      duration={scrollDuration} className="header__home-link">{title}</Link>
+						<div className='header__home-link'>
+							<Link to={id} spy={true} smooth={true} offset={-collapsedHeaderHeight}
+							      duration={scrollDuration}>{title}</Link>
+						</div>
 						<Navigation links={navLinks} scrollOffset={-collapsedHeaderHeight}
 						            scrollDuration={scrollDuration}/>
-						<Hero title={title} subtitle={subtitle} actionButton={actionButtonName}/>
+						<div className='header__hero'>
+							<hgroup>
+								<h1 className='header__hero__title'>{title}</h1>
+								<h2 className='header__hero__sub-title'>{subtitle}</h2>
+							</hgroup>
+							<Link to={goToPromoSectionId} spy={true} smooth={true} offset={-collapsedHeaderHeight}
+							      duration={scrollDuration} className={buttonClasses}>{goToPromoSectionName}</Link>
+							<svg className='see-more-icon' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
+								<path d="M0 0h24v24H0z" fill="none"/>
+							</svg>
+						</div>
 					</header>
 				</Element>
 			</div>
