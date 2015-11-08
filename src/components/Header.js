@@ -17,8 +17,7 @@ export default class Header extends React.Component {
 		title: React.PropTypes.string.isRequired,
 		subtitle: React.PropTypes.string.isRequired,
 		actionButtonName: React.PropTypes.string.isRequired,
-		navLinks: React.PropTypes.arrayOf(React.PropTypes.objectOf(React.PropTypes.string)).isRequired,
-		expendedNavHandler: React.PropTypes.func.isRequired,
+		navLinks: React.PropTypes.arrayOf(React.PropTypes.objectOf(React.PropTypes.string)).isRequired
 	};
 
 	state = {
@@ -78,7 +77,6 @@ export default class Header extends React.Component {
 	render() {
 		let {actionButtonName, navLinks, subtitle, title} = this.props,
 
-		// state
 			fixedHeader = this.state.fixedHeader,
 			isMenuExpanded = this.state.isMenuExpended,
 
