@@ -24,7 +24,7 @@ export default class Section extends React.Component {
 					<span className='section__header__title'>{title}</span>
 				</h2>
 				{description ? <p className='section__description'>{description}</p> : ''}
-				<div className={sectionContentClasses}>{this.props.children}</div>
+				{this.props.children}
 			</Element>
 		);
 	}

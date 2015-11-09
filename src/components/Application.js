@@ -5,7 +5,7 @@ import throttle from 'helpers/throttle';
 
 import Header from 'components/Header';
 import Section from 'components/Section';
-import OfficeAddress from 'components/OfficeAddress';
+import Offices from 'components/Offices';
 import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
@@ -101,11 +101,8 @@ export default class Application extends React.Component {
 					toggleMenu={this.toggleMenuDisplay.bind(this)}
 				/>
 
-				<Section title={messages.officeSectionHeader} id='office' flexLayout={true}>
-					{messages.offices.map((address) => {
-						let {...addressData} = address;
-						return <OfficeAddress {...addressData} showLocation={messages.showLocation}/>;
-					})}
+				<Section title={messages.officeSectionHeader} id='office'>
+					<Offices officesData={messages.offices} showLocation={messages.showLocation}/>
 				</Section>
 
 				<Section title={messages.contactSectionHeader} id='contact'>
