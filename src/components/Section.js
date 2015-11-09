@@ -10,11 +10,7 @@ const Section = ({id, title, description, children}) => {
 					<span className='section__header__title'>{title}</span>
 				</h2>
 				{description ? <p className='section__description'>{description}</p> : ''}
-<<<<<<< Updated upstream
-				<div className={sectionContentClasses}>{this.props.children}</div>
-=======
 				{children}
->>>>>>> Stashed changes
 			</Element>
 	);
 };
