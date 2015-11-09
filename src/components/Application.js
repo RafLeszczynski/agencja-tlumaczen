@@ -26,30 +26,40 @@ export default class Application extends React.Component {
 		throttleThreshold: 15
 	};
 
+	// reference to header component
+	_headerComponent = null;
+
 	state = {
 		fixedHeader: false,
 		isMenuExpanded: false
 	};
-
-	_headerComponent = null;
 
 	constructor(props) {
 		super(props);
 	}
 
 	/**
-	 * toggles fixed header position
+	 * @desc toggles fixed header position
 	 */
 	toggleHeaderPosition() {
-		let componentHeight = ReactDOM.findDOMNode(this._headerComponent).offsetHeight,
-				fixedOffset = componentHeight - this.props.collapsedHeaderHeight,
-				shouldBeFixed = window.scrollY >= fixedOffset;
+		let shouldBeFixed = this.shouldHeaderBeFixed(window.scrollY,
+				ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
 
 		if (this.state.fixedHeader !== shouldBeFixed) {
 			this.setState({
 				fixedHeader: shouldBeFixed
 			});
 		}
+	}
+
+	/**
+	 * @desc checks if header should be fixed base of window.scrollY and header height
+	 * @param {Number} windowScrollY
+	 * @param {Number} headerHeight
+	 * @returns {Boolean}
+	 */
+	shouldHeaderBeFixed(windowScrollY, headerHeight) {
+		return windowScrollY >= headerHeight - this.props.collapsedHeaderHeight;
 	}
 
 	/**
@@ -72,6 +82,7 @@ export default class Application extends React.Component {
 		}
 	}
 
+	// set reference to throttledListeners
 	throttledToggleHeaderPosition = throttle(this.toggleHeaderPosition, this.props.throttleThreshold, this);
 	throttledHideMenu = throttle(this.hideMenu, this.props.throttleThreshold, this);
 
@@ -81,7 +92,7 @@ export default class Application extends React.Component {
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll',this.throttledToggleHeaderPosition);
+		window.removeEventListener('scroll', this.throttledToggleHeaderPosition);
 		window.removeEventListener('scroll', this.throttledHideMenu);
 	}
 
@@ -126,7 +137,8 @@ export default class Application extends React.Component {
 					})}
 				</Section>
 
-				<Section title={messages.docsSectionHeader} id='docs' description={messages.docsSectionDescription}>
+				<Section title={messages.docsSectionHeader} id='docs'
+				         description={messages.docsSectionDescription}>
 				</Section>
 			</div>
 		);
