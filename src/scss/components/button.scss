@@ -6,9 +6,11 @@
 	border: 1px solid $brandingColor;
 	border-radius: 1px;
 	cursor: pointer;
-	font: 14px/20px;
+	font-size: 14px;
+	line-height: 20px;
 	outline: none;
 	padding: 8px 15px;
+	text-decoration: none;
 	text-transform: uppercase;
 
 	&.button--secondary {
