@@ -21,8 +21,8 @@ class SectionItem extends React.Component {
             <div style={[styles.base]}>
                 {header}
                 {description}
-                {this.props.item.details.map((detail) => {
-                    return <Button name={detail.title}/>
+                {this.props.item.details.map((detail, index) => {
+                    return <Button key={index} name={detail.title}/>
                 })}
             </div>
         );
