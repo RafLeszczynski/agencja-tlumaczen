@@ -121,8 +121,8 @@ export default class Application extends React.Component {
 				</Section>
 
 				<Section title={messages.offerSectionHeader} id='offer'>
-					{messages.offer.map((item) => {
-						return <SectionItem item={item}/>;
+					{messages.offer.map((item, index) => {
+						return <SectionItem key={index} item={item}/>;
 					})}
 				</Section>
 
@@ -132,8 +132,8 @@ export default class Application extends React.Component {
 				</Section>
 
 				<Section title={messages.prizesSectionHeader} id='prizes'>
-					{messages.prizes.map((item) => {
-						return <SectionItem item={item}/>;
+					{messages.prizes.map((item, index) => {
+						return <SectionItem key={index} item={item}/>;
 					})}
 				</Section>
 

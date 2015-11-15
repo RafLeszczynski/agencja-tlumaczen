@@ -1,87 +1,27 @@
+require('../scss/components/languages.scss');
+
 import React from 'react';
-import Radium from 'radium';
+import groupLanguagesByLetter from 'helpers/languageSort';
 import LanguageGroup from 'components/LanguageGroup';
-import theme from 'theme';
 
-@Radium
-class Languages extends React.Component {
-    static propTypes = {
-        languages: React.PropTypes.array.isRequired,
-        sideNote: React.PropTypes.string.isRequired
-    };
+const Languages = ({languages, sideNote}) => {
+	let groupedLanguages = groupLanguagesByLetter(languages);
 
-    /**
-     * @desc groups languages by letter
-     * @param {Array} languages
-     * @returns {Array[]}
-     */
-    groupLanguagesByLetter(languages) {
-        let languagesMap = new Map(),
-            groupedLanguages = [];
+	return (
+			<div>
+				<ul className="languages">
+					{groupedLanguages.map((languageGroup, index) => {
+						return <LanguageGroup key={index} languages={languageGroup}/>
+					})}
+				</ul>
+				<p>{sideNote}</p>
+			</div>
+	);
+};
 
-        languages.forEach((language) => {
-            let aString = language.trim(),
-                firstLetter = aString.charAt(0).toLowerCase();
-
-            if (!languagesMap.has(firstLetter)) {
-                languagesMap.set(firstLetter, [aString]);
-            } else {
-                languagesMap.get(firstLetter).push(aString);
-            }
-        });
-
-        languagesMap.forEach((languageGroup) => {
-            groupedLanguages.push(languageGroup);
-        });
-
-
-        return groupedLanguages;
-    }
-
-    render() {
-        let {languages, sideNote} = this.props,
-            groupedLanguages = this.groupLanguagesByLetter(languages),
-            columnBreakIndex = groupedLanguages.length / 2 + 1;
-
-        return (
-            <div>
-                <ul style={[styles.listPosition, styles.columns]}>
-                    {groupedLanguages.map((languageGroup, index) => {
-                        return <LanguageGroup alignment={index < columnBreakIndex ? 'left' : 'right'} languages={languageGroup} />
-                    })}
-                </ul>
-                <p style={[styles.sideNote]}>{sideNote}</p>
-            </div>
-
-        );
-    }
-}
-
-const styles = {
-    listPosition: {
-        padding: 0,
-        margin: '0 auto',
-        width: 288,
-
-        '@media (min-width: 768px)': {
-            width: 450
-
-        }
-    },
-    columns: {
-        columnCount: 2,
-        columnGap: 0,
-        listStyle: 'none',
-        '@media (min-width: 768px)': {
-            columnGap: 150
-        }
-    },
-    sideNote: {
-        color: theme.brandingLightColor,
-        margin: '48px 0 0',
-        textAlign: 'center',
-        textTransform: 'uppercase'
-    }
+Languages.propTypes = {
+	languages: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+	sideNote: React.PropTypes.string.isRequired
 };
 
 export default Languages;
