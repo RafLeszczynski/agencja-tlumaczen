@@ -10,6 +10,7 @@ import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
 import Contact from 'components/Contact';
+import Docs from 'components/Docs';
 
 import messages from 'messages';
 
@@ -43,7 +44,7 @@ export default class Application extends React.Component {
 	 */
 	toggleHeaderPosition() {
 		let shouldBeFixed = this.shouldHeaderBeFixed(window.scrollY,
-				ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
+			ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
 
 		if (this.state.fixedHeader !== shouldBeFixed) {
 			this.setState({
@@ -99,17 +100,16 @@ export default class Application extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header
-					collapsedHeaderHeight={this.props.collapsedHeaderHeight}
-					isMenuExpanded={this.state.isMenuExpanded}
-					fixedHeader={this.state.fixedHeader}
-					goToPromoSectionId='offer'
-					goToPromoSectionName={messages.showOfferDetails}
-					navLinks={messages.links}
-					ref={(component) => this._headerComponent = component}
-					subtitle={messages.pageSubtitle}
-					title={messages.pageTitle}
-					toggleMenu={this.toggleMenuDisplay.bind(this)}
+				<Header collapsedHeaderHeight={this.props.collapsedHeaderHeight}
+				        isMenuExpanded={this.state.isMenuExpanded}
+				        fixedHeader={this.state.fixedHeader}
+				        goToPromoSectionId='offer'
+				        goToPromoSectionName={messages.showOfferDetails}
+				        navLinks={messages.links}
+				        ref={(component) => this._headerComponent = component}
+				        subtitle={messages.pageSubtitle}
+				        title={messages.pageTitle}
+				        toggleMenu={this.toggleMenuDisplay.bind(this)}
 				/>
 
 				<Section title={messages.officeSectionHeader} id='office'>
@@ -121,8 +121,8 @@ export default class Application extends React.Component {
 				</Section>
 
 				<Section title={messages.offerSectionHeader} id='offer'>
-					{messages.offer.map((item) => {
-						return <SectionItem item={item}/>;
+					{messages.offer.map((item, index) => {
+						return <SectionItem key={index} item={item}/>;
 					})}
 				</Section>
 
@@ -132,13 +132,15 @@ export default class Application extends React.Component {
 				</Section>
 
 				<Section title={messages.prizesSectionHeader} id='prizes'>
-					{messages.prizes.map((item) => {
-						return <SectionItem item={item}/>;
+					{messages.prizes.map((item, index) => {
+						return <SectionItem key={index} item={item}/>;
 					})}
 				</Section>
 
-				<Section title={messages.docsSectionHeader} id='docs'
-				         description={messages.docsSectionDescription}>
+				<Section title={messages.docsSectionHeader} id='docs'>
+					<Docs tooltip={messages.docsSectionDescription}
+					      docs={messages.docs}
+					      actionTitle={messages.docsDocSelect}/>
 				</Section>
 			</div>
 		);
