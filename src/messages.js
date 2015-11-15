@@ -139,7 +139,7 @@ export default {
 	],
 	docsSectionHeader: 'Wzory',
 	docsSectionDescription: 'Przygotowaliśmy dla Państwa wzory dwujęzycznych umów kupna-sprzedaży samochodów z zagranicy.',
-	docsLanguageSelect: 'Wybierz język',
+	docsDocSelect: 'Wybierz document',
 	docs: [
 		{
 			value: '1.pdf',

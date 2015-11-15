@@ -43,8 +43,8 @@ export default class Docs extends React.Component {
 				        options={docs}
 				        placeholder={actionTitle}
 				        searchable={false}
-				        onChange={this.downloadDoc.bind(this)}/>
-				        value={this.state.initialSelectValue}
+				        onChange={this.downloadDoc.bind(this)}
+				        value={this.state.initialSelectValue}/>
 			</div>
 		);
 	}

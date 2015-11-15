@@ -100,17 +100,16 @@ export default class Application extends React.Component {
 	render() {
 		return (
 			<div>
-				<Header
-					collapsedHeaderHeight={this.props.collapsedHeaderHeight}
-					isMenuExpanded={this.state.isMenuExpanded}
-					fixedHeader={this.state.fixedHeader}
-					goToPromoSectionId='offer'
-					goToPromoSectionName={messages.showOfferDetails}
-					navLinks={messages.links}
-					ref={(component) => this._headerComponent = component}
-					subtitle={messages.pageSubtitle}
-					title={messages.pageTitle}
-					toggleMenu={this.toggleMenuDisplay.bind(this)}
+				<Header collapsedHeaderHeight={this.props.collapsedHeaderHeight}
+				        isMenuExpanded={this.state.isMenuExpanded}
+				        fixedHeader={this.state.fixedHeader}
+				        goToPromoSectionId='offer'
+				        goToPromoSectionName={messages.showOfferDetails}
+				        navLinks={messages.links}
+				        ref={(component) => this._headerComponent = component}
+				        subtitle={messages.pageSubtitle}
+				        title={messages.pageTitle}
+				        toggleMenu={this.toggleMenuDisplay.bind(this)}
 				/>
 
 				<Section title={messages.officeSectionHeader} id='office'>
@@ -139,8 +138,9 @@ export default class Application extends React.Component {
 				</Section>
 
 				<Section title={messages.docsSectionHeader} id='docs'>
-					<Docs tooltip={messages.docsSectionDescription} docs={messages.docs}
-					      actionTitle="Wybierz dokument"/>
+					<Docs tooltip={messages.docsSectionDescription}
+					      docs={messages.docs}
+					      actionTitle={messages.docsDocSelect}/>
 				</Section>
 			</div>
 		);
