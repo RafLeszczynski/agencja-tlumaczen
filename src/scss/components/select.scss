@@ -1,23 +1,18 @@
 @import '../variables';
 
-$select-input-border-width:        1px !default;
-$select-input-height:              44px !default;
-$select-input-internal-height:     ($select-input-height - ($select-input-border-width * 2)) !default;
-$select-padding-vertical:          11px !default;
-$select-padding-horizontal:        24px !default;
-$select-menu-zindex:               1000 !default;
-$select-menu-max-height:           196px !default;
-$select-option-disabled-color:     lighten($brandingColor, 60%) !default;
-
-// arrow indicator
-$select-arrow-color:               #999 !default;
-$select-arrow-color-hover:         #666 !default;
-$select-arrow-width:               5px !default;
+$select-input-border-width: 1px;
+$select-input-height: 44px;
+$select-input-internal-height: $select-input-height - $select-input-border-width * 2;
+$select-padding-vertical: 11px;
+$select-padding-horizontal: 24px;
+$select-menu-zindex: 1000;
+$select-menu-max-height: 196px;
+$select-option-disabled-color: lighten($brandingColor, 60%);
+$select-arrow-width: 5px;
 
 .Select {
 	position: relative;
 
-	// preferred box model
 	&,
 	& div,
 	& input,
@@ -30,8 +25,6 @@ $select-arrow-width:               5px !default;
 		pointer-events: none;
 	}
 }
-
-// base
 
 .Select-control {
 	background-color: transparent;
@@ -46,8 +39,6 @@ $select-arrow-width:               5px !default;
 	width: 100%;
 }
 
-// placeholder
-
 .Select-placeholder,
 :not(.Select--multi) > .Select-control .Select-value {
 	bottom: 0;
@@ -59,8 +50,6 @@ $select-arrow-width:               5px !default;
 	position: absolute;
 	right: 0;
 	top: 0;
-
-	// crop text
 	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
