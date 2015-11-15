@@ -3,26 +3,25 @@ require('../scss/components/hamburgerIcon.scss');
 import React from 'react';
 import classNames from 'classnames';
 
-export default class MenuButton extends React.Component {
-	static propTypes = {
-		isMenuExpanded: React.PropTypes.bool,
-		toggleMenu: React.PropTypes.func.isRequired
-	};
+const HamburgerIcon = ({isMenuExpanded, toggleMenu}) => {
+	let buttonClasses = classNames({
+		'menu-button': true,
+		'menu-button--active': isMenuExpanded
+	});
 
-	render() {
-		let {isMenuExpanded, toggleMenu} = this.props,
-			buttonClasses = classNames({
-			'menu-button': true,
-			'menu-button--active': isMenuExpanded
-		});
+	return (
+		<div className={buttonClasses} onClick={toggleMenu}>
+			<span/>
+			<span/>
+			<span/>
+			<span/>
+		</div>
+	);
+};
 
-		return (
-			<div className={buttonClasses} onClick={toggleMenu}>
-				<span/>
-				<span/>
-				<span/>
-				<span/>
-			</div>
-		);
-	}
-}
+HamburgerIcon.propTypes = {
+	isMenuExpanded: React.PropTypes.bool,
+	toggleMenu: React.PropTypes.func.isRequired
+};
+
+export default HamburgerIcon;
