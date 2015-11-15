@@ -10,6 +10,7 @@ import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
 import Contact from 'components/Contact';
+import Docs from 'components/Docs';
 
 import messages from 'messages';
 
@@ -43,7 +44,7 @@ export default class Application extends React.Component {
 	 */
 	toggleHeaderPosition() {
 		let shouldBeFixed = this.shouldHeaderBeFixed(window.scrollY,
-				ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
+			ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
 
 		if (this.state.fixedHeader !== shouldBeFixed) {
 			this.setState({
@@ -137,8 +138,9 @@ export default class Application extends React.Component {
 					})}
 				</Section>
 
-				<Section title={messages.docsSectionHeader} id='docs'
-				         description={messages.docsSectionDescription}>
+				<Section title={messages.docsSectionHeader} id='docs'>
+					<Docs tooltip={messages.docsSectionDescription} docs={messages.docs}
+					      actionTitle="Wybierz dokument"/>
 				</Section>
 			</div>
 		);
