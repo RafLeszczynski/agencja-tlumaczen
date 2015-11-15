@@ -29,7 +29,7 @@ export default class Docs extends React.Component {
 
 		this.setState({
 			initialSelectValue: null
-		})
+		});
 	}
 
 	render() {
@@ -38,8 +38,13 @@ export default class Docs extends React.Component {
 		return (
 			<div className="docs">
 				<p>{tooltip}</p>
-				<Select className="docs-select" clearable={false} value={this.state.initialSelectValue} placeholder={actionTitle}
-				        searchable={false} options={docs} onChange={this.downloadDoc.bind(this)}/>
+				<Select className="docs-select"
+				        clearable={false}
+				        options={docs}
+				        placeholder={actionTitle}
+				        searchable={false}
+				        onChange={this.downloadDoc.bind(this)}/>
+				        value={this.state.initialSelectValue}
 			</div>
 		);
 	}
