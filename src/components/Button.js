@@ -3,7 +3,7 @@ require('../scss/components/button.scss');
 import React from 'react';
 import classNames from 'classnames';
 
-const Button = ({big, link, linkUrl, name, secondary, title}) => {
+const Button = ({action, big, link, linkUrl, name, secondary, title}) => {
 	let buttonClasses = classNames({
 		button: true,
 		'button--secondary': secondary,
@@ -13,7 +13,7 @@ const Button = ({big, link, linkUrl, name, secondary, title}) => {
 	return (
 		link ?
 			<a href={linkUrl} className={buttonClasses} target="_blank" title={title}>{name}</a> :
-			<button className={buttonClasses}>{name}</button>
+			<button className={buttonClasses} onClick={action}>{name}</button>
 	);
 };
 
