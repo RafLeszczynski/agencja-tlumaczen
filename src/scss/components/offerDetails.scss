@@ -1,0 +1,23 @@
+@import '../variables';
+
+.offer-details {
+	list-style: none;
+	margin: 0;
+	padding: 35px 48px;
+
+	li:not(:first-child) {
+		margin-top: 30px;
+	}
+
+	h3 {
+		font-size: 16px;
+		font-weight: normal;
+		margin: 0 0 3px;
+		text-transform: uppercase;
+	}
+
+	p {
+		margin: 0;
+		color: $brandingLightColor;
+	}
+}

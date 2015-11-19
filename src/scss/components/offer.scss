@@ -1,0 +1,40 @@
+@import '../variables';
+
+.offer {
+	margin: 0 auto;
+	text-align: center;
+
+	@media (min-width: $breakPointMedium) {
+		width: 540px
+	}
+}
+
+.offer__item {
+	&:not(:first-child) {
+		margin-top: 72px;
+	}
+
+	h3 {
+		font-size: 16px;
+		font-weight: normal;
+		text-transform: upperCase;
+
+		@media (min-width: $breakPointMedium) {
+			font-size: 18px
+		}
+	}
+
+	p {
+		color: $brandingLightColor;
+		margin: 48px 0;
+	}
+
+	button {
+		display: block;
+		margin: auto;
+
+		&:not(:first-child) {
+			margin-top: 42px;
+		}
+	}
+}

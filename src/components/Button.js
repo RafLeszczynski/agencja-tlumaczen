@@ -18,6 +18,7 @@ const Button = ({action, big, link, linkUrl, name, secondary, title}) => {
 };
 
 Button.propTypes = {
+	action: React.PropTypes.func,
 	big: React.PropTypes.bool,
 	link: React.PropTypes.bool,
 	linkUrl: React.PropTypes.string,
