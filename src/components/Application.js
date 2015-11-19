@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import throttle from 'helpers/throttle';
+import classNames from 'classnames';
 
 import Header from 'components/Header';
 import Section from 'components/Section';
 import Offices from 'components/Offices';
+import Offer from 'components/Offer';
 import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
 import Contact from 'components/Contact';
 import Docs from 'components/Docs';
+import Modal from 'components/Modal';
+import OfferDetails from 'components/OfferDetails';
 
+import throttle from 'helpers/throttle';
 import messages from 'messages';
 
 export default class Application extends React.Component {
@@ -32,21 +35,25 @@ export default class Application extends React.Component {
 
 	state = {
 		fixedHeader: false,
-		isMenuExpanded: false
+		isMenuExpanded: false,
+		isModalVisible: false,
+		offsetHeight: 0,
+		modalName: ''
 	};
 
-	constructor(props) {
-		super(props);
+	static setWindowScrollYPosition(position) {
+		window.scrollTo(0, position)
 	}
 
 	/**
 	 * @desc toggles fixed header position
+	 * @todo simplify condition statement
 	 */
 	toggleHeaderPosition() {
 		let shouldBeFixed = this.shouldHeaderBeFixed(window.scrollY,
 			ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
 
-		if (this.state.fixedHeader !== shouldBeFixed) {
+		if (this.state.fixedHeader !== shouldBeFixed && !this.state.isModalVisible) {
 			this.setState({
 				fixedHeader: shouldBeFixed
 			});
@@ -83,6 +90,63 @@ export default class Application extends React.Component {
 		}
 	}
 
+	/**
+	 * @desc shows modal component
+	 * @param {String} name - modal name
+	 */
+	showModal(name) {
+		this.setState({
+			isModalVisible: true,
+			offsetHeight: window.scrollY,
+			modalName: name
+		});
+
+		Application.setWindowScrollYPosition(0);
+	}
+
+	/**
+	 * @desc hides modal component
+	 */
+	hideModal() {
+		this.setState({
+			isModalVisible: false,
+			modalName: ''
+		});
+	}
+
+	/**
+	 * @desc renders modal component
+	 * @returns {XML}
+	 */
+	renderModal() {
+		let title = this.state.modalName;
+
+		return (
+			<Modal title={title} closeAction={this.hideModal.bind(this)}>
+				{this.renderModalContent(title)}
+			</Modal>
+		);
+	}
+
+	/**
+	 * @deac renders modal content based on its name
+	 * @param {String} name
+	 * @returns {XML}
+	 */
+	renderModalContent(name) {
+		return <OfferDetails details={messages.offerDetails[name]}/>
+	}
+
+	/**
+	 * @desc sets top position styles of wrapper content
+	 * @returns {{top: number|string}}
+	 */
+	getOffsetStyles() {
+		let offset = this.state.offsetHeight;
+
+		return {top: offset ? -offset : 'auto'};
+	}
+
 	// set reference to throttledListeners
 	throttledToggleHeaderPosition = throttle(this.toggleHeaderPosition, this.props.throttleThreshold, this);
 	throttledHideMenu = throttle(this.hideMenu, this.props.throttleThreshold, this);
@@ -97,51 +161,66 @@ export default class Application extends React.Component {
 		window.removeEventListener('scroll', this.throttledHideMenu);
 	}
 
+	componentDidUpdate(nextProps, nextState) {
+		if (nextState.offsetHeight !== 0) {
+			Application.setWindowScrollYPosition(nextState.offsetHeight);
+
+			this.setState({
+				offsetHeight: 0
+			});
+		}
+	}
+
 	render() {
+		let withModal = classNames({
+			'with-modal': this.state.isModalVisible
+		});
+
 		return (
 			<div>
-				<Header collapsedHeaderHeight={this.props.collapsedHeaderHeight}
-				        isMenuExpanded={this.state.isMenuExpanded}
-				        fixedHeader={this.state.fixedHeader}
-				        goToPromoSectionId='offer'
-				        goToPromoSectionName={messages.showOfferDetails}
-				        navLinks={messages.links}
-				        ref={(component) => this._headerComponent = component}
-				        subtitle={messages.pageSubtitle}
-				        title={messages.pageTitle}
-				        toggleMenu={this.toggleMenuDisplay.bind(this)}
-				/>
+				<div className={withModal} style={this.getOffsetStyles()}>
+					<Header collapsedHeaderHeight={this.props.collapsedHeaderHeight}
+					        isMenuExpanded={this.state.isMenuExpanded}
+					        fixedHeader={this.state.fixedHeader}
+					        goToPromoSectionId='offer'
+					        goToPromoSectionName={messages.showOfferDetails}
+					        navLinks={messages.links}
+					        ref={(component) => this._headerComponent = component}
+					        subtitle={messages.pageSubtitle}
+					        title={messages.pageTitle}
+					        toggleMenu={this.toggleMenuDisplay.bind(this)}
+					/>
 
-				<Section title={messages.officeSectionHeader} id='office'>
-					<Offices officesData={messages.offices} showLocation={messages.showLocation}/>
-				</Section>
+					<Section title={messages.officeSectionHeader} id='office'>
+						<Offices officesData={messages.offices} showLocation={messages.showLocation}/>
+					</Section>
 
-				<Section title={messages.contactSectionHeader} id='contact'>
-					<Contact {...messages.contactDetails} contactUs={messages.contactUs}/>
-				</Section>
+					<Section title={messages.contactSectionHeader} id='contact'>
+						<Contact {...messages.contactDetails} contactUs={messages.contactUs}/>
+					</Section>
 
-				<Section title={messages.offerSectionHeader} id='offer'>
-					{messages.offer.map((item, index) => {
-						return <SectionItem key={index} item={item}/>;
-					})}
-				</Section>
+					<Section title={messages.offerSectionHeader} id='offer'>
+						<Offer offer={messages.offer} showModal={this.showModal.bind(this)}/>
+					</Section>
 
-				<Section title={messages.languageSectionHeader} id='languages'
-				         description={messages.languageSectionDescription}>
-					<Languages languages={messages.languages} sideNote={messages.otherLanguagesDescription}/>
-				</Section>
+					<Section title={messages.languageSectionHeader} id='languages'
+					         description={messages.languageSectionDescription}>
+						<Languages languages={messages.languages} sideNote={messages.otherLanguagesDescription}/>
+					</Section>
 
-				<Section title={messages.prizesSectionHeader} id='prizes'>
-					{messages.prizes.map((item, index) => {
-						return <SectionItem key={index} item={item}/>;
-					})}
-				</Section>
+					<Section title={messages.prizesSectionHeader} id='prizes'>
+						{messages.prizes.map((item, index) => {
+							return <SectionItem key={index} item={item}/>;
+						})}
+					</Section>
 
-				<Section title={messages.docsSectionHeader} id='docs'>
-					<Docs tooltip={messages.docsSectionDescription}
-					      docs={messages.docs}
-					      actionTitle={messages.docsDocSelect}/>
-				</Section>
+					<Section title={messages.docsSectionHeader} id='docs'>
+						<Docs tooltip={messages.docsSectionDescription}
+						      docs={messages.docs}
+						      actionTitle={messages.docsDocSelect}/>
+					</Section>
+				</div>
+				{this.state.isModalVisible && this.renderModal()}
 			</div>
 		);
 	}

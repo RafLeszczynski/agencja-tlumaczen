@@ -84,6 +84,48 @@ export default {
 			]
 		}
 	],
+	offerDetails: {
+		'Tłumaczenia przysięgłe': [
+			{
+				title: 'Dokumentów samochodowych',
+				description: 'np. dowód rejestracyjny, karta pojazdu, tytuł własności, faktura'
+			},
+			{
+				title: 'Pism sądowych',
+				description: 'np. wezwania, pouczenia, wnioski, wyroki, pozwy, protokoły, akty oskarżenia'
+			},
+			{
+				title: 'Dokumentów metrykalnych',
+				description: 'np. akty urodzenia, małżeństwa, zgonu, świadectwa chrztu, ślubu'
+			},
+			{
+				title: 'Korespondencji biznesowej',
+				description: 'np.informacje o działalności firmy, raporty, umowy, biznes plany'
+			},
+			{
+				title: 'Dokumentów szkolnych',
+				description: 'np. świadectwa, dyplomy'
+			},
+			{
+				title: 'Tekstów księgowych',
+				description: 'np. sprawozdania finansowe, opinie biegłego rewidenda, umowy'
+			},
+			{
+				title: 'Tekstów specjalistycznych'
+			},
+			{
+				title: 'Dokumentów celnych'
+			},
+			{
+				title: 'Tekstów medycznych'
+			},
+			{
+				title: 'Tekstów technicznych'
+			}
+		],
+		'Tłumaczenia nieprzysięgłe': [],
+		'Tłumaczenia przysięgłe i nieprzysięgłe': []
+	},
 	languageSectionHeader: 'Języki',
 	languageSectionDescription: 'Wykonujemy tłumaczenia przysięgłe i nieprzysięgłe w następujących językach:',
 	languages: [
