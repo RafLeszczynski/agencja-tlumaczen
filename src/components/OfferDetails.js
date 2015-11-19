@@ -12,4 +12,8 @@ const OfferDetails = ({details}) => {
 	);
 };
 
+OfferDetails.propTypes = {
+	details: React.PropTypes.object.isRequired
+};
+
 export default OfferDetails;
