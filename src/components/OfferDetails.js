@@ -13,7 +13,7 @@ const OfferDetails = ({details}) => {
 };
 
 OfferDetails.propTypes = {
-	details: React.PropTypes.object.isRequired
+	details: React.PropTypes.array.isRequired
 };
 
 export default OfferDetails;

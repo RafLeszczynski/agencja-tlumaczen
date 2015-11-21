@@ -10,19 +10,17 @@ export default class Offer extends React.Component {
 			React.PropTypes.objectOf({
 				title: React.PropTypes.string.isRequired,
 				description: React.PropTypes.string.isRequired,
-				details: React.PropTypes.arrayOf(
-					React.PropTypes.objectOf({
-						title: React.PropTypes.string.isRequired
-					})
-				)
+				details: React.PropTypes.array.isRequired
 			})
 		),
 		showModal: React.PropTypes.func.isRequired
 	};
 
+	/**
+	 * @desc triggers modal opening on click
+	 * @param {String} title - modal title
+	 */
 	clickHandler(title) {
-		console.log(title);
-
 		this.props.showModal(title)
 	}
 
