@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-
 import Header from 'components/Header';
 import Section from 'components/Section';
 import Offices from 'components/Offices';
@@ -12,8 +11,8 @@ import Languages from 'components/Languages';
 import Contact from 'components/Contact';
 import Docs from 'components/Docs';
 import Modal from 'components/Modal';
+import ContactForm from 'components/ContactForm';
 import OfferDetails from 'components/OfferDetails';
-
 import throttle from 'helpers/throttle';
 import messages from 'messages';
 
@@ -134,7 +133,30 @@ export default class Application extends React.Component {
 	 * @returns {XML}
 	 */
 	renderModalContent(name) {
-		return <OfferDetails details={messages.offerDetails[name]}/>
+		console.log(name);
+
+		switch (name) {
+			case 'contact':
+				return <ContactForm/>;
+				break;
+			default:
+				return <OfferDetails details={messages.offerDetails[name]}/>
+		}
+	}
+
+	/**
+	 * @desc renders section component
+	 * @param {String} title
+	 * @param {String} id
+	 * @param {XML} children
+	 * @returns {XML}
+	 */
+	renderSection(title, id, children) {
+		return (
+			<Section title={title} id={id}>
+				{children}
+			</Section>
+		);
 	}
 
 	/**
@@ -173,8 +195,8 @@ export default class Application extends React.Component {
 
 	render() {
 		let withModal = classNames({
-			'with-modal': this.state.isModalVisible
-		});
+				'with-modal': this.state.isModalVisible
+			});
 
 		return (
 			<div>
@@ -191,12 +213,15 @@ export default class Application extends React.Component {
 					        toggleMenu={this.toggleMenuDisplay.bind(this)}
 					/>
 
-					<Section title={messages.officeSectionHeader} id='office'>
-						<Offices officesData={messages.offices} showLocation={messages.showLocation}/>
-					</Section>
+					{this.renderSection(
+						messages.officeSectionHeader,
+						'office',
+						(<Offices officesData={messages.offices} showLocation={messages.showLocation}/>)
+					)}
 
 					<Section title={messages.contactSectionHeader} id='contact'>
-						<Contact {...messages.contactDetails} contactUs={messages.contactUs}/>
+						<Contact contactUs={messages.contactUs}
+						         showModal={this.showModal.bind(this)} {...messages.contactDetails}/>
 					</Section>
 
 					<Section title={messages.offerSectionHeader} id='offer'>
