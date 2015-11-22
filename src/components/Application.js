@@ -133,8 +133,6 @@ export default class Application extends React.Component {
 	 * @returns {XML}
 	 */
 	renderModalContent(name) {
-		console.log(name);
-
 		switch (name) {
 			case 'contact':
 				return <ContactForm/>;
