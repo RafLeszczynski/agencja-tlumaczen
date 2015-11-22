@@ -17,6 +17,7 @@
 
 	@media (min-width: $breakPointLarge) {
 		height: auto;
+		min-height: 100%;
 	}
 }
 
@@ -47,4 +48,8 @@
 		margin: 0;
 		padding: 17px 24px 11px 100px;
 	}
+}
+
+.modal__content {
+	padding: 35px 48px;
 }

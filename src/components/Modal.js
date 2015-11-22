@@ -8,7 +8,9 @@ const Modal = ({title, children, closeAction}) => {
 			<div className="modal" onClick={stopEventPropagation}>
 				<h2>{title}</h2>
 				<CloseIcon action={closeAction}/>
-				{children}
+				<div className="modal__content">
+					{children}
+				</div>
 			</div>
 		</div>
 	);
