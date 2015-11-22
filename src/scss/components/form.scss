@@ -1,0 +1,69 @@
+@import '../variables';
+
+$inputFortSize: 16px;
+$labelRiseFontSize: 14px;
+$errorFontSize: 12px;
+$inputWrapperPadding: 20px;
+$inputPadding: 5px;
+$inputBorderWidth: 1px;
+$labelTransitionDuration: .2s;
+
+.form {
+	text-align: right;
+}
+
+.form__input-group {
+	font-size: $inputFortSize;
+	padding: $inputWrapperPadding 0;
+	position: relative;
+	text-align: left;
+}
+
+.form__input-group__input,
+.form__input-group__textarea {
+	background-color: transparent;
+	border: none;
+	border-bottom: $inputBorderWidth solid $brandingColor;
+	outline: none;
+	padding: $inputPadding 0;
+	width: 100%;
+}
+
+.form__input-group__input--file {
+	opacity: 0;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+}
+
+.form__input-group__textarea {
+	box-sizing: border-box;
+	resize: none;
+}
+
+.form__input-group__label {
+	color: $brandingLightColor;
+	font-size: $inputFortSize;
+	left: 0;
+	position: absolute;
+	top: $inputWrapperPadding + $inputPadding;
+	transition: font-size $labelTransitionDuration, top $labelTransitionDuration;
+
+	.form__input-group__input:focus + &,
+	.form__input-group__textarea:focus + &,
+	&.form__input-group__label--empty-value {
+		&:not(.form__input-group__label--file) {
+			font-size: $labelRiseFontSize;
+			top: 0;
+		}
+	}
+}
+
+.form__input-group__label--file {
+	cursor: pointer;
+}
+
+.form__input-group__validation-error-msg {
+	color: $errorColor;
+	font-size: $errorFontSize;
+}
