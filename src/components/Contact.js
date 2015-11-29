@@ -15,13 +15,13 @@ const Contact = ({contactUs, email, fax, phones, showModal}) => {
 			})}
 			<span className="contact__fax">{fax}</span>
 			<span className="contact__email">{email}</span>
-			<Button name={contactUs} action={showContactForm.bind(this, showModal)} />
+			<Button name={contactUs} action={showContactForm.bind(this, showModal, contactUs)} />
 		</div>
 	);
 };
 
-function showContactForm(showModal) {
-	showModal('contact');
+function showContactForm(showModal, contactUs) {
+	showModal(contactUs);
 }
 
 Contact.propTypes = {

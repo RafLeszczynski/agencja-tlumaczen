@@ -8,6 +8,8 @@ import Offer from 'components/Offer';
 import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
+import Prizes from 'components/Prizes';
+import CheckPrizeForm from 'components/checkPrize/CheckPrizeForm';
 import Contact from 'components/Contact';
 import Docs from 'components/Docs';
 import Modal from 'components/Modal';
@@ -134,8 +136,11 @@ export default class Application extends React.Component {
 	 */
 	renderModalContent(name) {
 		switch (name) {
-			case 'contact':
+			case 'Napisz do nas':
 				return <ContactForm/>;
+				break;
+			case 'Przejdź do cennika':
+				return <CheckPrizeForm/>;
 				break;
 			default:
 				return <OfferDetails details={messages.offerDetails[name]}/>
@@ -232,9 +237,7 @@ export default class Application extends React.Component {
 					</Section>
 
 					<Section title={messages.prizesSectionHeader} id='prizes'>
-						{messages.prizes.map((item, index) => {
-							return <SectionItem key={index} item={item}/>;
-						})}
+						<Prizes showModal={this.showModal.bind(this)} />
 					</Section>
 
 					<Section title={messages.docsSectionHeader} id='docs'>
