@@ -90,42 +90,86 @@ export default class Application extends React.Component {
 						title={messages.pageTitle}
 						toggleMenu={this._toggleMenuDisplay.bind(this)}
 					/>
-
-					{this._renderSection(
-						messages.officeSectionHeader,
-						'office',
-						(<Offices officesData={messages.offices} showLocation={messages.showLocation}/>)
-					)}
-
-					<Section title={messages.contactSectionHeader} id='contact'>
-						<Contact contactUs={messages.contactUs}
-						         showModal={this._showModal.bind(this)} {...messages.contactDetails}/>
-					</Section>
-
-					<Section title={messages.offerSectionHeader} id='offer'>
-						<Offer offer={messages.offer} showModal={this._showModal.bind(this)}/>
-					</Section>
-
-					<Section title={messages.languageSectionHeader} id='languages'
-					         description={messages.languageSectionDescription}>
-						<Languages languages={messages.languages} sideNote={messages.otherLanguagesDescription}/>
-					</Section>
-
-					<Section title={messages.prizesSectionHeader} id='prizes'>
-						<Prizes showModal={this._showModal.bind(this)} />
-					</Section>
-
-					<Section title={messages.docsSectionHeader} id='docs'>
-						<Docs tooltip={messages.docsSectionDescription}
-						      docs={messages.docs}
-						      actionTitle={messages.docsDocSelect}/>
-					</Section>
+					{this._getSectionsData().map(Application._renderSection, this)}
 				</div>
 				{this.state.isModalVisible && this._renderModal()}
 			</div>
 		);
 	}
 
+	/**
+	 * @desc return section data
+	 * @returns {Array}
+	 * @private
+	 */
+	_getSectionsData() {
+		return [
+			{
+				title: messages.officeSectionHeader,
+				id: 'office',
+				children: (<Offices officesData={messages.offices} showLocation={messages.showLocation}/>)
+			},
+			{
+				title: messages.contactSectionHeader,
+				id: 'contact',
+				children: (<Contact
+					contactUs={messages.contactUs}
+					showModal={this._showModal.bind(this)}
+					{...messages.contactDetails}
+				/>)
+			},
+			{
+				title: messages.offerSectionHeader,
+				id: 'offer',
+				children: (<Offer offer={messages.offer} showModal={this._showModal.bind(this)}/>)
+			},
+			{
+				title: messages.languageSectionHeader,
+				id: 'languages',
+				description: messages.languageSectionDescription,
+				children: (<Languages languages={messages.languages} sideNote={messages.otherLanguagesDescription}/>)
+			},
+			{
+				title: messages.prizesSectionHeader,
+				id: 'prizes',
+				children: (<Prizes showModal={this._showModal.bind(this)} />)
+			},
+			{
+				title: messages.docsSectionHeader,
+				id: 'docs',
+				children: (<Docs
+					tooltip={messages.docsSectionDescription}
+					docs={messages.docs}
+					actionTitle={messages.docsDocSelect}
+				/>)
+			}
+		]
+	}
+
+	/**
+	 * @desc renders section component
+	 * @param {Object} sectionData
+	 * @param {Number} index
+	 * @returns {XML}
+	 */
+	static _renderSection(sectionData, index) {
+		return (
+				<Section
+					key={index}
+					title={sectionData.title}
+					id={sectionData.id}
+					description={sectionData.description}
+				>
+					{sectionData.children}
+				</Section>
+		);
+	}
+
+	/**
+	 * @desc sets window scrollY position
+	 * @param {Number} position
+	 * @private
+	 */
 	static _setWindowScrollYPosition(position) {
 		window.scrollTo(0, position)
 	}
@@ -208,7 +252,7 @@ export default class Application extends React.Component {
 
 		return (
 			<Modal title={title} closeAction={this._hideModal.bind(this)}>
-				{this._renderModalContent(title)}
+				{Application._renderModalContent(title)}
 			</Modal>
 		);
 	}
@@ -218,7 +262,7 @@ export default class Application extends React.Component {
 	 * @param {String} name
 	 * @returns {XML}
 	 */
-	_renderModalContent(name) {
+	static _renderModalContent(name) {
 		switch (name) {
 			case 'Napisz do nas':
 				return <ContactForm/>;
@@ -229,21 +273,6 @@ export default class Application extends React.Component {
 			default:
 				return <OfferDetails details={messages.offerDetails[name]}/>
 		}
-	}
-
-	/**
-	 * @desc renders section component
-	 * @param {String} title
-	 * @param {String} id
-	 * @param {XML} children
-	 * @returns {XML}
-	 */
-	_renderSection(title, id, children) {
-		return (
-				<Section title={title} id={id}>
-					{children}
-				</Section>
-		);
 	}
 
 	/**
