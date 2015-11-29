@@ -34,13 +34,17 @@ export default class Application extends React.Component {
 	// reference to header component
 	_headerComponent = null;
 
-	state = {
-		fixedHeader: false,
-		isMenuExpanded: false,
-		isModalVisible: false,
-		offsetHeight: 0,
-		modalName: ''
-	};
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			fixedHeader: false,
+			isMenuExpanded: false,
+			isModalVisible: false,
+			offsetHeight: 0,
+			modalName: ''
+		};
+	}
 
 	static setWindowScrollYPosition(position) {
 		window.scrollTo(0, position)
