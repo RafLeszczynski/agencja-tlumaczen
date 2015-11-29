@@ -1,6 +1,5 @@
 require('../scss/components/docs.scss');
-require('../scss/components/select.scss');
-
+require('components/forms/select.scss');
 
 import React from 'react';
 import Button from 'components/Button';

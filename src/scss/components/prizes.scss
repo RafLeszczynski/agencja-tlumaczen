@@ -1,0 +1,19 @@
+@import '../variables';
+
+$maxColumnWidth: 540px;
+$descriptionBottomMargin: 48px;
+
+.prizes {
+	margin: 0 auto;
+	text-align: center;
+	max-width: $maxColumnWidth;
+}
+
+.prizes__section:first-child {
+	margin-bottom: $descriptionBottomMargin * 2;
+}
+
+.prizes__section__description {
+	color: $brandingLightColor;
+	margin-bottom: $descriptionBottomMargin;
+}
