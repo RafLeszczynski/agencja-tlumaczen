@@ -21,7 +21,7 @@ export default class Offer extends React.Component {
 	 * @param {String} title - modal title
 	 */
 	clickHandler(title) {
-		this.props._showModal(title)
+		this.props.showModal(title)
 	}
 
 	/**
