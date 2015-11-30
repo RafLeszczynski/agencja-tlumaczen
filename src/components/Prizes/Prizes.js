@@ -1,5 +1,4 @@
-require('../scss/components/prizes.scss');
-
+import '../../scss/components/prizes.scss';
 import React from 'react';
 import Button from 'components/Button';
 import * as messages from 'messages/prizes.messages';
@@ -28,12 +27,12 @@ const prizesWrapperClassName = 'prizes',
 		)
 	};
 
-function showCheckPrizesModal(showModal, modalTitle) {
-	showModal(modalTitle);
-}
-
 Prizes.propTypes = {
 	showModal: React.PropTypes.func.isRequired
 };
+
+function showCheckPrizesModal(showModal, modalTitle) {
+	showModal(modalTitle);
+}
 
 export default Prizes;
