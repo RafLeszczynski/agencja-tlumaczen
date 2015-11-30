@@ -1,3 +1,4 @@
+import '../scss/components/modal.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
@@ -8,7 +9,7 @@ import Offer from 'components/Offer';
 import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
-import Prizes from 'components/Prizes';
+import Prizes from 'components/Prizes/Prizes';
 import CheckPrizeForm from 'components/checkPrize/CheckPrizeForm';
 import Contact from 'components/Contact';
 import Docs from 'components/Docs';
@@ -267,8 +268,11 @@ export default class Application extends React.Component {
 			case 'Napisz do nas':
 				return <ContactForm/>;
 				break;
-			case 'Przejdź do cennika':
+			case 'Cennik':
 				return <CheckPrizeForm/>;
+				break;
+			case 'Wycena':
+				return <RequestCustomPrize/>;
 				break;
 			default:
 				return <OfferDetails details={messages.offerDetails[name]}/>

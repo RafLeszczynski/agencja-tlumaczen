@@ -1,18 +1,10 @@
-require('../scss/components/offer.scss');
-require('../scss/components/modal.scss');
-
+import '../scss/components/offer.scss';
 import React from 'react';
 import Button from 'components/Button';
 
 export default class Offer extends React.Component {
 	static propTypes = {
-		offer: React.PropTypes.arrayOf(
-			React.PropTypes.objectOf({
-				title: React.PropTypes.string.isRequired,
-				description: React.PropTypes.string.isRequired,
-				details: React.PropTypes.array.isRequired
-			})
-		),
+		offer: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 		showModal: React.PropTypes.func.isRequired
 	};
 
@@ -35,7 +27,7 @@ export default class Offer extends React.Component {
 			<article className="offer__item" key={index}>
 				<h3>{section.title}</h3>
 				<p>{section.description}</p>
-				{section.details.map(this.renderOfferDetailsButtons.bind(this))}
+				{section.details.map(this.renderOfferDetailsButtons, this)}
 			</article>
 		);
 	}
@@ -55,7 +47,7 @@ export default class Offer extends React.Component {
 
 		return (
 			<div className="offer">
-				{offer.map(this.renderOfferSection.bind(this))}
+				{offer.map(this.renderOfferSection, this)}
 			</div>
 		);
 	}
