@@ -1,4 +1,4 @@
-import '../../scss/components/prizes.scss';
+import 'components/Prizes/Prizes.scss';
 import React from 'react';
 import Button from 'components/Button';
 import * as messages from 'messages/prizes.messages';
@@ -18,7 +18,7 @@ const prizesWrapperClassName = 'prizes',
 							</p>
 							<Button
 								name={section.button}
-								action={showCheckPrizesModal.bind(this, showModal, section.button)}
+								action={showCheckPrizesModal.bind(this, showModal, section.modalTitle)}
 							/>
 						</div>
 					)
