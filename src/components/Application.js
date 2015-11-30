@@ -93,7 +93,7 @@ export default class Application extends React.Component {
 					/>
 					{this._getSectionsData().map(Application._renderSection, this)}
 				</div>
-				{this.state.isModalVisible && this._renderModal()}
+				{this.state.isModalVisible && this._renderModal(this.state.modalName)}
 			</div>
 		);
 	}
@@ -246,11 +246,10 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc renders modal component
+	 * @param {String} title
 	 * @returns {XML}
 	 */
-	_renderModal() {
-		let title = this.state.modalName;
-
+	_renderModal(title) {
 		return (
 			<Modal title={title} closeAction={this._hideModal.bind(this)}>
 				{Application._renderModalContent(title)}
