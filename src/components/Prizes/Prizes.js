@@ -1,7 +1,9 @@
 import 'components/Prizes/Prizes.scss';
+
 import React from 'react';
+
 import Button from 'components/Button';
-import * as messages from 'messages/prizes.messages';
+import * as messages from 'components/Prizes/Prizes.messages';
 
 const prizesWrapperClassName = 'prizes',
 	prizesSectionClassName = 'prizes__section',

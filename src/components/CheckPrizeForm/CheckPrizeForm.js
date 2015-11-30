@@ -1,10 +1,14 @@
 import 'components/forms/select.scss';
 import 'components/CheckPrizeForm/CheckPrizeForm.scss';
+
 import React from 'react';
+import Select from 'react-select';
+
+import * as messages from 'components/CheckPrizeForm/CheckPrizeForm.messages';
 import {languages} from 'messages/languages.messages';
 import {docsTypes} from 'messages/docTypes.messages';
-import * as messages from 'messages/checkPrizeForm.messages';
-import Select from 'react-select';
+
+
 import Button from 'components/Button';
 import Label from 'components/forms/Label';
 import InputGroup from 'components/forms/InputGroup';
