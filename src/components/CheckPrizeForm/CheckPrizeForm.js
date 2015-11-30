@@ -1,5 +1,5 @@
 import 'components/forms/select.scss';
-import 'components/checkPrize/checkPrizeForm.scss';
+import 'components/CheckPrizeForm/CheckPrizeForm.scss';
 import React from 'react';
 import {languages} from 'messages/languages.messages';
 import {docsTypes} from 'messages/docTypes.messages';
@@ -17,8 +17,8 @@ export default class CheckPrizeForm extends React.Component {
 	static docTypeLangParam = 'docType';
 
 	// css classes
-	static checkPrizeFormClassName = 'checkPrize';
-	static selectClassName = 'checkPrize-select';
+	static checkPrizeFormClassName = 'check-prize';
+	static selectClassName = 'check-prize-select';
 	static selectGroupWrapperClassName = 'check-prize__select-group';
 	static radioGroupClassName = 'check-prize__radio-group';
 
