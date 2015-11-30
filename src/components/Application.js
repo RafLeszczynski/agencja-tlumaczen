@@ -10,7 +10,7 @@ import Button from 'components/Button';
 import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
 import Prizes from 'components/Prizes/Prizes';
-import CheckPrizeForm from 'components/checkPrize/CheckPrizeForm';
+import CheckPrizeForm from 'components/CheckPrizeForm/CheckPrizeForm';
 import Contact from 'components/Contact';
 import Docs from 'components/Docs';
 import Modal from 'components/Modal';
