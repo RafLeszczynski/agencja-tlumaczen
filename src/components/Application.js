@@ -155,14 +155,14 @@ export default class Application extends React.Component {
 	 */
 	static _renderSection(sectionData, index) {
 		return (
-				<Section
-					key={index}
-					title={sectionData.title}
-					id={sectionData.id}
-					description={sectionData.description}
-				>
-					{sectionData.children}
-				</Section>
+			<Section
+				key={index}
+				title={sectionData.title}
+				id={sectionData.id}
+				description={sectionData.description}
+			>
+				{sectionData.children}
+			</Section>
 		);
 	}
 
