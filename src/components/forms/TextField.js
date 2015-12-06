@@ -17,7 +17,7 @@ const TextField = ({id, isValid, label, multiline, onChange, onBlur, type, value
 				id={id}
 				title={label}
 			/>
-			{!isValid && validationErrorMsg ? <ValidationErrorMsg errorMsg={errorMessage}/> : ''}
+			{!isValid && validationErrorMsg ? <ValidationErrorMsg errorMsg={validationErrorMsg}/> : ''}
 		</InputGroup>
 	);
 };

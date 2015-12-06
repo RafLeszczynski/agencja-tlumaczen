@@ -1,15 +1,12 @@
 import 'components/Prizes/Prizes.scss';
-
 import React from 'react';
-
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import CheckPrizeForm from 'components/CheckPrizeForm/CheckPrizeForm';
 import sections from 'components/Prizes/Prizes.messages';
 
 const prizesWrapperClassName = 'prizes',
 	prizesSectionClassName = 'prizes__section',
 	prizesDescriptionClassName = 'prizes__section__description',
-
 	Prizes = ({showModal}) => {
 		return (
 			<div className={prizesWrapperClassName}>

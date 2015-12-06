@@ -2,7 +2,7 @@ import 'components/forms/form.scss';
 import React from 'react';
 import * as validator from 'helpers/validator';
 import TextField from 'components/forms/TextField';
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import * as messages from 'components/ContactForm/ContactForm.messages';
 import trimFromStart from 'helpers/trim'
 

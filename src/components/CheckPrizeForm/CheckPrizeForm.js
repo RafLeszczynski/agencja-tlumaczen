@@ -1,12 +1,11 @@
 import 'components/forms/select.scss';
 import 'components/CheckPrizeForm/CheckPrizeForm.scss';
-
 import React from 'react';
 import * as checkPrizeFormMessages from 'components/CheckPrizeForm/CheckPrizeForm.messages';
 import * as contactFormMessages from 'components/ContactForm/ContactForm.messages';
 import RadioButton from 'components/forms/RadioButton';
 import SelectBlock from 'components/forms/SelectBlock';
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import TextField from 'components/forms/TextField';
 import ContactForm from 'components/ContactForm/ContactForm';
 import trimFromStart from 'helpers/trim';
@@ -146,7 +145,7 @@ export default class CheckPrizeForm extends React.Component {
 	 * @returns {XML}
 	 */
 	_renderSelectBlock(select, index) {
-		let id = select.id;
+		const id = select.id;
 
 		return (
 			<SelectBlock
@@ -169,7 +168,7 @@ export default class CheckPrizeForm extends React.Component {
 	 * @returns {XML}
 	 */
 	_renderRadioButton(option, index) {
-		let id = checkPrizeFormMessages.translationOptionsName + index,
+		const id = checkPrizeFormMessages.translationOptionsName + index,
 			value = option.value;
 
 		return (

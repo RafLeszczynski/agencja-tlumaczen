@@ -1,6 +1,6 @@
 import 'components/Offer/Offer.scss';
 import React from 'react';
-import Button from 'components/Button';
+import Button from 'components/Button/Button';
 import OfferDetails from 'components/OfferDetails/OfferDetails';
 import messages from 'components/Offer/Offer.messages';
 
@@ -52,7 +52,7 @@ export default class Offer extends React.Component {
 	}
 
 	render() {
-		let {offer} = this.props;
+		const {offer} = this.props;
 
 		return (
 			<div className="offer">
