@@ -1,4 +1,4 @@
-export const nameLabel= 'Imię i nazwisko',
+export const nameLabel = 'Imię i nazwisko',
 	emailLabel = 'Adress email',
 	textLabel = 'Treść wiadomości',
 	fileLabel = 'Załącz plik',

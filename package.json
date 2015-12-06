@@ -39,7 +39,6 @@
     "babel-runtime": "^5.8.25",
     "classnames": "^2.2.0",
     "normalize.css": "^3.0.3",
-    "radium": "^0.15.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-scroll": "^0.30.0",
