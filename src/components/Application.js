@@ -5,17 +5,14 @@ import classNames from 'classnames';
 import Header from 'components/Header';
 import Section from 'components/Section';
 import Offices from 'components/Offices';
-import Offer from 'components/Offer';
+import Offer from 'components/Offer/Offer';
 import Button from 'components/Button';
-import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
 import Prizes from 'components/Prizes/Prizes';
-import CheckPrizeForm from 'components/CheckPrizeForm/CheckPrizeForm';
 import Contact from 'components/Contact';
 import Docs from 'components/Docs';
 import Modal from 'components/Modal';
-import ContactForm from 'components/ContactForm';
-import OfferDetails from 'components/OfferDetails';
+import ContactForm from 'components/ContactForm/ContactForm';
 import throttle from 'helpers/throttle';
 import messages from 'messages';
 
@@ -47,7 +44,9 @@ export default class Application extends React.Component {
 			isMenuExpanded: false,
 			isModalVisible: false,
 			offsetHeight: 0,
-			modalName: ''
+			modalName: '',
+			modalComponentName: '',
+			modalComponentProps: {}
 		};
 	}
 
@@ -93,7 +92,9 @@ export default class Application extends React.Component {
 					/>
 					{this._getSectionsData().map(Application._renderSection, this)}
 				</div>
-				{this.state.isModalVisible && this._renderModal(this.state.modalName)}
+				{this.state.isModalVisible && this._renderModal(
+					this.state.modalName, this.state.modalComponentName, this.state.modalComponentProps
+				)}
 			</div>
 		);
 	}
@@ -122,7 +123,7 @@ export default class Application extends React.Component {
 			{
 				title: messages.offerSectionHeader,
 				id: 'offer',
-				children: (<Offer offer={messages.offer} showModal={this._showModal.bind(this)}/>)
+				children: (<Offer showModal={this._showModal.bind(this)}/>)
 			},
 			{
 				title: messages.languageSectionHeader,
@@ -222,13 +223,17 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc shows modal component
-	 * @param {String} name - modal name
+	 * @param {String} title - modal name
+	 * @param {String} componentName
+	 * @param {Object} props
 	 */
-	_showModal(name) {
+	_showModal(title, componentName, props) {
 		this.setState({
 			isModalVisible: true,
 			offsetHeight: window.scrollY,
-			modalName: name
+			modalName: title,
+			modalComponentName: componentName,
+			modalComponentProps: props
 		});
 
 		Application._setWindowScrollYPosition(0);
@@ -240,42 +245,25 @@ export default class Application extends React.Component {
 	_hideModal() {
 		this.setState({
 			isModalVisible: false,
-			modalName: ''
+			modalName: '',
+			modalComponentName: '',
+			modalComponentProps: {}
 		});
 	}
 
 	/**
 	 * @desc renders modal component
 	 * @param {String} title
+	 * @param {String} componentName
+	 * @param {Object} props
 	 * @returns {XML}
 	 */
-	_renderModal(title) {
+	_renderModal(title, componentName, props) {
 		return (
 			<Modal title={title} closeAction={this._hideModal.bind(this)}>
-				{Application._renderModalContent(title)}
+				{React.createElement(componentName, props)}
 			</Modal>
 		);
-	}
-
-	/**
-	 * @deac renders modal content based on its name
-	 * @param {String} name
-	 * @returns {XML}
-	 */
-	static _renderModalContent(name) {
-		switch (name) {
-			case 'Napisz do nas':
-				return <ContactForm/>;
-				break;
-			case 'Cennik':
-				return <CheckPrizeForm/>;
-				break;
-			case 'Wycena':
-				return <RequestCustomPrize/>;
-				break;
-			default:
-				return <OfferDetails details={messages.offerDetails[name]}/>
-		}
 	}
 
 	/**

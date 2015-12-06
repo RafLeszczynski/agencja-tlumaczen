@@ -1,5 +1,4 @@
-require('../scss/components/offerDetails.scss');
-
+import 'components/OfferDetails/OfferDetails.scss';
 import React from 'react';
 
 const OfferDetails = ({details}) => {

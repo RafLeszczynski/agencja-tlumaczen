@@ -1,14 +1,9 @@
 import 'components/forms/form.scss';
 import React from 'react';
-import classNames from 'classnames';
-import TextareaAutosize from 'react-textarea-autosize';
 import * as validator from 'helpers/validator';
-import InputGroup from 'components/forms/InputGroup';
-import Label from 'components/forms/Label';
-import Input from 'components/forms/Input';
-import ValidationErrorMsg from 'components/forms/ValidationErrorMsg';
+import TextField from 'components/forms/TextField';
 import Button from 'components/Button';
-import * as messages from 'messages/contactForm.messages';
+import * as messages from 'components/ContactForm/ContactForm.messages';
 import trimFromStart from 'helpers/trim'
 
 export default class ContactForm extends React.Component {
@@ -34,10 +29,10 @@ export default class ContactForm extends React.Component {
 
 	render() {
 		return (
-				<form className='form' autoComplete='on'>
-					{this._getFormData().map(this._renderFormItem, this)}
-					<Button name={messages.submitLabel} />
-				</form>
+			<form className='form' autoComplete='on'>
+				{this._getFormData().map(this._renderFormItem, this)}
+				<Button name={messages.submitLabel} />
+			</form>
 		);
 	}
 
@@ -82,87 +77,22 @@ export default class ContactForm extends React.Component {
 	 * @private
 	 */
 	_renderFormItem(formItem, index) {
-		let id = formItem.id;
+		const id = formItem.id;
 
 		return (
-			<InputGroup key={index}>
-				{!formItem.multiline ?
-						this._renderInput(id, formItem.type) :
-						this._renderTextArea(id)
-				}
-				<Label
-					id={id}
-					title={formItem.label}
-				/>
-				{this._renderErrorMessage(id, formItem.validationErrorMsg)}
-			</InputGroup>
-		);
-	}
-
-	/**
-	 * @desc render validation error message
-	 * @param {String} id
-	 * @param {String} errorMessage
-	 * @returns {XML}
-	 * @private
-	 */
-	_renderErrorMessage(id, errorMessage) {
-		if (!this.state[ContactForm.isValidPrefix + id]) {
-			return <ValidationErrorMsg errorMsg={errorMessage}/>
-		}
-	}
-
-	/**
-	 * @desc renders Input component
-	 * @param {String} id
-	 * @param {String} type
-	 * @returns {XML}
-	 * @private
-	 */
-	_renderInput(id, type) {
-		let isFileInput = type === 'file',
-			inputClasses = {
-				input_file: isFileInput
-			};
-
-		return (
-			<Input
-				cssClasses={inputClasses}
+			<TextField
+				key={index}
+				multiline={formItem.multiline}
 				id={id}
-				name={id}
-				type={type}
+				type={formItem.type}
+				label={formItem.label}
+				isValid={this.state[ContactForm.isValidPrefix + id]}
+				validationErrorMsg={formItem.validationErrorMsg}
 				value={this.state[id]}
-				onChange={this._handlerChange.bind(this)}
-				onBlur={!isFileInput && this._handlerBlur.bind(this)}
-			/>
-		)
-	}
-
-	/**
-	 * @desc renders TextareaAutosize component
-	 * @param {String} id
-	 * @param {Boolean} isRequired
-	 * @returns {XML}
-	 * @private
-	 */
-	_renderTextArea(id) {
-		let value = this.state[id],
-			className = classNames({
-				textarea: true,
-				textarea_empty: value === ''
-			});
-
-		return (
-			<TextareaAutosize
-				id={id}
-				className={className}
-				minRows={1}
-				maxRows={6}
-				value={value}
 				onChange={this._handlerChange.bind(this)}
 				onBlur={this._handlerBlur.bind(this)}
 			/>
-		)
+		);
 	}
 
 	/**
@@ -171,7 +101,7 @@ export default class ContactForm extends React.Component {
 	 * @private
 	 */
 	_handlerChange(event) {
-		let target = event.target;
+		const target = event.target;
 
 		this.setState({
 			[target.id]: trimFromStart(target.value)
@@ -184,7 +114,7 @@ export default class ContactForm extends React.Component {
 	 * @private
 	 */
 	_handlerBlur(event) {
-		let target = event.target,
+		const target = event.target,
 			value = target.value,
 			isEmail = target.type === 'email';
 

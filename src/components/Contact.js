@@ -2,6 +2,7 @@ require('../scss/components/contact.scss');
 
 import React from 'react';
 import Button from 'components/Button';
+import ContactForm from 'components/ContactForm/ContactForm';
 
 const Contact = ({contactUs, email, fax, phones, showModal}) => {
 	return (
@@ -21,7 +22,7 @@ const Contact = ({contactUs, email, fax, phones, showModal}) => {
 };
 
 function showContactForm(showModal, contactUs) {
-	showModal(contactUs);
+	showModal(contactUs, ContactForm);
 }
 
 Contact.propTypes = {

@@ -2,49 +2,91 @@ import 'components/forms/select.scss';
 import 'components/CheckPrizeForm/CheckPrizeForm.scss';
 
 import React from 'react';
-import Select from 'react-select';
-
-import * as messages from 'components/CheckPrizeForm/CheckPrizeForm.messages';
-import {languages} from 'messages/languages.messages';
-import {docsTypes} from 'messages/docTypes.messages';
-
-
+import * as checkPrizeFormMessages from 'components/CheckPrizeForm/CheckPrizeForm.messages';
+import * as contactFormMessages from 'components/ContactForm/ContactForm.messages';
+import RadioButton from 'components/forms/RadioButton';
+import SelectBlock from 'components/forms/SelectBlock';
 import Button from 'components/Button';
-import Label from 'components/forms/Label';
-import InputGroup from 'components/forms/InputGroup';
-import Input from 'components/forms/Input';
-
+import TextField from 'components/forms/TextField';
+import ContactForm from 'components/ContactForm/ContactForm';
+import trimFromStart from 'helpers/trim';
+import * as validator from 'helpers/validator';
 
 export default class CheckPrizeForm extends React.Component {
-	static sourceLangParam = 'sourceLang';
-	static destinationLangParam = 'destinationLang';
-	static docTypeLangParam = 'docType';
+	static emailFieldId = 'emailTextField';
+	static textFieldId = 'textTextField';
+	static fileFieldId = 'fileTextField';
+	static isValidPrefix = 'isValid';
 
-	// css classes
-	static checkPrizeFormClassName = 'check-prize';
-	static selectClassName = 'check-prize-select';
-	static selectGroupWrapperClassName = 'check-prize__select-group';
-	static radioGroupClassName = 'check-prize__radio-group';
+	static propTypes = {
+		isCustomPrizeForm: React.PropTypes.bool,
+		translationOptions: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+		selectionOptions: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+	};
+
+	static defaultTypes = {
+		isCustomPrizeForm: false
+	};
 
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			translationType: messages.translationOptions[0].value,
+			translationType: this.props.translationOptions[0].value,
 			sourceLang: '',
 			destinationLang: '',
-			docType: ''
+			docType: '',
+			[CheckPrizeForm.emailFieldId]: '',
+			[CheckPrizeForm.textFieldId]: '',
+			[CheckPrizeForm.fileFieldId]: '',
+			[CheckPrizeForm.isValidPrefix + CheckPrizeForm.emailFieldId]: true,
+			[CheckPrizeForm.isValidPrefix + CheckPrizeForm.textFieldId]: true
 		}
 	}
 
 	render() {
+		const {isCustomPrizeForm, translationOptions, selectionOptions} = this.props;
+
 		return (
-				<div className={CheckPrizeForm.checkPrizeFormClassName}>
-					{this._renderRadioGroup()}
-					{this._renderSelectGroup()}
-					<Button name={messages.getPrizeButton} />
+			<form className='check-prize'>
+				<div className='check-prize__radio-group'>
+					<p>{checkPrizeFormMessages.translationOptionsLabel}</p>
+					{translationOptions.map(this._renderRadioButton, this)}
 				</div>
+				<div className='check-prize__select-group'>
+					{selectionOptions.map(this._renderSelectBlock, this)}
+				</div>
+				{isCustomPrizeForm ? this._renderCustomPrizeForm() : ''}
+				<Button name={checkPrizeFormMessages.getPrizeButton} />
+			</form>
 		);
+	}
+
+	/**
+	 * @desc returns form data
+	 * @returns {Array}
+	 * @private
+	 */
+	_getFormData() {
+		return [
+			{
+				id: CheckPrizeForm.emailFieldId,
+				label: contactFormMessages.emailLabel,
+				type: 'email',
+				validationErrorMsg: contactFormMessages.wrongEmailFormat
+			},
+			{
+				id: CheckPrizeForm.textFieldId,
+				label: contactFormMessages.textLabel,
+				multiline: true,
+				validationErrorMsg: contactFormMessages.emptyInputError
+			},
+			{
+				id: CheckPrizeForm.fileFieldId,
+				label: this.state[CheckPrizeForm.fileFieldId] || contactFormMessages.fileLabel,
+				type: 'file'
+			}
+		];
 	}
 
 	/**
@@ -52,7 +94,7 @@ export default class CheckPrizeForm extends React.Component {
 	 * @param {String} param
 	 * @param {String} value
 	 */
-	_handlerOnChange(param, value) {
+	_handlerOnSelectChange(param, value) {
 		this.setState({
 			[param]: value
 		});
@@ -69,36 +111,32 @@ export default class CheckPrizeForm extends React.Component {
 	}
 
 	/**
-	 * @desc returon array of select groups data
-	 * @returns {Array}
+	 * @desc handles TextField and Textarea value changes
+	 * @param {Event} event
+	 * @private
 	 */
-	static _getSelectGroupData() {
-		return [
-			{
-				id: CheckPrizeForm.sourceLangParam,
-				options: languages
-			},
-			{
-				id: CheckPrizeForm.destinationLangParam,
-				options: languages
-			},
-			{
-				id: CheckPrizeForm.docTypeLangParam,
-				options: docsTypes
-			}
-		];
+	_handlerChange(event) {
+		const target = event.target;
+
+		this.setState({
+			[target.id]: trimFromStart(target.value)
+		});
 	}
 
 	/**
-	 * @desc renders select group
-	 * @returns {XML}
+	 * @desc handles validation on blur
+	 * @param event
+	 * @private
 	 */
-	_renderSelectGroup() {
-		return (
-			<div className={CheckPrizeForm.selectGroupWrapperClassName}>
-				{CheckPrizeForm._getSelectGroupData().map(this._renderSelectBlock, this)}
-			</div>
-		);
+	_handlerBlur(event) {
+		const target = event.target,
+				value = target.value,
+				isEmail = target.type === 'email';
+
+		this.setState({
+			[CheckPrizeForm.isValidPrefix + target.id]: isEmail && validator.validateEmail(value) ||
+			!isEmail && value !== ''
+		})
 	}
 
 	/**
@@ -108,40 +146,19 @@ export default class CheckPrizeForm extends React.Component {
 	 * @returns {XML}
 	 */
 	_renderSelectBlock(select, index) {
-		let inputGroupClasses = {
-				'input-group_select': true
-			};
+		let id = select.id;
 
 		return (
-			<InputGroup key={index} className={inputGroupClasses}>
-				<Select
-						className={CheckPrizeForm.selectClassName}
-						clearable={false}
-						id={select.id}
-						options={select.options}
-						placeholder={messages.selectPlaceholder}
-						searchable={false}
-						onChange={this._handlerOnChange.bind(this, select.id)}
-						value={this.state[select.id]}
-				/>
-				<Label
-						id={select.id}
-						title={messages[select.id]}
-				/>
-			</InputGroup>
-		);
-	}
-
-	/**
-	 * @desc renders radio button group
-	 * @returns {XML}
-	 */
-	_renderRadioGroup() {
-		return (
-			<div className={CheckPrizeForm.radioGroupClassName}>
-				<p>{messages.translationOptionsLabel}</p>
-				{messages.translationOptions.map(this._renderRadioButton, this)}
-			</div>
+			<SelectBlock
+				className='check-prize-select'
+				id={id}
+				key={index}
+				label={checkPrizeFormMessages[id]}
+				onChange={this._handlerOnSelectChange.bind(this, id)}
+				options={select.options}
+				placeholder={checkPrizeFormMessages.selectPlaceholder}
+				value={this.state[id]}
+			/>
 		);
 	}
 
@@ -152,33 +169,58 @@ export default class CheckPrizeForm extends React.Component {
 	 * @returns {XML}
 	 */
 	_renderRadioButton(option, index) {
-		let id = messages.translationOptionsName + index,
-			value = option.value,
-			isChecked = value === this.state.translationType,
-			inputClasses = {
-				input_radio: true,
-				input_checked: isChecked
-			},
-			inputGroupClasses = {
-				'input-group_radio': true
-			};
+		let id = checkPrizeFormMessages.translationOptionsName + index,
+			value = option.value;
 
 		return (
-			<InputGroup key={index} cssClasses={inputGroupClasses}>
-				<Input
-					cssClasses={inputClasses}
-					defaultChecked={isChecked}
-					id={id}
-					name={messages.translationOptionsName}
-					onClick={this._handlerOnRadioClick.bind(this, value)}
-					type='radio'
-					value={value}
-				/>
-				<Label
-					id={id}
-					title={option.label}
-				/>
-			</InputGroup>
+			<RadioButton
+				key={index}
+				id={id}
+				value={value}
+				isChecked={value === this.state.translationType}
+				label={option.label}
+				name={checkPrizeFormMessages.translationOptionsName}
+				onClick={this._handlerOnRadioClick.bind(this, value)}
+			/>
 		)
+	}
+
+	/**
+	 * @desc renders custom check prize form content
+	 * @returns {XML}
+	 * @private
+	 */
+	_renderCustomPrizeForm() {
+		return (
+			<div className='check-prize__custom-group'>
+				{this._getFormData().map(this._renderFormItem, this)}
+			</div>
+		)
+	}
+
+	/**
+	 * @desc renders form item
+	 * @param {Object} formItem
+	 * @param {Number} index
+	 * @returns {XML}
+	 * @private
+	 */
+	_renderFormItem(formItem, index) {
+		const id = formItem.id;
+
+		return (
+			<TextField
+				key={index}
+				multiline={formItem.multiline}
+				id={id}
+				type={formItem.type}
+				label={formItem.label}
+				isValid={this.state[ContactForm.isValidPrefix + id]}
+				validationErrorMsg={formItem.validationErrorMsg}
+				value={this.state[id]}
+				onChange={this._handlerChange.bind(this)}
+				onBlur={this._handlerBlur.bind(this)}
+			/>
+		);
 	}
 }

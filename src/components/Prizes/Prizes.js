@@ -3,7 +3,8 @@ import 'components/Prizes/Prizes.scss';
 import React from 'react';
 
 import Button from 'components/Button';
-import * as messages from 'components/Prizes/Prizes.messages';
+import CheckPrizeForm from 'components/CheckPrizeForm/CheckPrizeForm';
+import sections from 'components/Prizes/Prizes.messages';
 
 const prizesWrapperClassName = 'prizes',
 	prizesSectionClassName = 'prizes__section',
@@ -12,7 +13,7 @@ const prizesWrapperClassName = 'prizes',
 	Prizes = ({showModal}) => {
 		return (
 			<div className={prizesWrapperClassName}>
-				{messages.sections.map((section, index) => {
+				{sections.map((section, index) => {
 					return (
 						<div key={index} className={prizesSectionClassName}>
 							<p className={prizesDescriptionClassName}>
@@ -20,7 +21,9 @@ const prizesWrapperClassName = 'prizes',
 							</p>
 							<Button
 								name={section.button}
-								action={showCheckPrizesModal.bind(this, showModal, section.modalTitle)}
+								action={showCheckPrizesModal.bind(
+									this, showModal, section.modalTitle, section.modalProps
+								)}
 							/>
 						</div>
 					)
@@ -33,8 +36,14 @@ Prizes.propTypes = {
 	showModal: React.PropTypes.func.isRequired
 };
 
-function showCheckPrizesModal(showModal, modalTitle) {
-	showModal(modalTitle);
+/**
+ * @desc triggers show modal method with appropriate params
+ * @param {Function} showModal
+ * @param {String} modalTitle
+ * @param {Object} props
+ */
+function showCheckPrizesModal(showModal, modalTitle, props) {
+	showModal(modalTitle, CheckPrizeForm, props);
 }
 
 export default Prizes;
