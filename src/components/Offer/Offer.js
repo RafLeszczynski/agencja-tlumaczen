@@ -1,27 +1,22 @@
-require('../scss/components/offer.scss');
-require('../scss/components/modal.scss');
-
+import 'components/Offer/Offer.scss';
 import React from 'react';
 import Button from 'components/Button';
+import OfferDetails from 'components/OfferDetails/OfferDetails';
+import messages from 'components/Offer/Offer.messages';
 
 export default class Offer extends React.Component {
 	static propTypes = {
-		offer: React.PropTypes.arrayOf(
-			React.PropTypes.objectOf({
-				title: React.PropTypes.string.isRequired,
-				description: React.PropTypes.string.isRequired,
-				details: React.PropTypes.array.isRequired
-			})
-		),
 		showModal: React.PropTypes.func.isRequired
 	};
 
 	/**
 	 * @desc triggers modal opening on click
 	 * @param {String} title - modal title
+	 * @param {Array} details - offer details content
 	 */
-	clickHandler(title) {
-		this.props.showModal(title)
+	clickHandler(title, details) {
+		const props = {details: details};
+		this.props.showModal(title, OfferDetails, props);
 	}
 
 	/**
@@ -35,7 +30,7 @@ export default class Offer extends React.Component {
 			<article className="offer__item" key={index}>
 				<h3>{section.title}</h3>
 				<p>{section.description}</p>
-				{section.details.map(this.renderOfferDetailsButtons.bind(this))}
+				{section.details.map(this.renderOfferDetailsButtons, this)}
 			</article>
 		);
 	}
@@ -47,7 +42,13 @@ export default class Offer extends React.Component {
 	 * @returns {XML}
 	 */
 	renderOfferDetailsButtons(detail, index) {
-		return <Button key={index} name={detail.title} action={this.clickHandler.bind(this, detail.title)} />
+		return (
+			<Button
+				key={index}
+				name={detail.title}
+				action={this.clickHandler.bind(this, detail.title, detail.content)}
+			/>
+		);
 	}
 
 	render() {
@@ -55,7 +56,7 @@ export default class Offer extends React.Component {
 
 		return (
 			<div className="offer">
-				{offer.map(this.renderOfferSection.bind(this))}
+				{messages.map(this.renderOfferSection, this)}
 			</div>
 		);
 	}

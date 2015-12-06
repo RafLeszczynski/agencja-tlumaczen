@@ -1,24 +1,26 @@
 import 'components/forms/select.scss';
-import 'components/checkPrize/checkPrizeForm.scss';
+import 'components/CheckPrizeForm/CheckPrizeForm.scss';
+
 import React from 'react';
+import Select from 'react-select';
+
+import * as messages from 'components/CheckPrizeForm/CheckPrizeForm.messages';
 import {languages} from 'messages/languages.messages';
 import {docsTypes} from 'messages/docTypes.messages';
-import * as messages from 'messages/checkPrizeForm.messages';
-import Select from 'react-select';
+
 import Button from 'components/Button';
 import Label from 'components/forms/Label';
 import InputGroup from 'components/forms/InputGroup';
 import Input from 'components/forms/Input';
 
 
-export default class CheckPrizeForm extends React.Component {
+export default class RequestCustomPrizeForm extends React.Component {
 	static sourceLangParam = 'sourceLang';
 	static destinationLangParam = 'destinationLang';
-	static docTypeLangParam = 'docType';
 
 	// css classes
-	static checkPrizeFormClassName = 'checkPrize';
-	static selectClassName = 'checkPrize-select';
+	static checkPrizeFormClassName = 'check-prize';
+	static selectClassName = 'check-prize-select';
 	static selectGroupWrapperClassName = 'check-prize__select-group';
 	static radioGroupClassName = 'check-prize__radio-group';
 
@@ -26,20 +28,19 @@ export default class CheckPrizeForm extends React.Component {
 		super(props);
 
 		this.state = {
-			translationType: messages.translationOptions[0].value,
+			translationType: messages.translationOptions[1].value,
 			sourceLang: '',
-			destinationLang: '',
-			docType: ''
+			destinationLang: ''
 		}
 	}
 
 	render() {
 		return (
-				<div className={CheckPrizeForm.checkPrizeFormClassName}>
-					{this._renderRadioGroup()}
-					{this._renderSelectGroup()}
-					<Button name={messages.getPrizeButton} />
-				</div>
+			<div className={RequestCustomPrizeForm.checkPrizeFormClassName}>
+				{this._renderRadioGroup()}
+				{this._renderSelectGroup()}
+				<Button name={messages.getPrizeButton} />
+			</div>
 		);
 	}
 
@@ -71,16 +72,12 @@ export default class CheckPrizeForm extends React.Component {
 	static _getSelectGroupData() {
 		return [
 			{
-				id: CheckPrizeForm.sourceLangParam,
+				id: RequestCustomPrizeForm.sourceLangParam,
 				options: languages
 			},
 			{
-				id: CheckPrizeForm.destinationLangParam,
+				id: RequestCustomPrizeForm.destinationLangParam,
 				options: languages
-			},
-			{
-				id: CheckPrizeForm.docTypeLangParam,
-				options: docsTypes
 			}
 		];
 	}
@@ -91,7 +88,7 @@ export default class CheckPrizeForm extends React.Component {
 	 */
 	_renderSelectGroup() {
 		return (
-			<div className={CheckPrizeForm.selectGroupWrapperClassName}>
+			<div className={RequestCustomPrizeForm.selectGroupWrapperClassName}>
 				{CheckPrizeForm._getSelectGroupData().map(this._renderSelectBlock, this)}
 			</div>
 		);
@@ -105,24 +102,24 @@ export default class CheckPrizeForm extends React.Component {
 	 */
 	_renderSelectBlock(select, index) {
 		let inputGroupClasses = {
-				'input-group_select': true
-			};
+			'input-group_select': true
+		};
 
 		return (
 			<InputGroup key={index} className={inputGroupClasses}>
 				<Select
-						className={CheckPrizeForm.selectClassName}
-						clearable={false}
-						id={select.id}
-						options={select.options}
-						placeholder={messages.selectPlaceholder}
-						searchable={false}
-						onChange={this._handlerOnChange.bind(this, select.id)}
-						value={this.state[select.id]}
+					className={RequestCustomPrizeForm.selectClassName}
+					clearable={false}
+					id={select.id}
+					options={select.options}
+					placeholder={messages.selectPlaceholder}
+					searchable={false}
+					onChange={this._handlerOnChange.bind(this, select.id)}
+					value={this.state[select.id]}
 				/>
 				<Label
-						id={select.id}
-						title={messages[select.id]}
+					id={select.id}
+					title={messages[select.id]}
 				/>
 			</InputGroup>
 		);
@@ -134,7 +131,7 @@ export default class CheckPrizeForm extends React.Component {
 	 */
 	_renderRadioGroup() {
 		return (
-			<div className={CheckPrizeForm.radioGroupClassName}>
+			<div className={RequestCustomPrizeForm.radioGroupClassName}>
 				<p>{messages.translationOptionsLabel}</p>
 				{messages.translationOptions.map(this._renderRadioButton, this)}
 			</div>

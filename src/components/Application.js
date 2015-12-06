@@ -1,20 +1,18 @@
+import '../scss/components/modal.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import Header from 'components/Header';
 import Section from 'components/Section';
 import Offices from 'components/Offices';
-import Offer from 'components/Offer';
+import Offer from 'components/Offer/Offer';
 import Button from 'components/Button';
-import SectionItem from 'components/SectionItem';
 import Languages from 'components/Languages';
-import Prizes from 'components/Prizes';
-import CheckPrizeForm from 'components/checkPrize/CheckPrizeForm';
+import Prizes from 'components/Prizes/Prizes';
 import Contact from 'components/Contact';
 import Docs from 'components/Docs';
 import Modal from 'components/Modal';
-import ContactForm from 'components/ContactForm';
-import OfferDetails from 'components/OfferDetails';
+import ContactForm from 'components/ContactForm/ContactForm';
 import throttle from 'helpers/throttle';
 import messages from 'messages';
 
@@ -34,15 +32,147 @@ export default class Application extends React.Component {
 	// reference to header component
 	_headerComponent = null;
 
-	state = {
-		fixedHeader: false,
-		isMenuExpanded: false,
-		isModalVisible: false,
-		offsetHeight: 0,
-		modalName: ''
-	};
+	// set reference to throttledListeners
+	_throttledToggleHeaderPosition = throttle(this._toggleHeaderPosition, this.props.throttleThreshold, this);
+	_throttledHideMenu = throttle(this._hideMenu, this.props.throttleThreshold, this);
 
-	static setWindowScrollYPosition(position) {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			fixedHeader: false,
+			isMenuExpanded: false,
+			isModalVisible: false,
+			offsetHeight: 0,
+			modalName: '',
+			modalComponentName: '',
+			modalComponentProps: {}
+		};
+	}
+
+	componentDidMount() {
+		window.addEventListener('scroll', this._throttledToggleHeaderPosition);
+		window.addEventListener('scroll', this._throttledHideMenu);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener('scroll', this._throttledToggleHeaderPosition);
+		window.removeEventListener('scroll', this._throttledHideMenu);
+	}
+
+	componentDidUpdate(nextProps, nextState) {
+		if (nextState.offsetHeight !== 0) {
+			Application._setWindowScrollYPosition(nextState.offsetHeight);
+
+			this.setState({
+				offsetHeight: 0
+			});
+		}
+	}
+
+	render() {
+		let withModal = classNames({
+				'with-modal': this.state.isModalVisible
+			});
+
+		return (
+			<div>
+				<div className={withModal} style={this._getOffsetStyles()}>
+					<Header
+						collapsedHeaderHeight={this.props.collapsedHeaderHeight}
+						isMenuExpanded={this.state.isMenuExpanded}
+						fixedHeader={this.state.fixedHeader}
+						goToPromoSectionId='offer'
+						goToPromoSectionName={messages.showOfferDetails}
+						navLinks={messages.links}
+						ref={(component) => this._headerComponent = component}
+						subtitle={messages.pageSubtitle}
+						title={messages.pageTitle}
+						toggleMenu={this._toggleMenuDisplay.bind(this)}
+					/>
+					{this._getSectionsData().map(Application._renderSection, this)}
+				</div>
+				{this.state.isModalVisible && this._renderModal(
+					this.state.modalName, this.state.modalComponentName, this.state.modalComponentProps
+				)}
+			</div>
+		);
+	}
+
+	/**
+	 * @desc return section data
+	 * @returns {Array}
+	 * @private
+	 */
+	_getSectionsData() {
+		return [
+			{
+				title: messages.officeSectionHeader,
+				id: 'office',
+				children: (<Offices officesData={messages.offices} showLocation={messages.showLocation}/>)
+			},
+			{
+				title: messages.contactSectionHeader,
+				id: 'contact',
+				children: (<Contact
+					contactUs={messages.contactUs}
+					showModal={this._showModal.bind(this)}
+					{...messages.contactDetails}
+				/>)
+			},
+			{
+				title: messages.offerSectionHeader,
+				id: 'offer',
+				children: (<Offer showModal={this._showModal.bind(this)}/>)
+			},
+			{
+				title: messages.languageSectionHeader,
+				id: 'languages',
+				description: messages.languageSectionDescription,
+				children: (<Languages languages={messages.languages} sideNote={messages.otherLanguagesDescription}/>)
+			},
+			{
+				title: messages.prizesSectionHeader,
+				id: 'prizes',
+				children: (<Prizes showModal={this._showModal.bind(this)} />)
+			},
+			{
+				title: messages.docsSectionHeader,
+				id: 'docs',
+				children: (<Docs
+					tooltip={messages.docsSectionDescription}
+					docs={messages.docs}
+					actionTitle={messages.docsDocSelect}
+				/>)
+			}
+		]
+	}
+
+	/**
+	 * @desc renders section component
+	 * @param {Object} sectionData
+	 * @param {Number} index
+	 * @returns {XML}
+	 */
+	static _renderSection(sectionData, index) {
+		return (
+			<Section
+				key={index}
+				title={sectionData.title}
+				id={sectionData.id}
+				description={sectionData.description}
+			>
+				{sectionData.children}
+			</Section>
+		);
+	}
+
+	/**
+	 * @desc sets window scrollY position
+	 * @param {Number} position
+	 * @private
+	 */
+	static _setWindowScrollYPosition(position) {
 		window.scrollTo(0, position)
 	}
 
@@ -50,8 +180,8 @@ export default class Application extends React.Component {
 	 * @desc toggles fixed header position
 	 * @todo simplify condition statement
 	 */
-	toggleHeaderPosition() {
-		let shouldBeFixed = this.shouldHeaderBeFixed(window.scrollY,
+	_toggleHeaderPosition() {
+		let shouldBeFixed = this._shouldHeaderBeFixed(window.scrollY,
 			ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
 
 		if (this.state.fixedHeader !== shouldBeFixed && !this.state.isModalVisible) {
@@ -67,14 +197,14 @@ export default class Application extends React.Component {
 	 * @param {Number} headerHeight
 	 * @returns {Boolean}
 	 */
-	shouldHeaderBeFixed(windowScrollY, headerHeight) {
+	_shouldHeaderBeFixed(windowScrollY, headerHeight) {
 		return windowScrollY >= headerHeight - this.props.collapsedHeaderHeight;
 	}
 
 	/**
 	 * @desc toggles navigation menu display (for small and medium breakpoint)
 	 */
-	toggleMenuDisplay() {
+	_toggleMenuDisplay() {
 		this.setState({
 			isMenuExpanded: !this.state.isMenuExpanded
 		});
@@ -83,7 +213,7 @@ export default class Application extends React.Component {
 	/**
 	 * @desc hides navigation menu (for small and medium breakpoint)
 	 */
-	hideMenu() {
+	_hideMenu() {
 		if (this.state.isMenuExpanded) {
 			this.setState({
 				isMenuExpanded: false
@@ -93,72 +223,46 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc shows modal component
-	 * @param {String} name - modal name
+	 * @param {String} title - modal name
+	 * @param {String} componentName
+	 * @param {Object} props
 	 */
-	showModal(name) {
+	_showModal(title, componentName, props) {
 		this.setState({
 			isModalVisible: true,
 			offsetHeight: window.scrollY,
-			modalName: name
+			modalName: title,
+			modalComponentName: componentName,
+			modalComponentProps: props
 		});
 
-		Application.setWindowScrollYPosition(0);
+		Application._setWindowScrollYPosition(0);
 	}
 
 	/**
 	 * @desc hides modal component
 	 */
-	hideModal() {
+	_hideModal() {
 		this.setState({
 			isModalVisible: false,
-			modalName: ''
+			modalName: '',
+			modalComponentName: '',
+			modalComponentProps: {}
 		});
 	}
 
 	/**
 	 * @desc renders modal component
-	 * @returns {XML}
-	 */
-	renderModal() {
-		let title = this.state.modalName;
-
-		return (
-			<Modal title={title} closeAction={this.hideModal.bind(this)}>
-				{this.renderModalContent(title)}
-			</Modal>
-		);
-	}
-
-	/**
-	 * @deac renders modal content based on its name
-	 * @param {String} name
-	 * @returns {XML}
-	 */
-	renderModalContent(name) {
-		switch (name) {
-			case 'Napisz do nas':
-				return <ContactForm/>;
-				break;
-			case 'Przejdź do cennika':
-				return <CheckPrizeForm/>;
-				break;
-			default:
-				return <OfferDetails details={messages.offerDetails[name]}/>
-		}
-	}
-
-	/**
-	 * @desc renders section component
 	 * @param {String} title
-	 * @param {String} id
-	 * @param {XML} children
+	 * @param {String} componentName
+	 * @param {Object} props
 	 * @returns {XML}
 	 */
-	renderSection(title, id, children) {
+	_renderModal(title, componentName, props) {
 		return (
-			<Section title={title} id={id}>
-				{children}
-			</Section>
+			<Modal title={title} closeAction={this._hideModal.bind(this)}>
+				{React.createElement(componentName, props)}
+			</Modal>
 		);
 	}
 
@@ -166,88 +270,9 @@ export default class Application extends React.Component {
 	 * @desc sets top position styles of wrapper content
 	 * @returns {{top: number|string}}
 	 */
-	getOffsetStyles() {
+	_getOffsetStyles() {
 		let offset = this.state.offsetHeight;
 
 		return {top: offset ? -offset : 'auto'};
-	}
-
-	// set reference to throttledListeners
-	throttledToggleHeaderPosition = throttle(this.toggleHeaderPosition, this.props.throttleThreshold, this);
-	throttledHideMenu = throttle(this.hideMenu, this.props.throttleThreshold, this);
-
-	componentDidMount() {
-		window.addEventListener('scroll', this.throttledToggleHeaderPosition);
-		window.addEventListener('scroll', this.throttledHideMenu);
-	}
-
-	componentWillUnmount() {
-		window.removeEventListener('scroll', this.throttledToggleHeaderPosition);
-		window.removeEventListener('scroll', this.throttledHideMenu);
-	}
-
-	componentDidUpdate(nextProps, nextState) {
-		if (nextState.offsetHeight !== 0) {
-			Application.setWindowScrollYPosition(nextState.offsetHeight);
-
-			this.setState({
-				offsetHeight: 0
-			});
-		}
-	}
-
-	render() {
-		let withModal = classNames({
-				'with-modal': this.state.isModalVisible
-			});
-
-		return (
-			<div>
-				<div className={withModal} style={this.getOffsetStyles()}>
-					<Header collapsedHeaderHeight={this.props.collapsedHeaderHeight}
-					        isMenuExpanded={this.state.isMenuExpanded}
-					        fixedHeader={this.state.fixedHeader}
-					        goToPromoSectionId='offer'
-					        goToPromoSectionName={messages.showOfferDetails}
-					        navLinks={messages.links}
-					        ref={(component) => this._headerComponent = component}
-					        subtitle={messages.pageSubtitle}
-					        title={messages.pageTitle}
-					        toggleMenu={this.toggleMenuDisplay.bind(this)}
-					/>
-
-					{this.renderSection(
-						messages.officeSectionHeader,
-						'office',
-						(<Offices officesData={messages.offices} showLocation={messages.showLocation}/>)
-					)}
-
-					<Section title={messages.contactSectionHeader} id='contact'>
-						<Contact contactUs={messages.contactUs}
-						         showModal={this.showModal.bind(this)} {...messages.contactDetails}/>
-					</Section>
-
-					<Section title={messages.offerSectionHeader} id='offer'>
-						<Offer offer={messages.offer} showModal={this.showModal.bind(this)}/>
-					</Section>
-
-					<Section title={messages.languageSectionHeader} id='languages'
-					         description={messages.languageSectionDescription}>
-						<Languages languages={messages.languages} sideNote={messages.otherLanguagesDescription}/>
-					</Section>
-
-					<Section title={messages.prizesSectionHeader} id='prizes'>
-						<Prizes showModal={this.showModal.bind(this)} />
-					</Section>
-
-					<Section title={messages.docsSectionHeader} id='docs'>
-						<Docs tooltip={messages.docsSectionDescription}
-						      docs={messages.docs}
-						      actionTitle={messages.docsDocSelect}/>
-					</Section>
-				</div>
-				{this.state.isModalVisible && this.renderModal()}
-			</div>
-		);
 	}
 }
