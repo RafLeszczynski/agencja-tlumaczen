@@ -41,15 +41,6 @@ module.exports = {
 				exclude: /node_modules/,
 				loader: "babel-loader"
 			},
-			//{
-			//    test: /\.js?$/,
-			//    exclude: [nodeModulesPath],
-			//    loader: 'babel',
-			//    query: {
-			//        cacheDirectory: true,
-			//        optional: ['es7.decorators', 'es7.classProperties']
-			//    }
-			//},
 			{
 				test: /\.scss$/,
 				loaders: ['style', 'css', 'autoprefixer-loader?browsers=last 2 versions', 'sass']
