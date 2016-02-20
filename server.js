@@ -6,22 +6,21 @@ import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.js';
-import * as config from './config.json';
 import MailSender from './server/mailSender';
 import fileFilter from './server/fileFilterHelper';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? config.devPort : process.env.PORT;
+const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
-const mailSender = new MailSender(config.gmailUser, config.gmailPass);
+const mailSender = new MailSender(process.env.GMAIL_USER, process.env.GMAIL_PASS);
 const multerOptions = {
-	dest: config.uploadDir,
+	dest: process.env.UPLOAD_DIR,
 	limits: {
-		fieldSize: config.maxUploadSize
+		fieldSize: process.env.MAX_UPLOAD_SIZE
 	},
 	fileFilter
 };
-const upload = multer(multerOptions).array('files', config.maxFileNumber);
+const upload = multer(multerOptions).array('files', 5);
 
 function removeTempFiles(files) {
 	files.map(file => {
@@ -67,7 +66,7 @@ app.post('/sendMessage', (req, res) => {
 		}
 
 		mailSender.send(
-			MailSender.createMessage(config.targetEmail, req.body, MailSender.sanitizeAttachments(req.files)),
+			MailSender.createMessage(process.env.TARGET_EMAIL, req.body, MailSender.sanitizeAttachments(req.files)),
 			(error, info) => {
 				if (error) {
 					res.send('Error');
