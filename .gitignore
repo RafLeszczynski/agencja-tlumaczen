@@ -30,8 +30,11 @@ node_modules
 .idea/*
 
 # build directory
-tmp/*
+build/
 
 #OSX
 .DS_Store
+
+# confif file
+config.json
 

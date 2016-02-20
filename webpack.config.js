@@ -1,45 +1,26 @@
 'use strict';
 
 var webpack = require('webpack'),
-	HtmlWebpackPlugin = require('html-webpack-plugin'),
-	TransferWebpackPlugin = require('transfer-webpack-plugin'),
 	path = require('path'),
-	nodeModulesPath = path.resolve(__dirname, 'node_modules'),
-	srcPath = path.join(__dirname, 'src');
+	HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-	target: 'web',
-	cache: true,
-	entry: {
-		app: path.join(srcPath, 'app.js'),
-		common: ['react']
-	},
-	resolve: {
-		root: srcPath,
-		extensions: ["", ".js", ".jsx"],
-		modulesDirectories: ['node_modules', 'src']
-	},
-	output: {
-		path: path.join(__dirname, 'tmp'),
-		publicPath: '',
-		filename: '[name].js',
-		library: ['Example', '[name]'],
-		pathInfo: true
-	},
+	devtool: 'eval-source-map',
+	entry: [
+		'webpack-hot-middleware/client?reload=true',
+		path.resolve(__dirname, 'app', 'app.js')
+	],
 	module: {
-		preLoaders: [
-			{
-				test: /\.js$/,
-				loader: 'eslint-loader',
-				include: [path.resolve(__dirname, "src/app")],
-				exclude: /node_modules/
-			}
-		],
 		loaders: [
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: "babel-loader"
+				loader: "babel"
+			},
+			{
+				test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
+				exclude: /node_modules/,
+				loader: 'url-loader?importLoaders=1&limit=100000'
 			},
 			{
 				test: /\.scss$/,
@@ -47,24 +28,26 @@ module.exports = {
 			}
 		]
 	},
+	output: {
+		filename: '[name].js',
+		path: path.resolve(__dirname, 'build'),
+		publicPath: '/'
+	},
 	plugins: [
-		new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
 		new HtmlWebpackPlugin({
 			inject: true,
-			template: 'src/index.html'
+			template: 'app/index.html'
 		}),
-		new TransferWebpackPlugin([
-			{from: 'src/fonts', to: 'fonts'}
-		]),
-		new webpack.NoErrorsPlugin()
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.HotModuleReplacementPlugin(),
+		new webpack.NoErrorsPlugin(),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('development')
+		})
 	],
-	debug: true,
-	devtool: 'eval-cheap-module-source-map',
-	devServer: {
-		contentBase: './tmp',
-		historyApiFallback: true
-	},
-	eslint: {
-		configFile: '.eslintrc'
+	resolve: {
+		root: path.resolve(__dirname, 'app'),
+		extensions: ["", ".js"],
+		modulesDirectories: ['node_modules', 'app']
 	}
 };

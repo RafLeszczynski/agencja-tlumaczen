@@ -1,0 +1,104 @@
+@import 'variables';
+
+@font-face {
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto-Regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Caviar Dreams';
+	src: url('../fonts/Caviar_Dreams-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Caviar Dreams';
+	src: url('../fonts/Caviar_Dreams_Bold-webfont.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+body {
+	color: $brandingColor;
+	font: 14px/20px 'Roboto', sans-serif;
+	margin: 0;
+}
+
+a {
+	background-color: transparent;
+
+	&:active,
+	&:hover {
+		outline: 0;
+	}
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+	color: inherit;
+	font: inherit;
+	margin: 0;
+}
+
+button {
+	overflow: visible;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+	cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+
+input {
+	line-height: normal;
+
+	&[type="checkbox"],
+	&[type="radio"] {
+		box-sizing: border-box;
+		padding: 0;
+	}
+
+	&[type="number"]::-webkit-inner-spin-button,
+	&[type="number"]::-webkit-outer-spin-button {
+		height: auto;
+	}
+}
+
+fieldset {
+	border: 1px solid #c0c0c0;
+	margin: 0 2px;
+	padding: 0.35em 0.625em 0.75em;
+}
+
+textarea {
+	overflow: auto;
+}
