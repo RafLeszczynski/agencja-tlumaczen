@@ -1,4 +1,3 @@
-import fs from 'fs';
 import express from 'express';
 import path from 'path';
 import multer from 'multer';
@@ -8,6 +7,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from './webpack.config.js';
 import MailSender from './server/mailSender';
 import fileFilter from './server/fileFilterHelper';
+import uploadsCleanup from './server/uploadsCleanupHelper';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? process.env.DEV_PORT : process.env.PORT;
@@ -21,14 +21,6 @@ const multerOptions = {
 	fileFilter
 };
 const upload = multer(multerOptions).array('files', 5);
-
-function removeTempFiles(files) {
-	files.map(file => {
-		fs.unlink(file.path, (error) => {
-			console.log(error);
-		});
-	})
-}
 
 if (isDeveloping) {
 	const compiler = webpack(webpackConfig);
@@ -73,7 +65,7 @@ app.post('/sendMessage', (req, res) => {
 					return console.log(error);
 				}
 
-				removeTempFiles(req.files);
+				uploadsCleanup(req.files);
 
 				console.log(`Message sent: ${info.response}`);
 				res.send('Mail send');
