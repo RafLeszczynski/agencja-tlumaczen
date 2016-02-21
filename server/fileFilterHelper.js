@@ -1,4 +1,4 @@
-const supportedTypes = [
+export const supportedTypes = [
 	"application/pdf",
 	"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 	"application/msword",
