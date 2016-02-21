@@ -1,0 +1,7 @@
+# example config file
+# export these env variables before starting dev server
+export PORT=3000
+export GMAIL_USER="user_name"
+export GMAIL_PASS="pass"
+export UPLOAD_DIR="path/"
+export MAX_UPLOAD_SIZE="1MB"
