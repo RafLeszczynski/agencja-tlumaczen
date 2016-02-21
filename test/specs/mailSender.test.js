@@ -17,4 +17,31 @@ describe('Mail Sender tests', () => {
 		expect(messageObject.text).toBe(message);
 		expect(messageObject.attachments).toBe(attachments);
 	});
+
+	it('sanitizes attachments data', () => {
+		const files = [
+			{
+				originalname: 'lorem ipsum',
+				path: 'upload/file1.jpg',
+				fakeProp: 'test'
+			},
+			{
+				originalname: 'ipsum lorem',
+				path: 'upload/file2.jpg',
+				fakeProp2: 'test123'
+			}
+		];
+		const filenameKey = 'filename';
+		const pathKey = 'path';
+		const attachments = MailSender.sanitizeAttachments(files);
+
+		attachments.forEach((attachment, index) => {
+			const keys = Object.keys(attachment);
+			expect(keys.length).toBe(2);
+			expect(attachment.hasOwnProperty(filenameKey)).toBe(true);
+			expect(attachment[filenameKey]).toBe(files[index].originalname);
+			expect(attachment.hasOwnProperty(pathKey)).toBe(true);
+			expect(attachment[pathKey]).toBe(files[index].path);
+		});
+	});
 });
