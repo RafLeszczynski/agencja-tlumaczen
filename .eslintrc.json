@@ -17,7 +17,6 @@
 		"react"
 	],
 	"rules": {
-		// possible errors
 		"comma-dangle": [
 			2,
 			"never"
@@ -52,7 +51,7 @@
 		"use-isnan": 2,
 		"valid-jsdoc": 2,
 		"valid-typeof": 2,
-		//Best Practices
+
 		"accessor-pairs": 2,
 		"array-callback-return": 2,
 		"block-scoped-var": 2,
@@ -131,7 +130,7 @@
 		"vars-on-top": 2,
 		"wrap-iife": 2,
 		"yoda": 2,
-		// Variables
+
 		"init-declarations": 0,
 		"no-catch-shadow": 2,
 		"no-delete-var": 2,
@@ -143,7 +142,7 @@
 		"no-undefined": 2,
 		"no-unused-vars": 2,
 		"no-use-before-define": 2,
-		// Node.js
+
 		"callback-return": 2,
 		"global-require": 2,
 		"handle-callback-err": 2,
@@ -154,7 +153,7 @@
 		"no-restricted-imports": 0,
 		"no-restricted-modules": 0,
 		"no-sync": 2,
-		// ECMAScript 6
+
 		"arrow-body-style": [
 			2,
 			"as-needed"
@@ -174,7 +173,7 @@
 		"no-this-before-super": 2,
 		"no-useless-constructor": 2,
 		"no-var": 2,
-		// Code Style
+
 		"array-bracket-spacing": [
 			2,
 			"never"
