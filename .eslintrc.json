@@ -25,7 +25,7 @@
 			2,
 			"always"
 		],
-		"no-console": 2,
+		"no-console": 1,
 		"no-constant-condition": 2,
 		"no-control-regex": 2,
 		"no-debugger": 2,
@@ -222,7 +222,6 @@
 			2,
 			"unix"
 		],
-		"lines-around-comment": 2,
 		"max-depth": 2,
 		"max-len": [
 			2,
@@ -250,7 +249,7 @@
 		"newline-per-chained-call": [
 			2,
 			{
-				"ignoreChainWithDepth": 2
+				"ignoreChainWithDepth": 3
 			}
 		],
 		"no-array-constructor": 2,
@@ -306,7 +305,6 @@
 		],
 		"semi-spacing": 2,
 		"space-before-blocks": 2,
-		"space-before-function-paren": 2,
 		"space-in-parens": [
 			2,
 			"never"
