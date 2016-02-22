@@ -1,30 +1,30 @@
-export const radioGroupLabel = 'Rodzaj tłumaczenia',
-	radioCarDocsLabel = 'DokumentySamochodowe',
-	radioOralTranslationLabel = 'Ustne',
-	radioLegalTranslationLabel = 'Pisemne przysięgłe',
-	radioBasicTranslationLabel = 'Pisemne nieprzysięgłe',
-	sourceLang = 'Język źródłowy',
-	destinationLang = 'Język docelowy',
-	docType = 'Rodzaj dokumentu',
-	selectPlaceholder = 'Wybierz',
-	translationOptionsLabel = 'Rodzaj Tłumaczenia',
-	translationOptionsName = 'translationType',
-	translationOptions = [
-		{
-			value: '1',
-			label: 'Dokumenty Samochodowe'
-		},
-		{
-			value: '2',
-			label: 'Ustne'
-		},
-		{
-			value: '3',
-			label: 'Pisemne przysięgłe'
-		},
-		{
-			value: '4',
-			label: 'Pisemne nieprzysięgłe'
-		}
-	],
-	getPrizeButton = 'Sprawdź cenę';
+export const radioGroupLabel = 'Rodzaj tłumaczenia';
+export const radioCarDocsLabel = 'DokumentySamochodowe';
+export const radioOralTranslationLabel = 'Ustne';
+export const radioLegalTranslationLabel = 'Pisemne przysięgłe';
+export const radioBasicTranslationLabel = 'Pisemne nieprzysięgłe';
+export const sourceLang = 'Język źródłowy';
+export const destinationLang = 'Język docelowy';
+export const docType = 'Rodzaj dokumentu';
+export const selectPlaceholder = 'Wybierz';
+export const translationOptionsLabel = 'Rodzaj Tłumaczenia';
+export const translationOptionsName = 'translationType';
+export const translationOptions = [
+	{
+		value: '1',
+		label: 'Dokumenty Samochodowe'
+	},
+	{
+		value: '2',
+		label: 'Ustne'
+	},
+	{
+		value: '3',
+		label: 'Pisemne przysięgłe'
+	},
+	{
+		value: '4',
+		label: 'Pisemne nieprzysięgłe'
+	}
+];
+export const getPrizeButton = 'Sprawdź cenę';

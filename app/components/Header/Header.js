@@ -6,6 +6,9 @@ import {Link, Element} from 'react-scroll';
 import HamburgerIcon from 'components/HamburgerIcon/HamburgerIcon';
 import Navigation from 'components/Navigation/Navigation';
 
+/**
+ * @desc react header component
+ */
 export default class Header extends React.Component {
 	static propTypes = {
 		collapsedHeaderHeight: React.PropTypes.number.isRequired,
@@ -26,20 +29,24 @@ export default class Header extends React.Component {
 		scrollDuration: 500
 	};
 
+	/**
+	 * @desc renders component
+	 * @returns {XML} - jsx markup
+	 */
 	render() {
 		const {collapsedHeaderHeight, id, fixedHeader, isMenuExpanded, goToPromoSectionId, goToPromoSectionName, navLinks,
-				scrollDuration, subtitle, title, toggleMenu} = this.props,
+				scrollDuration, subtitle, title, toggleMenu} = this.props;
 
-			headerClasses = classNames({
-				header: true,
-				'header--fixed': fixedHeader || isMenuExpanded,
-				'header--expanded': isMenuExpanded
-			}),
-			buttonClasses = classNames({
-				button: true,
-				'button--secondary': true,
-				'button--big': true
-			});
+		const headerClasses = classNames({
+			header: true,
+			'header--fixed': fixedHeader || isMenuExpanded,
+			'header--expanded': isMenuExpanded
+		});
+		const buttonClasses = classNames({
+			button: true,
+			'button--secondary': true,
+			'button--big': true
+		});
 
 		return (
 			<Element name={id} className='header-wrapper'>
@@ -74,9 +81,9 @@ export default class Header extends React.Component {
 							duration={scrollDuration}
 							className={buttonClasses}>{goToPromoSectionName}
 						</Link>
-						<svg className='see-more-icon' viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							<path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>
-							<path d="M0 0h24v24H0z" fill="none"/>
+						<svg className='see-more-icon' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+							<path d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z'/>
+							<path d='M0 0h24v24H0z' fill='none'/>
 						</svg>
 					</div>
 				</header>

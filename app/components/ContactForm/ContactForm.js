@@ -4,8 +4,11 @@ import * as validator from 'helpers/validator';
 import TextField from 'components/forms/TextField';
 import Button from 'components/Button/Button';
 import * as messages from 'components/ContactForm/ContactForm.messages';
-import trimFromStart from 'helpers/trim'
+import trimFromStart from 'helpers/trim';
 
+/**
+ * @desc contact form react component
+ */
 export default class ContactForm extends React.Component {
 	static nameFieldId = 'nameTextField';
 	static emailFieldId = 'emailTextField';
@@ -13,6 +16,10 @@ export default class ContactForm extends React.Component {
 	static fileFieldId = 'fileTextField';
 	static isValidPrefix = 'isValid';
 
+	/**
+	 * @deac creates new instance and sets its state
+	 * @param {Object} props - react props
+	 */
 	constructor(props) {
 		super(props);
 
@@ -24,9 +31,13 @@ export default class ContactForm extends React.Component {
 			[ContactForm.isValidPrefix + ContactForm.nameFieldId]: true,
 			[ContactForm.isValidPrefix + ContactForm.emailFieldId]: true,
 			[ContactForm.isValidPrefix + ContactForm.textFieldId]: true
-		}
+		};
 	}
 
+	/**
+	 * @desc renders component
+	 * @returns {XML} - jsx markup
+	 */
 	render() {
 		return (
 			<form className='form' autoComplete='on'>
@@ -38,7 +49,7 @@ export default class ContactForm extends React.Component {
 
 	/**
 	 * @desc returns form data
-	 * @returns {Array}
+	 * @returns {Array} - form props
 	 * @private
 	 */
 	_getFormData() {
@@ -71,9 +82,9 @@ export default class ContactForm extends React.Component {
 
 	/**
 	 * @desc renders form item
-	 * @param {Object} formItem
-	 * @param {Number} index
-	 * @returns {XML}
+	 * @param {Object} formItem - props
+	 * @param {Number} index - array index
+	 * @returns {XML} - jsx markup
 	 * @private
 	 */
 	_renderFormItem(formItem, index) {
@@ -97,7 +108,8 @@ export default class ContactForm extends React.Component {
 
 	/**
 	 * @desc handles TextField and Textarea value changes
-	 * @param {Event} event
+	 * @param {Event} event - browser event object
+	 * @returns {void}
 	 * @private
 	 */
 	_handlerChange(event) {
@@ -110,17 +122,18 @@ export default class ContactForm extends React.Component {
 
 	/**
 	 * @desc handles validation on blur
-	 * @param event
+	 * @param {Event} event - browser event object
+	 * @returns {void}
 	 * @private
 	 */
 	_handlerBlur(event) {
-		const target = event.target,
-			value = target.value,
-			isEmail = target.type === 'email';
+		const target = event.target;
+		const value = target.value;
+		const isEmail = target.type === 'email';
 
 		this.setState({
 			[ContactForm.isValidPrefix + target.id]: isEmail && validator.validateEmail(value) ||
 				!isEmail && value !== ''
-		})
+		});
 	}
 }

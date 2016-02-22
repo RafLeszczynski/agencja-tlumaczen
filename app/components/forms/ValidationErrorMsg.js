@@ -5,7 +5,7 @@ const ValidationErrorMsg = ({errorMsg}) => {
 		<span className='validation-error'>
 			{errorMsg}
 		</span>
-	)
+	);
 };
 
 ValidationErrorMsg.propTypes = {

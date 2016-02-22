@@ -19,7 +19,7 @@ const Navigation = ({links, scrollDuration, scrollOffset}) => {
 								{link.title}
 							</Link>
 						</li>
-					)
+					);
 				})}
 			</ul>
 		</nav>
