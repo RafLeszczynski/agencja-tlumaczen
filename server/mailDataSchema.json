@@ -1,0 +1,48 @@
+{
+	"title": "Validation schema for message body",
+	"type": "object",
+	"properties": {
+		"email": {
+			"description": "Valid email address",
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255,
+			"pattern": "/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i"
+		},
+		"message": {
+			"description": "<essage content",
+			"type": "string"
+		},
+		"name": {
+			"description": "Sender name",
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255
+		},
+		"sourceLang": {
+			"description": "Source language for translation task",
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255
+		},
+		"destinationLang": {
+			"description": "Destination language for translation task",
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255
+		},
+		"title": {
+			"description": "Message title",
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255
+		},
+		"translationType": {
+			"description": "Type of requested translation task",
+			"type": "string",
+			"minLength": 1,
+			"maxLength": 255
+		}
+	},
+	"required": ["email", "message", "name", "title"]
+}
