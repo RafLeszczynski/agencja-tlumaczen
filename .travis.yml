@@ -3,6 +3,9 @@ node_js:
   - "5.6.0"
 env:
   - CXX=g++-4.8
+  - SCRIPT=test
+  - SCRIPT=eslint
+script: npm run SCRIPT
 addons:
   apt:
     sources:
