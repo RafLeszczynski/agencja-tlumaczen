@@ -1,6 +1,6 @@
 'use strict';
 
-var path = require('path'),
+let path = require('path'),
 	webpack = require('webpack'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
 	ExtractTextPlugin = require('extract-text-webpack-plugin'),
@@ -56,7 +56,7 @@ module.exports = {
 	},
 	resolve: {
 		root: path.resolve(__dirname, 'app'),
-		extensions: ["", ".js"],
+		extensions: ['', '.js'],
 		modulesDirectories: ['node_modules', 'app']
 	}
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-var webpack = require('webpack'),
+let webpack = require('webpack'),
 	path = require('path'),
 	HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -15,7 +15,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
-				loader: "babel"
+				loader: 'babel'
 			},
 			{
 				test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
@@ -47,7 +47,7 @@ module.exports = {
 	],
 	resolve: {
 		root: path.resolve(__dirname, 'app'),
-		extensions: ["", ".js"],
+		extensions: ['', '.js'],
 		modulesDirectories: ['node_modules', 'app']
 	}
 };
