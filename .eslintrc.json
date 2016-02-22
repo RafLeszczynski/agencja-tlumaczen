@@ -90,7 +90,7 @@
 		"no-labels": 1,
 		"no-lone-blocks": 1,
 		"no-loop-func": 2,
-		"no-magic-numbers": 2,
+		"no-magic-numbers": 0,
 		"no-multi-spaces": 2,
 		"no-multi-str": 2,
 		"no-native-reassign": 2,
@@ -103,7 +103,7 @@
 		"no-process-env": 0,
 		"no-proto": 2,
 		"no-redeclare": 2,
-		"no-return-assign": 2,
+		"no-return-assign": 0,
 		"no-script-url": 2,
 		"no-self-assign": 2,
 		"no-self-compare": 2,
@@ -119,8 +119,7 @@
 			{
 				"terms": [
 					"todo",
-					"fixme",
-					"TODO"
+					"fixme"
 				],
 				"location": "anywhere"
 			}
@@ -140,7 +139,7 @@
 		"no-undef": 2,
 		"no-undef-init": 2,
 		"no-undefined": 2,
-		"no-unused-vars": 2,
+		"no-unused-vars": 0,
 		"no-use-before-define": 2,
 
 		"callback-return": 2,
@@ -200,7 +199,7 @@
 		"func-names": 2,
 		"func-style": [
 			2,
-			"expression",
+			"declaration",
 			{
 				"allowArrowFunctions": true
 			}
@@ -229,7 +228,7 @@
 		],
 		"max-params": [
 			2,
-			4
+			5
 		],
 		"max-statements": [
 			1,
@@ -244,7 +243,7 @@
 		"newline-per-chained-call": [
 			2,
 			{
-				"ignoreChainWithDepth": 3
+				"ignoreChainWithDepth": 4
 			}
 		],
 		"no-array-constructor": 2,
