@@ -1,28 +1,28 @@
 /**
  * @desc groups languages by letter
- * @param {Array} languages
- * @returns {Array[]}
+ * @param {Array} languages -  flat array of languages
+ * @returns {Array[]} - matrix of languages grouped by letter
  * @todo add unit tests
  */
-export default function groupLanguagesByLetter(languages) {
-	let languagesMap = new Map(),
-		groupedLanguages = [];
+export default languages => {
+	const languagesMap = new Map();
+	const groupedLanguages = [];
 
-	languages.forEach((language) => {
-		let aString = language.trim(),
-			firstLetter = aString.charAt(0).toLowerCase();
+	languages.forEach(language => {
+		const firstLetterIndex = 0;
+		const aString = language.trim();
+		const firstLetter = aString.charAt(firstLetterIndex).toLowerCase();
 
-		if (!languagesMap.has(firstLetter)) {
-			languagesMap.set(firstLetter, [aString]);
-		} else {
+		if (languagesMap.has(firstLetter)) {
 			languagesMap.get(firstLetter).push(aString);
+		} else {
+			languagesMap.set(firstLetter, [aString]);
 		}
 	});
 
-	languagesMap.forEach((languageGroup) => {
+	languagesMap.forEach(languageGroup => {
 		groupedLanguages.push(languageGroup);
 	});
-
 
 	return groupedLanguages;
 };
