@@ -5,8 +5,9 @@ describe('Mail Sender tests', () => {
 
 	it('accepts supported file types', () => {
 		const files = supportedTypes.map(mimetype => {
-			return {mimetype}
+			return {mimetype};
 		});
+
 
 		files.forEach(file => {
 			const cb = jasmine.createSpy('cb');
@@ -30,5 +31,5 @@ describe('Mail Sender tests', () => {
 
 		expect(cb).toHaveBeenCalled();
 		expect(cb).toHaveBeenCalledWith(error);
-	})
+	});
 });

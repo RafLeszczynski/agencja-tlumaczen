@@ -1,4 +1,4 @@
-import MailSender from '../../server/mailSender'
+import MailSender from '../../server/mailSender';
 
 describe('Mail Sender tests', () => {
 	it('creates proper message object', () => {
@@ -8,7 +8,7 @@ describe('Mail Sender tests', () => {
 		const name = 'Jan Kowalski';
 		const title = 'lorem ipsum';
 		const bodyData = {email, message, name, title};
-		const attachments = [1, 2, 3];
+		const attachments = [];
 		const messageObject = MailSender.createMessage(targetEmail, bodyData, attachments);
 
 		expect(messageObject.from).toBe(`${name} ${email}`);
@@ -34,10 +34,12 @@ describe('Mail Sender tests', () => {
 		const filenameKey = 'filename';
 		const pathKey = 'path';
 		const attachments = MailSender.sanitizeAttachments(files);
+		const keyCount = 2;
 
 		attachments.forEach((attachment, index) => {
 			const keys = Object.keys(attachment);
-			expect(keys.length).toBe(2);
+
+			expect(keys.length).toBe(keyCount);
 			expect(attachment.hasOwnProperty(filenameKey)).toBe(true);
 			expect(attachment[filenameKey]).toBe(files[index].originalname);
 			expect(attachment.hasOwnProperty(pathKey)).toBe(true);
