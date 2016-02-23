@@ -4,13 +4,13 @@ import Input from 'components/forms/Input';
 import Label from 'components/forms/Label';
 
 const RadioButton = ({id, value, isChecked, label, name, onClick}) => {
-	let inputClasses = {
-			input_radio: true,
-			input_checked: isChecked
-		},
-		inputGroupClasses = {
-			'input-group_radio': true
-		};
+	const inputClasses = {
+		input_radio: true,
+		input_checked: isChecked
+	};
+	const inputGroupClasses = {
+		'input-group_radio': true
+	};
 
 	return (
 		<InputGroup cssClasses={inputGroupClasses}>
@@ -34,7 +34,7 @@ const RadioButton = ({id, value, isChecked, label, name, onClick}) => {
 RadioButton.propTypes = {
 	id: React.PropTypes.string.isRequired,
 	value: React.PropTypes.string.isRequired,
-	isChecked:React.PropTypes.bool.isRequired,
+	isChecked: React.PropTypes.bool.isRequired,
 	label: React.PropTypes.string.isRequired,
 	name: React.PropTypes.string.isRequired,
 	onClick: React.PropTypes.func.isRequired

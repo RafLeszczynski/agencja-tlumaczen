@@ -20,7 +20,8 @@ const multerOptions = {
 	},
 	fileFilter
 };
-const upload = multer(multerOptions).array('files', 5);
+const upload = multer(multerOptions).array('files', process.env.MAX_FILE_COUNT);
+const pathToIndex = path.join(__dirname, 'build/index.html');
 
 if (isDeveloping) {
 	const compiler = webpack(webpackConfig);
@@ -39,30 +40,39 @@ if (isDeveloping) {
 
 	app.use(middleware);
 	app.use(webpackHotMiddleware(compiler));
-	app.get('*', function response(req, res) {
-		res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'build/index.html')));
-		res.end();
+	app.get('*', (req, res) => {
+		middleware.fileSystem.readFile(pathToIndex, (error, data) => {
+			if (error) {
+				res.send(error);
+				console.log(error);
+				return;
+			}
+
+			res.send(data);
+		});
 	});
 } else {
-	app.use(express.static(__dirname + '/build'));
-	app.get('*', function response(req, res) {
-		res.sendFile(path.join(__dirname, 'build/index.html'));
+	app.use(express.static(path.join(__dirname, '/build')));
+	app.get('*', (req, res) => {
+		res.sendFile(pathToIndex);
 	});
 }
 
 app.post('/sendMessage', (req, res) => {
-	upload(req, res, function (error) {
-		if (error) {
-			res.send(error);
-			return console.log(error);
+	upload(req, res, uploadError => {
+		if (uploadError) {
+			res.send(uploadError);
+			console.log(uploadError);
+			return;
 		}
 
 		mailSender.send(
 			MailSender.createMessage(process.env.TARGET_EMAIL, req.body, MailSender.sanitizeAttachments(req.files)),
-			(error, info) => {
-				if (error) {
-					res.send('Error');
-					return console.log(error);
+			(mailSenderError, info) => {
+				if (mailSenderError) {
+					res.send(mailSenderError);
+					console.log(mailSenderError);
+					return;
 				}
 
 				uploadsCleanup(req.files);
@@ -74,7 +84,7 @@ app.post('/sendMessage', (req, res) => {
 	});
 });
 
-app.listen(port, (error) => {
+app.listen(port, error => {
 	if (error) {
 		console.log(error);
 	}

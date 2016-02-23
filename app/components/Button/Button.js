@@ -12,7 +12,7 @@ const Button = ({action, big, link, linkUrl, name, secondary, title}) => {
 
 	return (
 		link ?
-			<a href={linkUrl} className={buttonClasses} target="_blank" title={title}>{name}</a> :
+			<a href={linkUrl} className={buttonClasses} target='_blank' title={title}>{name}</a> :
 			<button className={buttonClasses} onClick={action}>{name}</button>
 	);
 };

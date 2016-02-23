@@ -5,6 +5,9 @@ import Button from 'components/Button/Button';
 import Select from 'react-select';
 import * as massages from 'components/Docs/Docs.messages';
 
+/**
+ * @desc Docs react component
+ */
 export default class Docs extends React.Component {
 	state = {
 		initialSelectValue: null
@@ -12,7 +15,8 @@ export default class Docs extends React.Component {
 
 	/**
 	 * @desc opens document in new window
-	 * @param url
+	 * @param {String} url - download path
+	 * @returns {void}
 	 */
 	downloadDoc(url) {
 		window.open(url, '_blank');
@@ -22,11 +26,15 @@ export default class Docs extends React.Component {
 		});
 	}
 
+	/**
+	 * @desc renders component
+	 * @returns {XML} - jsx markup
+	 */
 	render() {
 		return (
-			<div className="docs">
+			<div className='docs'>
 				<p>{massages.tooltip}</p>
-				<Select className="docs-select"
+				<Select className='docs-select'
 					clearable={false}
 					options={massages.docs}
 					placeholder={massages.actionTitle}
