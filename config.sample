@@ -3,6 +3,7 @@
 export PORT=3000
 export GMAIL_USER="user_name"
 export GMAIL_PASS="pass"
+export TARGET_EMAIL="target@email.address"
 export UPLOAD_DIR="path/"
 export MAX_UPLOAD_SIZE="1MB"
 MAX_FILE_COUNT=1
