@@ -3,19 +3,11 @@ import React from 'react';
 import Button from 'components/Button/Button';
 import {officesData, showLocation} from 'components/Offices/Offices.messages';
 
-const Offices = () => {
-	return (
-		<div className="offices">
-			{officesData.map(renderOfficeItem)}
-		</div>
-	);
-};
-
 /**
  * @desc renders office item markup
- * @param {Object} data
- * @param {Number} index
- * @returns {XML}
+ * @param {Object} data - react props
+ * @param {Number} index - array index
+ * @returns {XML} - jsx markup
  */
 function renderOfficeItem(data, index) {
 	return (
@@ -39,4 +31,10 @@ function renderOfficeItem(data, index) {
 	);
 }
 
-export default Offices;
+export default () => {
+	return (
+		<div className='offices'>
+			{officesData.map(renderOfficeItem)}
+		</div>
+	);
+};

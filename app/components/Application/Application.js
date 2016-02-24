@@ -15,6 +15,9 @@ import ContactForm from 'components/ContactForm/ContactForm';
 import throttle from 'helpers/throttle';
 import messages from 'components/Application/Application.messages';
 
+/**
+ * @desc Main application componenet
+ */
 export default class Application extends React.Component {
 	static propTypes = {
 		collapsedHeaderHeight: React.PropTypes.number.isRequired,
@@ -28,13 +31,12 @@ export default class Application extends React.Component {
 		throttleThreshold: 15
 	};
 
-	// reference to header component
-	_headerComponent = null;
+	static baseOffsetHeight = 0;
 
-	// set reference to throttledListeners
-	_throttledToggleHeaderPosition = throttle(this._toggleHeaderPosition, this.props.throttleThreshold, this);
-	_throttledHideMenu = throttle(this._hideMenu, this.props.throttleThreshold, this);
-
+	/**
+	 * @desc creates new instance of the componenet and sets initial state
+	 * @param {Object} props - component props
+	 */
 	constructor(props) {
 		super(props);
 
@@ -42,37 +44,59 @@ export default class Application extends React.Component {
 			fixedHeader: false,
 			isMenuExpanded: false,
 			isModalVisible: false,
-			offsetHeight: 0,
+			offsetHeight: Application.baseOffsetHeight,
 			modalName: '',
 			modalComponentName: '',
 			modalComponentProps: {}
 		};
+
+		// reference to header component
+		this._headerComponent = null;
+
+		// set reference to throttledListeners
+		this._throttledToggleHeaderPosition = throttle(this._toggleHeaderPosition, this.props.throttleThreshold, this);
+		this._throttledHideMenu = throttle(this._hideMenu, this.props.throttleThreshold, this);
 	}
 
+	/**
+	 * @returns {void}
+	 */
 	componentDidMount() {
 		window.addEventListener('scroll', this._throttledToggleHeaderPosition);
 		window.addEventListener('scroll', this._throttledHideMenu);
 	}
 
+	/**
+	 * @returns {void}
+	 */
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this._throttledToggleHeaderPosition);
 		window.removeEventListener('scroll', this._throttledHideMenu);
 	}
 
+	/**
+	 * @param {Object} nextProps - new props
+	 * @param {Object} nextState - new state
+	 * @returns {void}
+	 */
 	componentDidUpdate(nextProps, nextState) {
-		if (nextState.offsetHeight !== 0) {
+		if (nextState.offsetHeight !== Application.baseOffsetHeight) {
 			Application._setWindowScrollYPosition(nextState.offsetHeight);
 
 			this.setState({
-				offsetHeight: 0
+				offsetHeight: Application.baseOffsetHeight
 			});
 		}
 	}
 
+	/**
+	 * @desc renders component
+	 * @returns {XML} - jsx markup
+	 */
 	render() {
-		let withModal = classNames({
-				'with-modal': this.state.isModalVisible
-			});
+		const withModal = classNames({
+			'with-modal': this.state.isModalVisible
+		});
 
 		return (
 			<div>
@@ -84,7 +108,7 @@ export default class Application extends React.Component {
 						goToPromoSectionId='offer'
 						goToPromoSectionName={messages.showOfferDetails}
 						navLinks={messages.links}
-						ref={(component) => this._headerComponent = component}
+						ref={component => this._headerComponent = component}
 						subtitle={messages.pageSubtitle}
 						title={messages.pageTitle}
 						toggleMenu={this._toggleMenuDisplay.bind(this)}
@@ -100,7 +124,7 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc return section data
-	 * @returns {Array}
+	 * @returns {Array} - section data
 	 * @private
 	 */
 	_getSectionsData() {
@@ -108,42 +132,43 @@ export default class Application extends React.Component {
 			{
 				title: messages.officeSectionHeader,
 				id: 'office',
-				children: (<Offices/>)
+				children: <Offices/>
 			},
 			{
 				title: messages.contactSectionHeader,
 				id: 'contact',
-				children: (<Contact showModal={this._showModal.bind(this)}/>)
+				children: <Contact showModal={this._showModal.bind(this)}/>
 			},
 			{
 				title: messages.offerSectionHeader,
 				id: 'offer',
-				children: (<Offer showModal={this._showModal.bind(this)}/>)
+				children: <Offer showModal={this._showModal.bind(this)}/>
 			},
 			{
 				title: messages.languageSectionHeader,
 				id: 'languages',
 				description: messages.languageSectionDescription,
-				children: (<Languages/>)
+				children: <Languages/>
 			},
 			{
 				title: messages.prizesSectionHeader,
 				id: 'prizes',
-				children: (<Prizes showModal={this._showModal.bind(this)} />)
+				children: <Prizes showModal={this._showModal.bind(this)} />
 			},
 			{
 				title: messages.docsSectionHeader,
 				id: 'docs',
-				children: (<Docs/>)
+				children: <Docs/>
 			}
-		]
+		];
 	}
 
 	/**
 	 * @desc renders section component
-	 * @param {Object} sectionData
-	 * @param {Number} index
-	 * @returns {XML}
+	 * @param {Object} sectionData - props
+	 * @param {Number} index - array index
+	 * @returns {XML} - jsx markup
+	 * @private
 	 */
 	static _renderSection(sectionData, index) {
 		return (
@@ -160,19 +185,22 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc sets window scrollY position
-	 * @param {Number} position
+	 * @param {Number} position - current scroll horizontal position
+	 * @returns {void}
 	 * @private
 	 */
 	static _setWindowScrollYPosition(position) {
-		window.scrollTo(0, position)
+		window.scrollTo(Application.baseOffsetHeight, position);
 	}
 
 	/**
 	 * @desc toggles fixed header position
+	 * @returns {void}
 	 * @todo simplify condition statement
+	 * @private
 	 */
 	_toggleHeaderPosition() {
-		let shouldBeFixed = this._shouldHeaderBeFixed(window.scrollY,
+		const shouldBeFixed = this._shouldHeaderBeFixed(window.scrollY,
 			ReactDOM.findDOMNode(this._headerComponent).offsetHeight);
 
 		if (this.state.fixedHeader !== shouldBeFixed && !this.state.isModalVisible) {
@@ -184,9 +212,10 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc checks if header should be fixed base of window.scrollY and header height
-	 * @param {Number} windowScrollY
-	 * @param {Number} headerHeight
-	 * @returns {Boolean}
+	 * @param {Number} windowScrollY - scroll position
+	 * @param {Number} headerHeight - height of header componenet
+	 * @returns {Boolean} - decision
+	 * @private
 	 */
 	_shouldHeaderBeFixed(windowScrollY, headerHeight) {
 		return windowScrollY >= headerHeight - this.props.collapsedHeaderHeight;
@@ -194,6 +223,8 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc toggles navigation menu display (for small and medium breakpoint)
+	 * @returns {void}
+	 * @private
 	 */
 	_toggleMenuDisplay() {
 		this.setState({
@@ -203,6 +234,8 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc hides navigation menu (for small and medium breakpoint)
+	 * @returns {void}
+	 * @private
 	 */
 	_hideMenu() {
 		if (this.state.isMenuExpanded) {
@@ -215,8 +248,10 @@ export default class Application extends React.Component {
 	/**
 	 * @desc shows modal component
 	 * @param {String} title - modal name
-	 * @param {String} componentName
-	 * @param {Object} props
+	 * @param {String} componentName - componenet name
+	 * @param {Object} props - componenet props
+	 * @returns {void}
+	 * @private
 	 */
 	_showModal(title, componentName, props) {
 		this.setState({
@@ -227,11 +262,13 @@ export default class Application extends React.Component {
 			modalComponentProps: props
 		});
 
-		Application._setWindowScrollYPosition(0);
+		Application._setWindowScrollYPosition(Application.baseOffsetHeight);
 	}
 
 	/**
 	 * @desc hides modal component
+	 * @returns {void}
+	 * @private
 	 */
 	_hideModal() {
 		this.setState({
@@ -244,10 +281,11 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc renders modal component
-	 * @param {String} title
-	 * @param {String} componentName
-	 * @param {Object} props
-	 * @returns {XML}
+	 * @param {String} title - modal title
+	 * @param {String} componentName - componenet name
+	 * @param {Object} props - componenet props
+	 * @returns {XML} - jsx markup
+	 * @private
 	 */
 	_renderModal(title, componentName, props) {
 		return (
@@ -259,10 +297,11 @@ export default class Application extends React.Component {
 
 	/**
 	 * @desc sets top position styles of wrapper content
-	 * @returns {{top: number|string}}
+	 * @returns {Object} - {top: number|string}
+	 * @private
 	 */
 	_getOffsetStyles() {
-		let offset = this.state.offsetHeight;
+		const offset = this.state.offsetHeight;
 
 		return {top: offset ? -offset : 'auto'};
 	}

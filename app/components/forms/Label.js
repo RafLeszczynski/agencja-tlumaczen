@@ -2,10 +2,10 @@ import React from 'react';
 import classNames from 'classnames';
 
 const Label = ({cssClasses, id, title}) => {
-	let baseClasses = {
-			'label': true
-		},
-		combinedClasses = classNames(Object.assign({}, baseClasses, cssClasses));
+	const baseClasses = {
+		'label': true
+	};
+	const combinedClasses = classNames(Object.assign({}, baseClasses, cssClasses));
 
 	return (
 		<label

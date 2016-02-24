@@ -5,3 +5,4 @@ export GMAIL_USER="user_name"
 export GMAIL_PASS="pass"
 export UPLOAD_DIR="path/"
 export MAX_UPLOAD_SIZE="1MB"
+MAX_FILE_COUNT=1

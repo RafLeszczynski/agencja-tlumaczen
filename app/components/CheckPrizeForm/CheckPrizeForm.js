@@ -11,6 +11,9 @@ import ContactForm from 'components/ContactForm/ContactForm';
 import trimFromStart from 'helpers/trim';
 import * as validator from 'helpers/validator';
 
+/**
+ * @desc Check prize from react component
+ */
 export default class CheckPrizeForm extends React.Component {
 	static emailFieldId = 'emailTextField';
 	static textFieldId = 'textTextField';
@@ -27,11 +30,17 @@ export default class CheckPrizeForm extends React.Component {
 		isCustomPrizeForm: false
 	};
 
+	/**
+	 * @desc creats new instance of the compoenent and sets initial state
+	 * @param {Object} props - react props
+	 */
 	constructor(props) {
 		super(props);
 
+		const zeroIndex = 0;
+
 		this.state = {
-			translationType: this.props.translationOptions[0].value,
+			translationType: this.props.translationOptions[zeroIndex].value,
 			sourceLang: '',
 			destinationLang: '',
 			docType: '',
@@ -40,9 +49,13 @@ export default class CheckPrizeForm extends React.Component {
 			[CheckPrizeForm.fileFieldId]: '',
 			[CheckPrizeForm.isValidPrefix + CheckPrizeForm.emailFieldId]: true,
 			[CheckPrizeForm.isValidPrefix + CheckPrizeForm.textFieldId]: true
-		}
+		};
 	}
 
+	/**
+	 * @desc renders component
+	 * @returns {XML} - jsx markup
+	 */
 	render() {
 		const {isCustomPrizeForm, translationOptions, selectionOptions} = this.props;
 
@@ -63,7 +76,7 @@ export default class CheckPrizeForm extends React.Component {
 
 	/**
 	 * @desc returns form data
-	 * @returns {Array}
+	 * @returns {Array} - form data array
 	 * @private
 	 */
 	_getFormData() {
@@ -90,8 +103,10 @@ export default class CheckPrizeForm extends React.Component {
 
 	/**
 	 * @desc updates state
-	 * @param {String} param
-	 * @param {String} value
+	 * @param {String} param - state key
+	 * @param {String} value - new value
+	 * @returns {void}
+	 * @private
 	 */
 	_handlerOnSelectChange(param, value) {
 		this.setState({
@@ -101,7 +116,9 @@ export default class CheckPrizeForm extends React.Component {
 
 	/**
 	 * @desc sets translation type
-	 * @param {String} value
+	 * @param {String} value - new value
+	 * @returns {void}
+	 * @private
 	 */
 	_handlerOnRadioClick(value) {
 		this.setState({
@@ -111,7 +128,8 @@ export default class CheckPrizeForm extends React.Component {
 
 	/**
 	 * @desc handles TextField and Textarea value changes
-	 * @param {Event} event
+	 * @param {Event} event - browser event
+	 * @returns {void}
 	 * @private
 	 */
 	_handlerChange(event) {
@@ -124,25 +142,27 @@ export default class CheckPrizeForm extends React.Component {
 
 	/**
 	 * @desc handles validation on blur
-	 * @param event
+	 * @param {Event} event - browser event
+	 * @returns {void}
 	 * @private
 	 */
 	_handlerBlur(event) {
-		const target = event.target,
-				value = target.value,
-				isEmail = target.type === 'email';
+		const target = event.target;
+		const value = target.value;
+		const isEmail = target.type === 'email';
 
 		this.setState({
 			[CheckPrizeForm.isValidPrefix + target.id]: isEmail && validator.validateEmail(value) ||
 			!isEmail && value !== ''
-		})
+		});
 	}
 
 	/**
 	 * @desc renders select block
-	 * @param {Object} select
-	 * @param {Number} index
-	 * @returns {XML}
+	 * @param {Object} select - props
+	 * @param {Number} index - array index
+	 * @returns {XML} - jsx markup
+	 * @private
 	 */
 	_renderSelectBlock(select, index) {
 		const id = select.id;
@@ -163,13 +183,14 @@ export default class CheckPrizeForm extends React.Component {
 
 	/**
 	 * @desc renders radio button
-	 * @param {Object} option
-	 * @param {Number} index
-	 * @returns {XML}
+	 * @param {Object} option - props
+	 * @param {Number} index - array index
+	 * @returns {XML} - isx markup
+	 * @private
 	 */
 	_renderRadioButton(option, index) {
-		const id = checkPrizeFormMessages.translationOptionsName + index,
-			value = option.value;
+		const id = checkPrizeFormMessages.translationOptionsName + index;
+		const value = option.value;
 
 		return (
 			<RadioButton
@@ -181,12 +202,12 @@ export default class CheckPrizeForm extends React.Component {
 				name={checkPrizeFormMessages.translationOptionsName}
 				onClick={this._handlerOnRadioClick.bind(this, value)}
 			/>
-		)
+		);
 	}
 
 	/**
 	 * @desc renders custom check prize form content
-	 * @returns {XML}
+	 * @returns {XML} - jsx markup
 	 * @private
 	 */
 	_renderCustomPrizeForm() {
@@ -194,14 +215,14 @@ export default class CheckPrizeForm extends React.Component {
 			<div className='check-prize__custom-group'>
 				{this._getFormData().map(this._renderFormItem, this)}
 			</div>
-		)
+		);
 	}
 
 	/**
 	 * @desc renders form item
-	 * @param {Object} formItem
-	 * @param {Number} index
-	 * @returns {XML}
+	 * @param {Object} formItem - props
+	 * @param {Number} index - array index
+	 * @returns {XML} - jsx markup
 	 * @private
 	 */
 	_renderFormItem(formItem, index) {

@@ -1,10 +1,16 @@
 import nodemailer from 'nodemailer';
 
+/**
+ * @desc Sends emails with attachments using GMail transport
+ * @param {String} gmailUser - GMail username
+ * @param {String} gmailPass - GMail password
+ */
 export default class MailSender {
 	/**
 	 * @constructor
-	 * @param {String} gmailUser
-	 * @param {String} gmailPass
+	 * @param {String} gmailUser - GMail username
+	 * @param {String} gmailPass - GMail password
+	 * @returns {void}
 	 */
 	constructor(gmailUser, gmailPass) {
 		this.transporter = nodemailer.createTransport(`smtps://${gmailUser}%40gmail.com:${gmailPass}@smtp.gmail.com`);
@@ -12,8 +18,9 @@ export default class MailSender {
 
 	/**
 	 * @desc sends email based on given options
-	 * @param {Object} mailOptions
-	 * @param {Function} cb
+	 * @param {Object} mailOptions - message object
+	 * @param {Function} cb - callback function
+	 * @returns {void}
 	 */
 	send(mailOptions, cb) {
 		this.transporter.sendMail(mailOptions, cb);
@@ -25,7 +32,7 @@ export default class MailSender {
 	 * @param {String} target - target email
 	 * @param {Object} data - message body params
 	 * @param {Array} attachments - file attachments
-	 * @returns {Object}
+	 * @returns {Object} message object
 	 */
 	static createMessage(target, data, attachments) {
 		return {
@@ -39,8 +46,8 @@ export default class MailSender {
 
 	/**
 	 * @desc prepare attachments array
-	 * @param {Array} attachments
-	 * @returns {Array}
+	 * @param {Array} attachments row attachments array
+	 * @returns {Array} sanitized attachments array
 	 */
 	static sanitizeAttachments(attachments) {
 		return attachments.map(file => {

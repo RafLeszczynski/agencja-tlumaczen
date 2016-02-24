@@ -1,9 +1,8 @@
 /**
  * @desc stops event propagation
- * @param {Event} event
+ * @param {Event} event - browser event object
+ * @returns {void}
  */
-const stopEventPropagation = (event) => {
+export default event => {
 	event.stopPropagation();
 };
-
-export default stopEventPropagation;

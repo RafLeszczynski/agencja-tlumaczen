@@ -1,11 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const InputGroup = (props) => {
-	let baseClasses = {
-			'input-group': true
-		},
-		combinedClasses = classNames(Object.assign({}, baseClasses, props.cssClasses));
+const InputGroup = props => {
+	const baseClasses = {
+		'input-group': true
+	};
+	const combinedClasses = classNames(Object.assign({}, baseClasses, props.cssClasses));
 
 	return (
 		<div className={combinedClasses}>
