@@ -5,9 +5,7 @@
 		"email": {
 			"description": "Valid email address",
 			"type": "string",
-			"minLength": 1,
-			"maxLength": 255,
-			"pattern": "/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i"
+			"format": "email"
 		},
 		"message": {
 			"description": "<essage content",
@@ -44,5 +42,6 @@
 			"maxLength": 255
 		}
 	},
-	"required": ["email", "message", "name", "title"]
+	"required": ["email", "message", "name", "title"],
+	"additionalProperties": false
 }
