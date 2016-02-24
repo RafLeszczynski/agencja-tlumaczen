@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import multer from 'multer';
+import ajv from 'ajv';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -8,9 +9,11 @@ import webpackConfig from './webpack.config.js';
 import MailSender from './server/mailSender';
 import fileFilter from './server/fileFilterHelper';
 import uploadsCleanup from './server/uploadsCleanupHelper';
+import validationSchema from './server/mailDataSchema.json';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? process.env.DEV_PORT : process.env.PORT;
+const validator = ajv();
 const app = express();
 const mailSender = new MailSender(process.env.GMAIL_USER, process.env.GMAIL_PASS);
 const multerOptions = {
@@ -60,6 +63,14 @@ if (isDeveloping) {
 
 app.post('/sendMessage', (req, res) => {
 	upload(req, res, uploadError => {
+		// validate request body against email message schema
+		if (validator.validate(validationSchema, req.body) === false) {
+			res.send(validator.errors);
+			console.log(validator.errors);
+			return;
+		}
+
+		// check for any file upload errors
 		if (uploadError) {
 			res.send(uploadError);
 			console.log(uploadError);
