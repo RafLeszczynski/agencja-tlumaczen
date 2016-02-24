@@ -1,0 +1,13 @@
+{
+	"env": {
+		"es6": true,
+		"jasmine": true,
+		"node": true
+	},
+	"rules": {
+		"max-nested-callbacks": [
+			2,
+			4
+		]
+	}
+}
