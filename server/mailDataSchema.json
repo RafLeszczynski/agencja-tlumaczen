@@ -8,7 +8,7 @@
 			"format": "email"
 		},
 		"message": {
-			"description": "<essage content",
+			"description": "Message content",
 			"type": "string"
 		},
 		"name": {
