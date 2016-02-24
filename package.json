@@ -33,6 +33,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "ajv": "^3.7.2",
     "autoprefixer-loader": "^3.2.0",
     "babel-cli": "^6.5.1",
     "babel-core": "^6.5.2",
@@ -51,8 +52,8 @@
     "html-webpack-plugin": "^2.9.0",
     "jscs": "^2.10.1",
     "multer": "^1.1.0",
-    "nodemailer": "^2.2.0",
     "node-sass": "^3.4.2",
+    "nodemailer": "^2.2.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-scroll": "^1.0.2",
