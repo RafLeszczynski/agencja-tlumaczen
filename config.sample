@@ -6,4 +6,4 @@ export GMAIL_PASS="pass"
 export TARGET_EMAIL="target@email.address"
 export UPLOAD_DIR="path/"
 export MAX_UPLOAD_SIZE="1MB"
-MAX_FILE_COUNT=1
+export MAX_FILE_COUNT=1
