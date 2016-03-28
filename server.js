@@ -1,21 +1,26 @@
-import express from 'express';
-import path from 'path';
-import multer from 'multer';
+// external modules
 import ajv from 'ajv';
+import express from 'express';
+import multer from 'multer';
+import path from 'path';
 import webpack from 'webpack';
-import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from './webpack.config.js';
-import MailSender from './server/mailSender';
-import fileFilter from './server/fileFilterHelper';
-import uploadsCleanup from './server/uploadsCleanupHelper';
-import logger from './server/logger';
-import validationSchema from './server/mailDataSchema.json';
+import webpackMiddleware from 'webpack-dev-middleware';
 
-const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? process.env.DEV_PORT : process.env.PORT;
-const validator = ajv();
+// internal modules
+import CustomError from './server/customError';
+import errorFileCleanUp from './server/errorFileCleanUp';
+import errorHandler from './server/errorHandler';
+import errorLogger from './server/errorLogger';
+import fileFilter from './server/fileFilterHelper';
+import logger from './server/logger';
+import MailSender from './server/mailSender';
+import uploadsCleanup from './server/uploadsCleanupHelper';
+import validationSchema from './server/mailDataSchema.json';
+import webpackConfig from './webpack.config.js';
+
 const app = express();
+const isDeveloping = process.env.NODE_ENV !== 'production';
 const mailSender = new MailSender(process.env.GMAIL_USER, process.env.GMAIL_PASS);
 const multerOptions = {
 	dest: process.env.UPLOAD_DIR,
@@ -24,8 +29,10 @@ const multerOptions = {
 	},
 	fileFilter
 };
-const upload = multer(multerOptions).array('files', process.env.MAX_FILE_COUNT);
 const pathToIndex = path.join(__dirname, 'build/index.html');
+const port = isDeveloping ? process.env.DEV_PORT : process.env.PORT;
+const upload = multer(multerOptions).array('files', process.env.MAX_FILE_COUNT);
+const validator = ajv();
 
 if (isDeveloping) {
 	const compiler = webpack(webpackConfig);
@@ -47,11 +54,10 @@ if (isDeveloping) {
 
 	app.use(middleware);
 	app.use(webpackHotMiddleware(compiler));
-	app.get('*', (req, res) => {
+	app.get('*', (req, res, next) => {
 		middleware.fileSystem.readFile(pathToIndex, (error, data) => {
 			if (error) {
-				logger.error(error);
-				res.send(error);
+				next(new CustomError('Webpack Middleware read file error', 500, 500, error));
 				return;
 			}
 
@@ -65,24 +71,20 @@ if (isDeveloping) {
 	});
 }
 
-app.post('/sendMessage', (req, res) => {
+app.post('/sendMessage', (req, res, next) => {
 	upload(req, res, uploadError => {
 		const files = req.files;
 		const messageBody = req.body;
 
 		// check for any file upload errors
 		if (uploadError) {
-			logger.error(uploadError);
-			res.send(uploadError);
-			uploadsCleanup(files);
+			next(new CustomError('File upload error', 400, 400, uploadError));
 			return;
 		}
 
 		// validate request body against email message schema
 		if (validator.validate(validationSchema, messageBody) === false) {
-			logger.error(validator.errors);
-			res.send(validator.errors);
-			uploadsCleanup(files);
+			next(new CustomError('Form validation Error', 400, 400, validator.errors));
 			return;
 		}
 
@@ -90,9 +92,7 @@ app.post('/sendMessage', (req, res) => {
 			MailSender.createMessage(process.env.TARGET_EMAIL, messageBody, MailSender.sanitizeAttachments(files)),
 			(mailSenderError, info) => {
 				if (mailSenderError) {
-					logger.error(mailSenderError);
-					res.send(mailSenderError);
-					uploadsCleanup(files);
+					next(new CustomError('Mail Sender Error', 500, 500, mailSenderError));
 					return;
 				}
 
@@ -103,6 +103,10 @@ app.post('/sendMessage', (req, res) => {
 		);
 	});
 });
+
+app.use(errorFileCleanUp);
+app.use(errorLogger);
+app.use(errorHandler);
 
 app.listen(port, error => {
 	if (error) {
