@@ -42,6 +42,7 @@ if (isDeveloping) {
 		}
 	});
 
+	// change default logging level for dev env
 	logger.level = 'debug';
 
 	app.use(middleware);
