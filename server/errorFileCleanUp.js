@@ -10,8 +10,9 @@ import uploadsCleanup from './uploadsCleanupHelper';
 export default (error, request, response, next) => {
 	const files = request.files;
 
-	if (error && files)
-	uploadsCleanup(files);
+	if (error && files) {
+		uploadsCleanup(files);
+	}
 
 	next(error);
 };
