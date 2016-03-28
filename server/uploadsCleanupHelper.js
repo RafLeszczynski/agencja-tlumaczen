@@ -1,4 +1,5 @@
 import fs from 'fs';
+import logger from './logger';
 
 /**
  * @desc removes files
@@ -7,8 +8,14 @@ import fs from 'fs';
  */
 export default files => {
 	files.map(file => {
+		const path = file.path;
+
 		fs.unlink(file.path, error => {
-			console.log(error);
+			if (error) {
+				logger.warn('Failed removing file %s', path, error);
+			} else {
+				logger.info('File %s was successfully removed', path);
+			}
 		});
 
 		return false;

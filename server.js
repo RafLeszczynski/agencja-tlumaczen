@@ -9,6 +9,7 @@ import webpackConfig from './webpack.config.js';
 import MailSender from './server/mailSender';
 import fileFilter from './server/fileFilterHelper';
 import uploadsCleanup from './server/uploadsCleanupHelper';
+import logger from './server/logger';
 import validationSchema from './server/mailDataSchema.json';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
@@ -41,13 +42,16 @@ if (isDeveloping) {
 		}
 	});
 
+	// change default logging level for dev env
+	logger.level = 'debug';
+
 	app.use(middleware);
 	app.use(webpackHotMiddleware(compiler));
 	app.get('*', (req, res) => {
 		middleware.fileSystem.readFile(pathToIndex, (error, data) => {
 			if (error) {
+				logger.error(error);
 				res.send(error);
-				console.log(error);
 				return;
 			}
 
@@ -63,33 +67,38 @@ if (isDeveloping) {
 
 app.post('/sendMessage', (req, res) => {
 	upload(req, res, uploadError => {
-		// validate request body against email message schema
-		if (validator.validate(validationSchema, req.body) === false) {
-			res.send(validator.errors);
-			console.log(validator.errors);
-			return;
-		}
+		const files = req.files;
+		const messageBody = req.body;
 
 		// check for any file upload errors
 		if (uploadError) {
+			logger.error(uploadError);
 			res.send(uploadError);
-			console.log(uploadError);
+			uploadsCleanup(files);
+			return;
+		}
+
+		// validate request body against email message schema
+		if (validator.validate(validationSchema, messageBody) === false) {
+			logger.error(validator.errors);
+			res.send(validator.errors);
+			uploadsCleanup(files);
 			return;
 		}
 
 		mailSender.send(
-			MailSender.createMessage(process.env.TARGET_EMAIL, req.body, MailSender.sanitizeAttachments(req.files)),
+			MailSender.createMessage(process.env.TARGET_EMAIL, messageBody, MailSender.sanitizeAttachments(files)),
 			(mailSenderError, info) => {
 				if (mailSenderError) {
+					logger.error(mailSenderError);
 					res.send(mailSenderError);
-					console.log(mailSenderError);
+					uploadsCleanup(files);
 					return;
 				}
 
-				uploadsCleanup(req.files);
-
-				console.log(`Message sent: ${info.response}`);
+				logger.debug(`Message sent: ${info.response}`);
 				res.send('Mail send');
+				uploadsCleanup(files);
 			}
 		);
 	});
@@ -97,7 +106,7 @@ app.post('/sendMessage', (req, res) => {
 
 app.listen(port, error => {
 	if (error) {
-		console.log(error);
+		logger.error(error);
 	}
-	console.info(`Server listening on port ${port}!`);
+	logger.info(`Server listening on port ${port}!`);
 });
