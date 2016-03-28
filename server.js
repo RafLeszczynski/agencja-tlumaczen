@@ -72,17 +72,17 @@ app.post('/sendMessage', (req, res) => {
 
 		// check for any file upload errors
 		if (uploadError) {
-			uploadsCleanup(files);
 			logger.error(uploadError);
 			res.send(uploadError);
+			uploadsCleanup(files);
 			return;
 		}
 
 		// validate request body against email message schema
 		if (validator.validate(validationSchema, messageBody) === false) {
-			uploadsCleanup(files);
 			logger.error(validator.errors);
 			res.send(validator.errors);
+			uploadsCleanup(files);
 			return;
 		}
 
@@ -92,13 +92,13 @@ app.post('/sendMessage', (req, res) => {
 				if (mailSenderError) {
 					logger.error(mailSenderError);
 					res.send(mailSenderError);
+					uploadsCleanup(files);
 					return;
 				}
 
-				uploadsCleanup(files);
-
 				logger.debug(`Message sent: ${info.response}`);
 				res.send('Mail send');
+				uploadsCleanup(files);
 			}
 		);
 	});
