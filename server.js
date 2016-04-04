@@ -9,12 +9,12 @@ import webpackMiddleware from 'webpack-dev-middleware';
 
 // internal modules
 import CustomError from './server/customError';
-import errorFileCleanUp from './server/errorFileCleanUp';
 import errorHandler from './server/errorHandler';
 import errorLogger from './server/errorLogger';
 import fileFilter from './server/fileFilterHelper';
 import logger from './server/logger';
 import MailSender from './server/mailSender';
+import onErrorFileCleanUp from './server/onErrorFileCleanUp';
 import uploadsCleanup from './server/uploadsCleanupHelper';
 import validationSchema from './server/mailDataSchema.json';
 import webpackConfig from './webpack.config.js';
@@ -104,7 +104,7 @@ app.post('/sendMessage', (req, res, next) => {
 	});
 });
 
-app.use(errorFileCleanUp);
+app.use(onErrorFileCleanUp);
 app.use(errorLogger);
 app.use(errorHandler);
 
