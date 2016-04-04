@@ -1,7 +1,7 @@
 import uploadsCleanup from './uploadsCleanupHelper';
 
 /**
- * @desc cleaup files on sendMessage error
+ * @desc clean up files on sendMessage error
  * @param {Object} error - node error Object
  * @param {Object} request - express request object
  * @param {Object} response - express response object
