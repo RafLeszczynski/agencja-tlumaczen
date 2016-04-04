@@ -4,10 +4,10 @@
 export default class CustomError extends Error {
 	/**
 	 * @constructor
-	 * @param {String} message
-	 * @param {Number} statusCode
-	 * @param {Number} errorCode
-	 * @param {*} details
+	 * @param {String} message - error message
+	 * @param {Number} statusCode - error status code
+	 * @param {Number} errorCode - custom error code
+	 * @param {*} details - error details
 	 */
 	constructor(message, statusCode, errorCode, details) {
 		super(message);
