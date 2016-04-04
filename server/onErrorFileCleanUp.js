@@ -6,6 +6,7 @@ import uploadsCleanup from './uploadsCleanupHelper';
  * @param {Object} request - express request object
  * @param {Object} response - express response object
  * @param {Function} next - express next callback
+ * @returns {void}
  */
 export default (error, request, response, next) => {
 	const files = request.files;
