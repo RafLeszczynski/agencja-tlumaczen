@@ -5,12 +5,12 @@ const defaultStatusCode = 500;
  * @param {Object} error - node error object
  * @returns {Object} - error response JSON object
  */
-function createErrorResponseJsonObject(error) {
+export function createErrorResponseJsonObject(error) {
 	return {
 		message: error.message,
 		errorCode: error.errorCode,
 		details: error.details
-	}
+	};
 }
 
 /**
@@ -19,6 +19,7 @@ function createErrorResponseJsonObject(error) {
  * @param {Object} request - express request object
  * @param {Object} response - express response object
  * @param {Function} next - express next callback
+ * @returns {void}
  */
 export default (error, request, response, next) => {
 	response.status(error.statusCode || defaultStatusCode).json(createErrorResponseJsonObject(error));
