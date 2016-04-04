@@ -5,7 +5,7 @@ import logger from './logger';
  * @param {String} errorMessage - original error message
  * @returns {string} - error message template
  */
-function createErrorMessageTemplate(errorMessage) {
+export function createErrorMessageTemplate(errorMessage) {
 	return [
 		errorMessage,
 		'details: %j',
@@ -20,6 +20,7 @@ function createErrorMessageTemplate(errorMessage) {
  * @param {Object} request - express request object
  * @param {Object} response - express response object
  * @param {Function} next - express next callback
+ * @returns {void}
  */
 export default (error, request, response, next) => {
 	logger.error(
