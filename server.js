@@ -25,7 +25,7 @@ const mailSender = new MailSender(process.env.GMAIL_USER, process.env.GMAIL_PASS
 const multerOptions = {
 	dest: process.env.UPLOAD_DIR,
 	limits: {
-		fieldSize: process.env.MAX_UPLOAD_SIZE
+		fileSize: parseInt(process.env.MAX_UPLOAD_SIZE, 10)
 	},
 	fileFilter
 };
@@ -77,8 +77,8 @@ app.post('/sendMessage', (req, res, next) => {
 		const messageBody = req.body;
 
 		// check for any file upload errors
-		if (uploadError) {
-			next(new CustomError('File upload error', 400, 400, uploadError));
+		if (uploadError || req.unsupportedFileTypeErrors) {
+			next(new CustomError('File upload error', 400, 400, uploadError || req.unsupportedFileTypeErrors));
 			return;
 		}
 
