@@ -19,7 +19,7 @@ export function createUnsupportedTypeErrorObject(fileName, mimeType) {
 		message: 'File format not supported',
 		fileName,
 		mimeType
-	}
+	};
 }
 
 /**
@@ -40,7 +40,7 @@ export default (req, file, cb) => {
 		}
 		req[unsupportedFileTypeKey].push(createUnsupportedTypeErrorObject(file.originalname, mimeType));
 		cb(null, false);
-	} else {
-		cb(null, true);
+		return;
 	}
+	cb(null, true);
 };

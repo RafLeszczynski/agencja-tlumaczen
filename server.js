@@ -75,10 +75,11 @@ app.post('/sendMessage', (req, res, next) => {
 	upload(req, res, uploadError => {
 		const files = req.files;
 		const messageBody = req.body;
+		const fileUploadError = uploadError || req.unsupportedFileTypeErrors;
 
 		// check for any file upload errors
-		if (uploadError || req.unsupportedFileTypeErrors) {
-			next(new CustomError('File upload error', 400, 400, uploadError || req.unsupportedFileTypeErrors));
+		if (fileUploadError) {
+			next(new CustomError('File upload error', 400, 400, fileUploadError));
 			return;
 		}
 
