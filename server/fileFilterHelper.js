@@ -9,6 +9,20 @@ export const supportedTypes = [
 ];
 
 /**
+ * @desc creates error details object
+ * @param {String} fileName - original file name
+ * @param {String} mimeType - file mime type
+ * @returns {Object} - error object
+ */
+export function createUnsupportedTypeErrorObject(fileName, mimeType) {
+	return {
+		message: 'File format not supported',
+		fileName,
+		mimeType
+	};
+}
+
+/**
  * @desc checks if given file has supported mime type
  * @param {Object} req - HTTP request object
  * @param {Object} file - file data object
@@ -18,11 +32,15 @@ export const supportedTypes = [
 export default (req, file, cb) => {
 	const mimeType = file.mimetype;
 	const negativeIndex = -1;
+	const unsupportedFileTypeKey = 'unsupportedFileTypeErrors';
 
 	if (supportedTypes.indexOf(mimeType) === negativeIndex) {
-		cb(new Error(`File format ${mimeType} not supported`));
+		if (req.hasOwnProperty(unsupportedFileTypeKey) !== true) {
+			req[unsupportedFileTypeKey] = [];
+		}
+		req[unsupportedFileTypeKey].push(createUnsupportedTypeErrorObject(file.originalname, mimeType));
+		cb(null, false);
 		return;
 	}
-
 	cb(null, true);
 };
