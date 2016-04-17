@@ -55,7 +55,7 @@ export default [
 		description: 'Zajmujemy się obsługą tłumaczeniową konferencji, spotkań czy przemówień. Zespół naszych tłumaczy przełoży dla Państwa także rozmowy telefoniczne, a także będzie toważyszył podczas spotkań biznesowych. Dokonujemy również tłumaczeń przysięgłych m.in. w sądzie, w Urzędzie Stanu Cywilnego czy u notariusza.',
 		details: [
 			{
-				title: 'Tłumaczenia przysięgłe i nieprzysięgłe',
+				title: 'Tłumaczenia przysięgłe i\xa0nieprzysięgłe',
 				content: []
 			}
 		]
