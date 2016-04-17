@@ -97,11 +97,15 @@ $labelTransitionDuration: .2s;
 			top: -2px;
 			width: 20px;
 		}
+
+		&:hover:before {
+			background-color: transparentize($brandingColor, .6);
+		}
 	}
 
 	.input_checked + & {
 		&:after {
-			background-color: #421536;
+			background-color: $brandingColor;
 			border-radius: 5px;
 			content: '';
 			display: block;
