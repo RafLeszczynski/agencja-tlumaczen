@@ -28,7 +28,9 @@ body {
 }
 
 a {
-	background-color: transparent;
+	background-color: transparentize($brandingColor, .9);
+	color: inherit;
+	text-decoration: none;
 
 	&:active,
 	&:hover {
