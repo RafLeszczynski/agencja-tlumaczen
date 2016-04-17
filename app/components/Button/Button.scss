@@ -16,6 +16,11 @@ $transition-time: 0.3s;
 	text-transform: uppercase;
 	transition: background-color $transition-time ease, color $transition-time ease;
 
+	.prizes &,
+	.offer & {
+		width: 236px;
+	}
+
 	&:hover {
 		background-color: $brandingColor;
 		color: $secondaryColor;
