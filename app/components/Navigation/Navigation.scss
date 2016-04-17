@@ -17,10 +17,10 @@
 	@media(min-width: $breakPointLarge) {
 		display: block;
 		position: absolute;
-		top: 20px;
+		top: 0;
 
 		.header--fixed & {
-			bottom: 20px;
+			bottom: 0;
 			text-align: right;
 			top: auto;
 		}
@@ -46,26 +46,30 @@
 
 .header__navigation-list__list-item {
 	display: block;
-	padding: 15px;
 	text-transform: uppercase;
+	transition: background-color 0.5s ease;
+
+	&:hover {
+		background-color: transparentize($secondaryColor, .9);
+	}
 
 	@media(min-width: $breakPointLarge) {
 		display: inline;
-		padding: 0 30px;
 	}
 
 	a {
 		cursor: pointer;
+		display: block;
+		padding: 20px 30px;
 		position: relative;
 
-		&:hover,
 		&.active {
 			&:after {
 				content: '•';
 				display: block;
 				left: 0;
 				position: absolute;
-				top: 14px;
+				top: 37px;
 				text-align: center;
 				width: 100%;
 			}

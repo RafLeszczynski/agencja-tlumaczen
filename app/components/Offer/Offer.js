@@ -61,8 +61,6 @@ export default class Offer extends React.Component {
 	 * @returns {XML} - jsx markup
 	 */
 	render() {
-		const {offer} = this.props;
-
 		return (
 			<div className='offer'>
 				{messages.map(this.renderOfferSection, this)}
