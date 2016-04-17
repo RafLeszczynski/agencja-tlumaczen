@@ -75,7 +75,7 @@ export default class Header extends React.Component {
 						</hgroup>
 						<Link
 							to={goToPromoSectionId}
-							spy={true}
+							spy={false}
 							smooth={true}
 							offset={-collapsedHeaderHeight}
 							duration={scrollDuration}
