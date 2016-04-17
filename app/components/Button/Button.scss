@@ -1,5 +1,7 @@
 @import '../../scss/variables';
 
+$transition-time: 0.3s;
+
 .button {
 	background-color: transparent;
 	color: $brandingColor;
@@ -12,10 +14,21 @@
 	padding: 8px 15px;
 	text-decoration: none;
 	text-transform: uppercase;
+	transition: background-color $transition-time ease, color $transition-time ease;
+
+	&:hover {
+		background-color: $brandingColor;
+		color: $secondaryColor;
+	}
 
 	&.button--secondary {
 		color: $secondaryColor;
 		border-color: $secondaryColor;
+
+		&:hover {
+			background-color: $secondaryColor;
+			color: $brandingColor;
+		}
 	}
 
 	&.button--big {
