@@ -33,11 +33,11 @@ export default class Docs extends React.Component {
 	render() {
 		return (
 			<div className='docs'>
-				<p>{massages.tooltip}</p>
+				<p>{massages.docsSectionDescription}</p>
 				<Select className='docs-select'
 					clearable={false}
 					options={massages.docs}
-					placeholder={massages.actionTitle}
+					placeholder={massages.docsDocSelect}
 					searchable={false}
 					onChange={this.downloadDoc.bind(this)}
 					value={this.state.initialSelectValue}

@@ -34,22 +34,5 @@ export default {
 	languageSectionHeader: 'Języki',
 	languageSectionDescription: 'Wykonujemy tłumaczenia przysięgłe i nieprzysięgłe w następujących językach:',
 	prizesSectionHeader: 'Ceny',
-	docsSectionHeader: 'Wzory',
-	docsSectionDescription: 'Przygotowaliśmy dla Państwa wzory dwujęzycznych umów kupna-sprzedaży samochodów z zagranicy.',
-	docsDocSelect: 'Wybierz document',
-	docs: [
-		{
-			value: '1.pdf',
-			label: 'Temp 1'
-		},
-		{
-			value: '2.pdf',
-			label: 'Temp 2'
-		},
-		{
-			value: '3.pdf',
-			label: 'Temp 3'
-		}
-	]
-
+	docsSectionHeader: 'Wzory Umów'
 };
