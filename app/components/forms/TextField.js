@@ -13,10 +13,11 @@ import ValidationErrorMsg from 'components/forms/ValidationErrorMsg';
  * @param {String} value - html element value attribute
  * @param {Function} onChange - change handler
  * @param {Function} onBlur - blur handler
+ * @param {Boolean} disabled - disabled inpu attribute
  * @returns {XML} - jsx markup
  * @private
  */
-function renderInput(id, type, value, onChange, onBlur) {
+function renderInput(id, type, value, onChange, onBlur, disabled) {
 	const inputType = type || 'text';
 	const isFileInput = inputType === 'file';
 	const inputClasses = {
@@ -31,6 +32,7 @@ function renderInput(id, type, value, onChange, onBlur) {
 			type={inputType}
 			value={value}
 			onChange={onChange}
+			disabled={disabled}
 			onBlur={!isFileInput && onBlur}
 		/>
 	);
@@ -66,10 +68,13 @@ function renderTextArea(id, value, onChange, onBlur) {
 	);
 }
 
-const TextField = ({id, isValid, label, multiline, onChange, onBlur, type, value, validationErrorMsg}) => {
+const TextField = ({id, isValid, label, multiline, onChange, onBlur, type, value, validationErrorMsg, disabled}) => {
 	return (
 		<InputGroup>
-			{multiline ? renderTextArea(id, value, onChange, onBlur) : renderInput(id, type, value, onChange, onBlur)}
+			{multiline ?
+				renderTextArea(id, value, onChange, onBlur) :
+				renderInput(id, type, value, onChange, onBlur, disabled)
+			}
 			<Label
 				id={id}
 				title={label}
@@ -82,13 +87,14 @@ const TextField = ({id, isValid, label, multiline, onChange, onBlur, type, value
 TextField.propTypes = {
 	id: React.PropTypes.string.isRequired,
 	isValid: React.PropTypes.bool,
-	label: React.PropTypes.string.isRequired,
+	label: React.PropTypes.node.isRequired,
 	multiline: React.PropTypes.bool,
 	onChange: React.PropTypes.func,
 	onBlur: React.PropTypes.func,
 	type: React.PropTypes.string,
 	value: React.PropTypes.string.isRequired,
-	validationErrorMsg: React.PropTypes.string
+	validationErrorMsg: React.PropTypes.string,
+	disabled: React.PropTypes.bool
 };
 
 export default TextField;
