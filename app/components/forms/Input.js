@@ -13,6 +13,7 @@ const Input = ({cssClasses, name, type, value, ...props}) => {
 			className={combinedClasses}
 			name={name}
 			type={type}
+			value={value}
 			{...props}
 		/>
 	);

@@ -20,7 +20,7 @@ const Label = ({cssClasses, id, title}) => {
 Label.propTypes = {
 	cssClasses: React.PropTypes.object,
 	id: React.PropTypes.string,
-	title: React.PropTypes.string.isRequired
+	title: React.PropTypes.node.isRequired
 };
 
 export default Label;

@@ -8,6 +8,23 @@ $inputPadding: 5px;
 $inputBorderWidth: 1px;
 $labelTransitionDuration: .2s;
 
+@keyframes circle {
+	0%
+	{
+		-webkit-transform: rotate(0);
+		-ms-transform: rotate(0);
+		-o-transform: rotate(0);
+		transform: rotate(0);
+	}
+	100%
+	{
+		-webkit-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
 .form {
 	text-align: right;
 }
@@ -55,7 +72,6 @@ $labelTransitionDuration: .2s;
 
 	.input_empty + &,
 	.textarea_empty + &,
-	.input_file:focus + &,
 	.input_radio:focus + & {
 		font-size: $inputFortSize;
 		top: $inputWrapperPadding + $inputPadding;
@@ -76,6 +92,8 @@ $labelTransitionDuration: .2s;
 
 	.input_file + & {
 		cursor: pointer;
+		position: static;
+		top: auto;
 	}
 
 	.input_radio + & {
@@ -115,6 +133,97 @@ $labelTransitionDuration: .2s;
 			top: 5px;
 			width: 10px;
 		}
+	}
+}
+
+.add-attachment-input {
+	align-items: center;
+	display: flex;
+	font-size: 14px;
+
+	svg {
+		fill: $brandingLightColor;
+		height: 26px;
+		margin-right: 10px;
+		width: 26px;
+	}
+
+	&:hover {
+		color: $brandingColor;
+
+		svg {
+			fill: $brandingColor;
+		}
+
+		.input_file:disabled + label & {
+			color: $brandingLightColor;
+			cursor: not-allowed;
+
+			svg {
+				fill: $brandingLightColor;
+			}
+		}
+	}
+}
+
+.file-attachment {
+	background-color: transparentize($brandingColor, .9);
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
+	padding: 4px 5px 2px 7px;
+	text-align: left;
+
+	@media(min-width: $breakPointLarge) {
+		width: 350px;
+	}
+
+	> span {
+		text-overflow: ellipsis;
+		overflow: hidden;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+
+	.close-icon {
+		color: $brandingColor;
+		display: inline-block;
+		height: 22px;
+		left: auto;
+		position: relative;
+		top: auto;
+		width: 20px;
+
+		span {
+			background-color: $brandingColor;
+			height: 2px;
+			top: 10px;
+		}
+	}
+}
+
+.loading-info {
+	background-color: $secondaryColor;
+	border-radius: 1px;
+	margin: 80px auto;
+	padding: 30px;
+	text-align: center;
+	width: 80%;
+
+	span {
+		display: block;
+		padding: 10px 0;
+	}
+
+	.loading-throbber {
+		animation: circle infinite .75s linear;
+		border: 2px solid $brandingColor;
+		border-radius: 100%;
+		border-top-color: transparent;
+		height: 25px;
+		margin: 0 auto;
+		padding: 0;
+		width: 25px;
 	}
 }
 
