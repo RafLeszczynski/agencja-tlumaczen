@@ -14,7 +14,10 @@ describe('Mail Sender tests', () => {
 		expect(messageObject.from).toBe(`${name} ${email}`);
 		expect(messageObject.to).toBe(targetEmail);
 		expect(messageObject.subject).toBe(title);
-		expect(messageObject.text).toBe(message);
+		expect(messageObject.text).toBe(`Adres zwrotny: ${email} \n\n ${message}`);
+		expect(messageObject.html).toBe(
+			`<p>Adres zwrotny: <a href="mailto:${email}">${email}</a></p><p>${message}</p>`
+		);
 		expect(messageObject.attachments).toBe(attachments);
 	});
 

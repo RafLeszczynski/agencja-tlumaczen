@@ -39,9 +39,30 @@ export default class MailSender {
 			from: `${data.name} ${data.email}`,
 			to: target,
 			subject: data.title,
-			text: data.message,
+			text: MailSender.createMessageText(data.email, data.message),
+			html: MailSender.createMessageHtml(data.email, data.message),
 			attachments
 		};
+	}
+
+	/**
+	 * @desc creates plain text email message
+	 * @param {String} email - sender email
+	 * @param {String} text - message text
+	 * @returns {string} - plan text message with sender email
+	 */
+	static createMessageText(email, text) {
+		return `Adres zwrotny: ${email} \n\n ${text}`;
+	}
+
+	/**
+	 * @desc creates HTML email message
+	 * @param {String} email - sender email
+	 * @param {String} text - message text
+	 * @returns {string} - HTML message with sender email
+	 */
+	static createMessageHtml(email, text) {
+		return `<p>Adres zwrotny: <a href="mailto:${email}">${email}</a></p><p>${text}</p>`;
 	}
 
 	/**
