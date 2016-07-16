@@ -11,7 +11,11 @@
 
 	.header--expanded & {
 		display: block;
-		top: 150px;
+		position: static;
+		display: flex;
+		flex-direction: column;
+		min-height: calc(100% - 52px);
+		justify-content: center;
 	}
 
 	@media(min-width: $breakPointLarge) {

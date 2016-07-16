@@ -41,7 +41,22 @@
 }
 
 .header--expanded {
-	top: 0
+	top: 0;
+	overflow: auto;
+	padding-top: 0;
+
+	.top-bar {
+		height: 52px;
+		padding-top: 15px;
+		position: relative;
+	}
+}
+
+.top-bar {
+	box-sizing: border-box;
+	height: 0;
+	position: absolute;
+	top: 0;
 }
 
 .header__home-link {
@@ -53,10 +68,14 @@
 	line-height: 24px;
 	display: none;
 	position: fixed;
-	text-align: center;
 	top: 15px;
-	width: 100%;
 	z-index: 4;
+
+	margin-left: 70px;
+
+	@media (min-width: $breakPointMedium) {
+		margin-left: 82px;
+	}
 
 	a {
 		cursor: pointer;
@@ -66,6 +85,16 @@
 	.header--expanded & {
 		display: block;
 	}
+
+	.header--fixed.header--expanded & {
+		position: static;
+		margin-left: 54px;
+
+		@media (min-width: $breakPointMedium) {
+			margin-left: 66px;
+		}
+	}
+
 
 	@media (min-width: $breakPointLarge) {
 		left: 30px;
