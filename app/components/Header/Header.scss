@@ -77,6 +77,10 @@
 		margin-left: 82px;
 	}
 
+	@media (min-width: $breakPointLarge) {
+		margin-left: 0;
+	}
+
 	a {
 		cursor: pointer;
 	}
