@@ -2,7 +2,7 @@ import 'components/Navigation/Navigation.scss';
 import React from 'react';
 import {Link} from 'react-scroll';
 
-const Navigation = ({links, scrollDuration, scrollOffset}) => {
+const Navigation = ({links, scrollDuration, scrollOffset, hideMenu}) => {
 	return (
 		<nav className='header__navigation'>
 			<ul className='header__navigation-list'>
@@ -15,6 +15,7 @@ const Navigation = ({links, scrollDuration, scrollOffset}) => {
 								smooth={true}
 								offset={scrollOffset}
 								duration={scrollDuration}
+								onClick={hideMenu}
 							>
 								{link.title}
 							</Link>

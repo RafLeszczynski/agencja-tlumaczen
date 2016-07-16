@@ -4,15 +4,19 @@
 	color: $secondaryColor;
 	cursor: pointer;
 	display: block;
+	height: 18px;
+	left: 0;
 	position: absolute;
-	left: 30px;
 	top: 18px;
+	transform: rotate(0deg);
+	transition: transform .5s ease-in-out;
+	width: 27px;
 	z-index: 5;
 
-	width: 27px;
-	height: 18px;
-	transform: rotate(0deg);
-	transition: .5s ease-in-out;
+
+	@media (min-width: $breakPointMedium) {
+		left: 8px;
+	}
 
 	span {
 		display: block;
@@ -59,8 +63,13 @@
 		}
 	}
 
-	.header--fixed & {
+	.header--fixed:not(.header--expanded) & {
+		left: 16px;
 		position: fixed;
+
+		@media (min-width: $breakPointMedium) {
+			left: 24px;
+		}
 	}
 
 	@media (min-width: $breakPointLarge) {

@@ -21,7 +21,8 @@ export default class Header extends React.Component {
 		scrollDuration: React.PropTypes.number.isRequired,
 		subtitle: React.PropTypes.string.isRequired,
 		title: React.PropTypes.string.isRequired,
-		toggleMenu: React.PropTypes.func.isRequired
+		toggleMenu: React.PropTypes.func.isRequired,
+		hideMenu: React.PropTypes.func.isRequired
 	};
 
 	static defaultProps = {
@@ -34,8 +35,8 @@ export default class Header extends React.Component {
 	 * @returns {XML} - jsx markup
 	 */
 	render() {
-		const {collapsedHeaderHeight, id, fixedHeader, isMenuExpanded, goToPromoSectionId, goToPromoSectionName, navLinks,
-				scrollDuration, subtitle, title, toggleMenu} = this.props;
+		const {collapsedHeaderHeight, id, fixedHeader, isMenuExpanded, goToPromoSectionId, goToPromoSectionName,
+			hideMenu, navLinks, scrollDuration, subtitle, title, toggleMenu} = this.props;
 
 		const headerClasses = classNames({
 			header: true,
@@ -51,22 +52,26 @@ export default class Header extends React.Component {
 		return (
 			<Element name={id} className='header-wrapper'>
 				<header className={headerClasses} style={isMenuExpanded ? {height: window.innerHeight} : {}}>
-					<HamburgerIcon toggleMenu={toggleMenu} isMenuExpanded={isMenuExpanded}/>
-					<div className='header__home-link'>
-						<Link
-							to={id}
-							spy={true}
-							smooth={true}
-							offset={-collapsedHeaderHeight}
-							duration={scrollDuration}
-						>
-							{title}
-						</Link>
+					<div className='top-bar'>
+						<HamburgerIcon toggleMenu={toggleMenu} isMenuExpanded={isMenuExpanded}/>
+						<div className='header__home-link'>
+							<Link
+								to={id}
+								spy={true}
+								smooth={true}
+								offset={-collapsedHeaderHeight}
+								duration={scrollDuration}
+								onClick={hideMenu}
+							>
+								{title}
+							</Link>
+						</div>
 					</div>
 					<Navigation
 						links={navLinks}
 						scrollOffset={-collapsedHeaderHeight}
 						scrollDuration={scrollDuration}
+						hideMenu={hideMenu}
 					/>
 					<div className='header__hero'>
 						<hgroup>

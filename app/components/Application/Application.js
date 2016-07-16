@@ -55,7 +55,6 @@ export default class Application extends React.Component {
 
 		// set reference to throttledListeners
 		this._throttledToggleHeaderPosition = throttle(this._toggleHeaderPosition, this.props.throttleThreshold, this);
-		this._throttledHideMenu = throttle(this._hideMenu, this.props.throttleThreshold, this);
 	}
 
 	/**
@@ -63,7 +62,6 @@ export default class Application extends React.Component {
 	 */
 	componentDidMount() {
 		window.addEventListener('scroll', this._throttledToggleHeaderPosition);
-		window.addEventListener('scroll', this._throttledHideMenu);
 	}
 
 	/**
@@ -71,7 +69,6 @@ export default class Application extends React.Component {
 	 */
 	componentWillUnmount() {
 		window.removeEventListener('scroll', this._throttledToggleHeaderPosition);
-		window.removeEventListener('scroll', this._throttledHideMenu);
 	}
 
 	/**
@@ -112,6 +109,7 @@ export default class Application extends React.Component {
 						subtitle={messages.pageSubtitle}
 						title={messages.pageTitle}
 						toggleMenu={this._toggleMenuDisplay.bind(this)}
+						hideMenu={this._hideMenu.bind(this)}
 					/>
 					{this._getSectionsData().map(Application._renderSection, this)}
 				</div>
