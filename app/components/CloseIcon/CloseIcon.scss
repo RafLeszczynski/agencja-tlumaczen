@@ -4,14 +4,18 @@
 	color: $secondaryColor;
 	cursor: pointer;
 	display: block;
-	position: absolute;
-	left: 30px;
-	top: 25px;
-	z-index: 5;
-
-	width: 27px;
 	height: 18px;
+	left: 16px;
+	padding-top: 12px;
+	position: absolute;
+	top: 15px;
 	transform: rotate(0deg);
+	z-index: 5;
+	width: 24px;
+
+	@media (min-width: $breakPointMedium) {
+		left: 24px;
+	}
 
 	span {
 		display: block;

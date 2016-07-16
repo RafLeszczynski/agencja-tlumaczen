@@ -7,6 +7,7 @@ $inputWrapperPadding: 20px;
 $inputPadding: 5px;
 $inputBorderWidth: 1px;
 $labelTransitionDuration: .2s;
+$hoverSubmitColor: lighten($brandingColor, 10);
 
 @keyframes circle {
 	0%
@@ -38,8 +39,20 @@ $labelTransitionDuration: .2s;
 }
 
 .form-submit-button {
+	background-color: $brandingColor;
+	color: $secondaryColor;
 	display: inline-block;
-	margin-bottom: 48px;
+	margin-bottom: 24px;
+
+	&:hover {
+		background-color: $hoverSubmitColor;
+		border-color: $hoverSubmitColor;
+	}
+
+
+	@media(min-width: $breakPointMedium) {
+		margin-bottom: 48px;
+	}
 
 	@media(min-width: $breakPointLarge) {
 		margin-bottom: auto;
