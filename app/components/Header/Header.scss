@@ -68,13 +68,13 @@
 	line-height: 24px;
 	display: none;
 	position: fixed;
-	text-align: center;
 	top: 15px;
-	width: 100%;
 	z-index: 4;
 
-	@media (max-width: 350px) {
-		padding-left: 18px;
+	margin-left: 70px;
+
+	@media (min-width: $breakPointMedium) {
+		margin-left: 82px;
 	}
 
 	a {
@@ -88,6 +88,11 @@
 
 	.header--fixed.header--expanded & {
 		position: static;
+		margin-left: 54px;
+
+		@media (min-width: $breakPointMedium) {
+			margin-left: 66px;
+		}
 	}
 
 
