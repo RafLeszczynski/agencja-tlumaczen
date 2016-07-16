@@ -26,7 +26,28 @@ $labelTransitionDuration: .2s;
 }
 
 .form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
 	text-align: right;
+
+	@media(min-width: $breakPointLarge) {
+		height: auto;
+	}
+}
+
+.form-submit-button {
+	display: inline-block;
+	margin-bottom: 48px;
+
+	@media(min-width: $breakPointLarge) {
+		margin-bottom: auto;
+	}
+}
+
+.form-content {
+	margin-bottom: 72px;
 }
 
 .input-group {

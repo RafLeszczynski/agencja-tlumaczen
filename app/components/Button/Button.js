@@ -3,11 +3,12 @@ import 'components/Button/Button.scss';
 import React from 'react';
 import classNames from 'classnames';
 
-const Button = ({action, big, link, linkUrl, name, secondary, title}) => {
+const Button = ({action, customClass, big, link, linkUrl, name, secondary, title}) => {
 	const buttonClasses = classNames({
 		button: true,
 		'button--secondary': secondary,
-		'button--big': big
+		'button--big': big,
+		[customClass]: true
 	});
 
 	return (

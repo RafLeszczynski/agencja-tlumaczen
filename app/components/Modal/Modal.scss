@@ -51,5 +51,12 @@
 }
 
 .modal__content {
-	padding: 35px 48px;
+	box-sizing: border-box;
+	height: calc(100% - 52px);
+	padding: 35px 48px 0;
+
+	@media (min-width: $breakPointLarge) {
+		height: auto;
+		padding-bottom: 48px;
+	}
 }

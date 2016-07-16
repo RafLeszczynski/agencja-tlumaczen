@@ -52,10 +52,14 @@ export default class ContactForm extends React.Component {
 	render() {
 		return (
 			<form className='form' autoComplete='on' onSubmit={this._submitForm.bind(this)}>
-				{this._getFormData().map(this._renderFormItem, this)}
-				{this.state[ContactForm.fileAttachments].map(this._renderFileAttachment, this)}
-				<Button name={messages.submitLabel}/>
-				{this.state.submitInProgress ? this._renderLoadingOverlay() : ''}
+				<div className='form-content'>
+					{this._getFormData().map(this._renderFormItem, this)}
+					{this.state[ContactForm.fileAttachments].map(this._renderFileAttachment, this)}
+				</div>
+				<div className='form-buttons'>
+					<Button name={messages.submitLabel} customClass='form-submit-button' />
+				</div>
+				{this.state.submitInProgress ? this._renderLoadingOverlay() : null}
 			</form>
 		);
 	}
