@@ -5,16 +5,18 @@
 	cursor: pointer;
 	display: block;
 	height: 18px;
-	left: 16px;
+	left: 24px;
 	padding-top: 12px;
 	position: absolute;
 	top: 15px;
 	transform: rotate(0deg);
 	z-index: 5;
-	width: 24px;
+	width: 16px;
 
 	@media (min-width: $breakPointMedium) {
-		left: 24px;
+		left: 30px;
+		top: 22px;
+		width: 24px;
 	}
 
 	span {
