@@ -13,7 +13,7 @@ function renderOfficeItem(data, index) {
 	return (
 		<div key={index} className='offices__location'>
 			<p>
-				<span className="office-hours">{data.hours}</span>
+				<span className='office-hours'>{data.hours}</span>
 				<span className='offices__location__working-days'>{data.days}</span>
 			</p>
 			<p>
