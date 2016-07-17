@@ -1,13 +1,6 @@
 @import 'variables';
 
 @font-face {
-	font-family: 'Roboto';
-	src: url('../fonts/Roboto-Regular-webfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
 	font-family: 'Caviar Dreams';
 	src: url('../fonts/Caviar_Dreams-webfont.woff') format('woff');
 	font-weight: normal;
@@ -18,6 +11,13 @@
 	font-family: 'Caviar Dreams';
 	src: url('../fonts/Caviar_Dreams_Bold-webfont.woff') format('woff');
 	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Ticking Timebomb';
+	src: url('../fonts/Ticking-Timebomb-Regular.woff') format('woff');
+	font-weight: normal;
 	font-style: normal;
 }
 
