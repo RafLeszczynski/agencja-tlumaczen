@@ -40,6 +40,7 @@ export default class Header extends React.Component {
 
 		const headerClasses = classNames({
 			header: true,
+			'background-pattern': true,
 			'header--fixed': fixedHeader || isMenuExpanded,
 			'header--expanded': isMenuExpanded
 		});
