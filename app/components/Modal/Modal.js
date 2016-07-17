@@ -7,7 +7,7 @@ export default ({title, children, closeAction}) => {
 	return (
 		<div className='blackout' onClick={closeAction}>
 			<div className='modal' onClick={stopEventPropagation}>
-				<h2>{title}</h2>
+				<h2 className='background-pattern'>{title}</h2>
 				<CloseIcon action={closeAction}/>
 				<div className='modal__content'>
 					{children}
