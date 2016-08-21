@@ -1,76 +1,265 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const dataModel = [
-  {
-    languages: ['angielski', 'francuski', 'niemiecki', 'rosyjski'],
-    pricePN: 'od 25 PLN',
-    pricePP: 'od 35 PLN',
-    priceU: 'od 100 PLN'
-  },
-  {
-    languages: ['białoruski', 'czeski', 'hiszpański', 'łacina', 'niderlandzki', 'słowacki', 'ukraiński', 'węgierski',
-      'włoski'],
-    pricePN: 'od 35 PLN',
-    pricePP: 'od 40 PLN',
-    priceU: 'od 120 PLN'
-  },
-  {
-    languages: ['bułgarski', 'estoński', 'szwedzki', 'chorwacki', 'duński', 'grecki', 'litewski', 'łotewski',
-      'norweski', 'portugalski', 'rumuński', 'serbski', 'słoweński'],
-    pricePN: 'od 40 PLN',
-    pricePP: 'od 45 PLN',
-    priceU: 'od 130 PLN'
-  },
-  {
-    languages: ['turecki', 'japoński', 'chiński', 'i inne'],
-    custom: 'wycena indywidualna'
-  }
+	{
+		languages: 'angielski',
+		dr: '100 - 130 PLN',
+		u: 'od 35 PLN',
+		next: 'od 35 PLN'
+	},
+	{
+		languages: 'francuski',
+		dr: 'od 45 PLN',
+		u: 'od 45 PLN',
+		next: 'od 36 PLN'
+	},
+	{
+		languages: 'hiszpański',
+		dr: 'od 45 PLN',
+		u: 'od 45 PLN',
+		next: 'od 36 PLN'
+	},
+	{
+		languages: 'niderlandzki',
+		dr: 'od 45 PLN',
+		u: 'od 50 PLN',
+		next: 'od 45 PLN'
+	},
+	{
+		languages: 'niemiecki',
+		dr: 'od 35 PLN',
+		u: 'od 35 PLN',
+		next: 'od 25 PLN'
+	},
+	{
+		languages: 'norweski',
+		dr: 'od 100 PLN',
+		u: 'od 55 PLN',
+		next: 'od 50 PLN'
+	},
+	{
+		languages: 'szwedzki',
+		dr: 'od 100 PLN',
+		u: 'od 40 PLN',
+		next: 'od 45 PLN'
+	},
+	{
+		languages: 'włoski',
+		dr: 'od 65 PLN',
+		u: 'od 55 PLN',
+		next: 'od 36 PLN'
+	},
+	{
+		languages: 'białoruski',
+		dr: 'od 50 PLN',
+		u: 'od 50 PLN',
+		next: 'od 40 PLN'
+	},
+	{
+		languages: 'bułgarski',
+		dr: 'od 45 PLN',
+		u: 'od 45 PLN',
+		next: 'od 40 PLN'
+	},
+	{
+		languages: 'chiński',
+		dr: 'wycena indywidualna',
+		u: 'wycena indywidualna',
+		next: 'wycena indywidualna'
+	},
+	{
+		languages: 'chorwacki',
+		dr: 'od 45 PLN',
+		u: 'od 45 PLN',
+		next: 'od 35 PLN'
+	}, {
+		languages: 'czeski',
+		dr: 'od 65 PLN',
+		u: 'od 60 PLN',
+		next: 'od 38 PLN'
+	},
+	{
+		languages: 'duński',
+		dr: 'od 120 PLN',
+		u: 'od 40 PLN',
+		next: 'od 27 PLN'
+	},
+	{
+		languages: 'estoński',
+		dr: 'od 95 PLN',
+		u: 'od 55 PLN',
+		next: 'od 35 PLN'
+	},
+	{
+		languages: 'grecki',
+		dr: 'od 75 PLN',
+		u: 'od 45 PLN',
+		next: 'od 35 PLN'
+	},
+	{
+		languages: 'japoński',
+		dr: 'od 110 PLN',
+		u: 'od 65 PLN',
+		next: 'od 40 PLN'
+	},
+	{
+		languages: 'litweski',
+		dr: 'od 65 PLN',
+		u: 'od 40 PLN',
+		next: 'od 35 PLN'
+	},
+	{
+		languages: 'łotewski',
+		dr: 'od 90 PLN',
+		u: 'od 40 PLN',
+		next: 'od 34 PLN'
+	},
+	{
+		languages: 'portugalski',
+		dr: 'od 65 PLN',
+		u: 'od 55 PLN',
+		next: 'od 35 PLN'
+	}, {
+		languages: 'rosyjski',
+		dr: 'od 45 PLN',
+		u: 'od 40 PLN',
+		next: 'od 32 PLN'
+	},
+	{
+		languages: 'rumuński',
+		dr: 'od 65 PLN',
+		u: 'od 40 PLN',
+		next: 'od 35 PLN'
+	},
+	{
+		languages: 'serbski',
+		dr: 'od 65 PLN',
+		u: 'od 40 PLN',
+		next: 'od 36 PLN'
+	},
+	{
+		languages: 'słowacki',
+		dr: 'od 45 PLN',
+		u: 'od 45 PLN',
+		next: 'od 45 PLN'
+	},
+
+	{
+		languages: 'słoweński',
+		dr: 'od 65 PLN',
+		u: 'od 40 PLN',
+		next: 'od 34 PLN'
+	}, {
+		languages: 'turecki',
+		dr: 'od 60 PLN',
+		u: 'od 40 PLN',
+		next: 'od 40 PLN'
+	},
+	{
+		languages: 'ukraiński',
+		dr: 'od 50 PLN',
+		u: 'od 45 PLN',
+		next: 'od 45 PLN'
+	},
+	{
+		languages: 'węgierski',
+		dr: 'od 55 PLN',
+		u: 'od 55 PLN',
+		next: 'od 50 PLN'
+	},
+	{
+		languages: 'pozostałe języki',
+		dr: 'wycena indywidualna',
+		u: 'wycena indywidualna',
+		next: 'wycena indywidualna'
+	}
 ];
 
-function renderTableRowContent(item, index) {
-  if (item.custom) {
-    return (
-      <tr key={index}>
-        <td>{renderLanguages(item.languages)}</td>
-        <td colSpan="3" className="long">{item.custom}</td>
-      </tr>
-      )
-  } else {
-    return (
-      <tr key={index}>
-        <td>{renderLanguages(item.languages)}</td>
-        <td>{item.pricePN}</td>
-        <td>{item.pricePP}</td>
-        <td>{item.priceU}</td>
-      </tr>
-    );
-  }
-}
+/**
+ * @desc price table for car translations
+ */
+export default class PriceTableCar extends React.Component {
+	/**
+	 * @desc constructor function
+	 * @param {Object} props - component props
+	 * @constructor
+	 * @returns {void}
+	 */
+	constructor(props) {
+		super(props);
 
-function renderLanguages(languages) {
-  return (
-    <ul>
-      {languages.map((item, index) => {
-        return <li key={index}>{item}</li>
-      })}
-    </ul>
-  );
-}
+		this.state = {
+			expended: false
+		};
+	}
 
-export default () => {
-  return (
-    <table className="price-table">
-      <thead>
-        <tr>
-          <th>Język</th>
-          <th>Tłumaczenia pisemne niepszysięgłe</th>
-          <th>Tłumaczenia pisemne przysięgłe</th>
-          <th>Tłumaczenia ustne</th>
-        </tr>
-      </thead>
-      <tbody>
-        {dataModel.map(renderTableRowContent)}
-      </tbody>
-    </table>
-  );
+	/**
+	 * @param {Object} item - item
+	 * @param {Number} index - index
+	 * @returns {XML} - jsx markup
+	 * @private
+	 */
+	_renderTableRowContent(item, index) {
+		return (
+			<tr key={index}>
+				<td>{item.languages}</td>
+				<td><span className='mobile-header'>Dowód rejestracyjny</span><span>{item.dr}</span></td>
+				<td><span className='mobile-header'>Umowa</span><span>{item.u}</span></td>
+				<td><span className='mobile-header'>Każdy kolejny document</span><span>{item.next}</span></td>
+			</tr>
+		);
+	}
+
+	/**
+	 * @returns {void}
+	 * @private
+	 */
+	_toggleExpand() {
+		this.setState({
+			expended: !this.state.expended
+		});
+	}
+
+	/**
+	 * @returns {XML} - jsx markup
+	 */
+	render() {
+		const tableClassName = classNames({
+			'price-table': true,
+			'price-table-car': true,
+			expended: this.state.expended
+		});
+
+		const arrowClassName = classNames({
+			'see-more-langs': true,
+			expended: this.state.expended
+		});
+
+		return (
+			<div>
+				<table className={tableClassName}>
+					<thead>
+					<tr>
+						<th>Język</th>
+						<th>Dowód rejestracyjny</th>
+						<th>Umowa</th>
+						<th>Każdy kolejny document</th>
+					</tr>
+					</thead>
+					<tbody>
+					{dataModel.map(this._renderTableRowContent)}
+					</tbody>
+				</table>
+				<div className='table-expander'>
+					<strong onClick={this._toggleExpand.bind(this)}>{this.state.expended ? 'mniej' : 'więcej'}
+						języków</strong>
+					<svg className={arrowClassName} viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+						<path d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z'/>
+						<path d='M0 0h24v24H0z' fill='none'/>
+					</svg>
+				</div>
+			</div>
+		);
+	}
 }
