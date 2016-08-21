@@ -16,4 +16,148 @@ $descriptionBottomMargin: 48px;
 .prizes__section__description {
 	color: $brandingLightColor;
 	margin-bottom: $descriptionBottomMargin;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.table-header {
+	font-size: 16px;
+	font-weight: normal;
+	text-transform: upperCase;
+
+	@media (min-width: $breakPointMedium) {
+		font-size: 18px
+	}
+}
+
+.price-table {
+	border-collapse: collapse;
+	display: block;
+	margin: 26px -16px;
+	table-layout: fixed;
+
+	tbody {
+		display: block;
+	}
+
+	tr:nth-child(odd) {
+		background-color: rgba(65, 21, 54, 0.1);
+	}
+
+	tr {
+		align-content: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 100%;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	thead {
+		display: none;
+	}
+
+	td,
+	th {
+		display: block;
+		font-size: 16px;
+		padding: 16px 12px;
+		text-align: center;
+	}
+
+	span {
+		display: block;
+	}
+
+	&.price-table-car:not(.expended) {
+		tr:nth-child(n+9) {
+			display: none;
+		}
+	}
+
+	@media (min-width: $breakPointMedium) {
+		margin: 26px -24px;
+
+		tbody tr:nth-child(odd) {
+			background-color: transparent;
+		}
+
+		tr:nth-child(even),
+		thead tr {
+			background-color: rgba(65, 21, 54, 0.1);
+		}
+
+		.mobile-header {
+			display: none;
+		}
+
+		tr {
+			flex-direction: row;
+		}
+
+		thead {
+			display: block;
+		}
+
+		td,
+		th {
+			display: block;
+			font-size: 16px;
+			padding: 16px 12px;
+			text-align: center;
+			width: 182px;
+
+			&.long {
+				width: 182px * 3 + 48px;
+			}
+
+			&:first-child {
+				padding-right: 70px;
+				text-align: right;
+			}
+		}
+
+		td:not(:first-child) {
+			align-items: center;
+			display: flex;
+			justify-content: center;
+		}
+
+		&.price-table-car {
+			td:first-child,
+			th:first-child {
+				padding-right: 12px;
+				text-align: center;
+			}
+		}
+	}
+}
+
+.table-expander {
+	display: block;
+	text-align: center;
+
+	strong {
+		cursor: pointer;
+		font-size: 16px;
+		font-weight: normal;
+	}
+
+	.see-more-langs {
+		display: block;
+		margin: 5px auto 20px;
+		height: 23px;
+		width: 23px;
+
+		&.expended {
+			transform: rotate(180deg);
+		}
+	}
 }
