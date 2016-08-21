@@ -48,7 +48,7 @@ const Prizes = ({showModal}) => {
 			<h3 className='prizes table-header'>Cennik tłumaczeń dokumentów samochodwych</h3>
 			<PriceTableCar/>
 			<p className='prizes prizes__section__description'>Cennik nie stanowi oferty handlowej w rozumieniu art. 66 §1 KC.
-				Ceny mogą uledz zmianie bez uprzedzenia.</p>
+				Ceny mogą ulec zmianie bez uprzedzenia.</p>
 		</div>
 	);
 };
