@@ -88,6 +88,29 @@ export default class Offer extends React.Component {
 		return (
 			<div className='offer'>
 				{messages.map(this.renderOfferSection, this)}
+				<article className='offer__item'>
+					<svg id="ackU"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220">
+						<path d="M174,169.9a1,1,0,0,1-1-1V30.7L154.16,11.48h-107l0.25,38.61a1,1,0,0,1-1,1,1,1,0,0,1-1-1L45.21,10.5a1,1,0,0,1,.29-0.7,1,1,0,0,1,.7-0.29H154.57a1,1,0,0,1,.7.29l19.44,19.8a1,1,0,0,1,.28.7V168.91A1,1,0,0,1,174,169.9Z"/>
+						<path d="M173.49,210.5H46a1,1,0,0,1-1-1L45,89.7a1,1,0,1,1,2,0l0,118.82h126.5A1,1,0,0,1,173.49,210.5Z"/>
+						<path d="M163.7,144.16H56a1,1,0,0,1,0-2H163.7A1,1,0,0,1,163.7,144.16Z"/>
+						<path d="M75.87,59.61H69.58L68.09,64H65.78l6-16.89h1.94L79.64,64H77.34Zm-5.63-1.91h5l-2.43-7.25H72.73Z"/>
+						<path d="M90.53,56.32H89.06V64H86.8V47.06h2.26v7.47H90.3l6.2-7.47H99l0,0.06-6.77,8,7.25,8.78,0,0.06H96.78Z"/>
+						<path d="M118,58.55l0,0.07a5.1,5.1,0,0,1-1.65,4,6.27,6.27,0,0,1-4.49,1.6,5.86,5.86,0,0,1-4.62-2A7.52,7.52,0,0,1,105.49,57V54a7.54,7.54,0,0,1,1.78-5.16,5.86,5.86,0,0,1,4.62-2,6.44,6.44,0,0,1,4.51,1.53,5.07,5.07,0,0,1,1.63,4l0,0.07h-2.17a3.79,3.79,0,0,0-1-2.81,3.94,3.94,0,0,0-2.91-1,3.55,3.55,0,0,0-3,1.54A6.33,6.33,0,0,0,107.75,54v3a6.37,6.37,0,0,0,1.12,3.85,3.55,3.55,0,0,0,3,1.54,4,4,0,0,0,2.91-1,3.82,3.82,0,0,0,1-2.84H118Z"/>
+						<path d="M132.4,57.72h-6.77V55.93h6.77v1.79Z"/>
+						<path d="M153.29,47.06V58.28a5.48,5.48,0,0,1-1.79,4.35,6.75,6.75,0,0,1-4.61,1.57,6.37,6.37,0,0,1-4.45-1.57,5.57,5.57,0,0,1-1.73-4.35V47.06H143V58.28a4.1,4.1,0,0,0,1.1,3,3.83,3.83,0,0,0,2.83,1.1,4.16,4.16,0,0,0,3-1.1,4,4,0,0,0,1.15-3V47.06h2.26Z"/>
+						<path d="M163.7,197.63H124.54a1,1,0,0,1,0-2H163.7A1,1,0,0,1,163.7,197.63Z"/>
+						<path d="M163.7,131.29H56a1,1,0,0,1,0-2H163.7A1,1,0,0,1,163.7,131.29Z"/>
+						<path d="M163.7,102.57H56a1,1,0,0,1,0-2H163.7A1,1,0,0,1,163.7,102.57Z"/>
+					</svg>
+					<h3>Wypełnianie deklaracji
+						AKC-U</h3>
+					<h4>Sporządzenie deklaracji i pobranie potwierdzenia</h4>
+					<p className="akc-u">Deklaracja wypełniana jest przez pracownika na miejscu lub w ciągu jednego dnia roboczego. Otrzymują Państwo sporządzoną deklarację i samodzielnie opłacają akcyzę. </p>
+					<p className="akc-u">Koszt usługi: 25PLN</p>
+					<h4>Sporządzenie deklaracji wraz ze złożeniem UPL (upoważnienia),<br/> opłaceniem i pobraniem potwierdzenia</h4>
+					<p className="akc-u">Usługa bardziej kompleksowa. Przy pierwszej deklaracji składanej dla Państwa, czas realizacji to ok. 7 dni ze względu na konieczność zarejestrowania UPL w US. Przy kolejnych deklaracjach dla tego samego klienta, czas oczekiwania skraca się do jednego dnia roboczego (przy złożeniu dokumentów do godziny 10:00).</p>
+					<p className="akc-u">Koszt usługi: od 60PLN + zwrot kosztów akcyzy pokrytych uprzednio przez biuro</p>
+				</article>
 			</div>
 		);
 	}
