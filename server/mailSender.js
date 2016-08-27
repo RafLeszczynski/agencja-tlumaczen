@@ -13,7 +13,14 @@ export default class MailSender {
 	 * @returns {void}
 	 */
 	constructor(gmailUser, gmailPass) {
-		this.transporter = nodemailer.createTransport(`smtps://${gmailUser}%40gmail.com:${gmailPass}@smtp.gmail.com`);
+		this.transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				user: gmailUser,
+				pass: gmailPass
+			}
+		});
+
 	}
 
 	/**
