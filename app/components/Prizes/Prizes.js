@@ -1,7 +1,7 @@
 import 'components/Prizes/Prizes.scss';
 import React from 'react';
 import Button from 'components/Button/Button';
-import CheckPrizeForm from 'components/CheckPrizeForm/CheckPrizeForm';
+import ContactForm from 'components/ContactForm/ContactForm';
 import PriceTable from 'components/PriceTable/PriceTable';
 import PriceTableCar from 'components/PriceTableCar/PriceTableCar';
 import sections from 'components/Prizes/Prizes.messages';
@@ -13,8 +13,8 @@ import sections from 'components/Prizes/Prizes.messages';
  * @param {Object} props - modal component props
  * @returns {void}
  */
-function showCheckPrizesModal(showModal, modalTitle, props) {
-	showModal(modalTitle, CheckPrizeForm, props);
+function showCheckPrizesModal(showModal, modalTitle) {
+	showModal(modalTitle, ContactForm);
 }
 
 const prizesWrapperClassName = 'prizes';
@@ -33,7 +33,7 @@ const Prizes = ({showModal}) => {
 							<Button
 								name={section.button}
 								action={showCheckPrizesModal.bind(
-									this, showModal, section.modalTitle, section.modalProps
+									this, showModal, section.modalTitle
 								)}
 							/>
 						</div>

@@ -249,7 +249,7 @@ const sections = [
 	{
 		description: 'Oferujemy darmową wycenę Państwa dokumentów w 24 godziny. W odpowiedzi na wiadomość, otrzymają Państwo nie tylko dokładny koszt usługi tłumaczeniowej, ale także przybliżony termin realizacji.',
 		button: 'Zamów darmową wycenę',
-		modalTitle: 'Wycena',
+		modalTitle: 'Zamów darmową wycenę',
 		modalProps: {
 			isCustomPrizeForm: true,
 			selectionOptions: [
