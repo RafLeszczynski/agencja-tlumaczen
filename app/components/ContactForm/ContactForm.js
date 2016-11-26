@@ -1,11 +1,10 @@
-import 'components/forms/form.scss';
 import React from 'react';
-import validateEmail from 'helpers/validator';
-import TextField from 'components/forms/TextField';
-import Button from 'components/Button/Button';
-import CloseIcon from 'components/CloseIcon/CloseIcon';
-import * as messages from 'components/ContactForm/ContactForm.messages';
-import trimFromStart from 'helpers/trim';
+import validateEmail from '../../helpers/validator';
+import TextField from '../forms/TextField';
+import Button from '../Button/Button';
+import CloseIcon from '../CloseIcon/CloseIcon';
+import * as messages from './ContactForm.messages';
+import trimFromStart from '../../helpers/trim';
 import {supportedTypes} from '../../../server/fileFilterHelper';
 
 /**

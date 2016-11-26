@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
-import InputGroup from 'components/forms/InputGroup';
-import Label from 'components/forms/Label';
+import InputGroup from './InputGroup';
+import Label from './Label';
 
 const SelectBlock = ({className, id, label, onChange, options, placeholder, value}) => {
 	let inputGroupClasses = {

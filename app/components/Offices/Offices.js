@@ -1,7 +1,6 @@
-import 'components/Offices/Offices.scss';
 import React from 'react';
-import Button from 'components/Button/Button';
-import {officesData, showLocation} from 'components/Offices/Offices.messages';
+import Button from '../Button/Button';
+import {officesData, showLocation} from './Offices.messages';
 
 /**
  * @desc renders office item markup

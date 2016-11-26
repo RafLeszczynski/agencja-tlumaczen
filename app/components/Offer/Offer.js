@@ -1,8 +1,7 @@
-import 'components/Offer/Offer.scss';
 import React from 'react';
-import Button from 'components/Button/Button';
-import OfferDetails from 'components/OfferDetails/OfferDetails';
-import messages from 'components/Offer/Offer.messages';
+import Button from '../Button/Button';
+import OfferDetails from '../OfferDetails/OfferDetails';
+import messages from './Offer.messages';
 
 /**
  * Offer react component

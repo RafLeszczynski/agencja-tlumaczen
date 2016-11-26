@@ -1,8 +1,7 @@
-import 'components/Languages/Languages.scss';
 import React from 'react';
-import groupLanguagesByLetter from 'helpers/languageSort';
-import LanguageGroup from 'components/Languages/LanguageGroup';
-import * as messages from 'components/Languages/Languages.messages';
+import groupLanguagesByLetter from '../../helpers/languageSort';
+import LanguageGroup from './LanguageGroup';
+import * as messages from './Languages.messages';
 
 /**
  * #desc renders language group

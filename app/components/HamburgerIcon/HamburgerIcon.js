@@ -1,4 +1,3 @@
-import 'components/HamburgerIcon/HamburgerIcon.scss';
 import React from 'react';
 import classNames from 'classnames';
 

@@ -1,15 +1,13 @@
-import 'components/forms/select.scss';
-import 'components/CheckPrizeForm/CheckPrizeForm.scss';
 import React from 'react';
-import * as checkPrizeFormMessages from 'components/CheckPrizeForm/CheckPrizeForm.messages';
-import * as contactFormMessages from 'components/ContactForm/ContactForm.messages';
-import RadioButton from 'components/forms/RadioButton';
-import SelectBlock from 'components/forms/SelectBlock';
-import Button from 'components/Button/Button';
-import TextField from 'components/forms/TextField';
-import ContactForm from 'components/ContactForm/ContactForm';
-import trimFromStart from 'helpers/trim';
-import * as validator from 'helpers/validator';
+import * as checkPrizeFormMessages from './CheckPrizeForm.messages';
+import * as contactFormMessages from '../ContactForm/ContactForm.messages';
+import RadioButton from '../forms/RadioButton';
+import SelectBlock from '../forms/SelectBlock';
+import Button from '../Button/Button';
+import TextField from '../forms/TextField';
+import ContactForm from '../ContactForm/ContactForm';
+import trimFromStart from '../../helpers/trim';
+import * as validator from '../../helpers/validator';
 
 /**
  * @desc Check prize from react component

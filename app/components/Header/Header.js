@@ -1,10 +1,9 @@
-import 'components/Header/Header.scss';
+// import './Header.scss';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import {Link, Element} from 'react-scroll';
-import HamburgerIcon from 'components/HamburgerIcon/HamburgerIcon';
-import Navigation from 'components/Navigation/Navigation';
+import HamburgerIcon from '../HamburgerIcon/HamburgerIcon';
+import Navigation from '../Navigation/Navigation';
 
 /**
  * @desc react header component
