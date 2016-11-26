@@ -28,7 +28,7 @@ $select-arrow-width: 5px;
 
 .Select-control {
 	background-color: transparent;
-	border-bottom: $select-input-border-width solid $brandingColor;
+	border-bottom: $select-input-border-width * 2 solid $brandingColor;
 	color: $brandingColor;
 	cursor: default;
 	display: table;
