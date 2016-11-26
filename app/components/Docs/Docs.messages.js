@@ -1,6 +1,6 @@
 export const docsSectionDescription = 'Przygotowaliśmy dla Państwa wzory dwujęzycznych umów kupna-sprzedaży' +
 	' samochodów z zagranicy.';
-export const docsDocSelect = 'Wybierz document';
+export const docsDocSelect = 'Wybierz dokument';
 export const docs = [
 	{
 		value: '1.pdf',
