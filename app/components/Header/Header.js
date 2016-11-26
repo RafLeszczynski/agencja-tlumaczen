@@ -87,10 +87,18 @@ export default class Header extends React.Component {
 							duration={scrollDuration}
 							className={buttonClasses}>{goToPromoSectionName}
 						</Link>
-						<svg className='see-more-icon' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-							<path d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z'/>
-							<path d='M0 0h24v24H0z' fill='none'/>
-						</svg>
+						<Link
+							to={goToPromoSectionId}
+							spy={false}
+							smooth={true}
+							offset={-collapsedHeaderHeight}
+							duration={scrollDuration}
+						>
+							<svg className='see-more-icon' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
+								<path d='M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z'/>
+								<path d='M0 0h24v24H0z' fill='none'/>
+							</svg>
+						</Link>
 					</div>
 				</header>
 			</Element>
