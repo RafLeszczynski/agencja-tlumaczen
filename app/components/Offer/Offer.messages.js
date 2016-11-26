@@ -46,7 +46,26 @@ export default [
 			},
 			{
 				title: 'Tłumaczenia nieprzysięgłe',
-				content: []
+				content: [
+					{
+						title: 'Stron internetowych'
+					},
+					{
+						title: 'Aplikacji mobilnych'
+					},
+					{
+						title: 'CV i Listów motywacyjnych'
+					},
+					{
+						title: 'Korespondencji'
+					},
+					{
+						title: 'Streszczeń prac licencjackich i magisterskich'
+					},
+					{
+						title: 'Aktów prawnych'
+					}
+				]
 			}
 		]
 	},
@@ -56,7 +75,23 @@ export default [
 		details: [
 			{
 				title: 'Tłumaczenia przysięgłe i\xa0nieprzysięgłe',
-				content: []
+				content: [
+					{
+						title: 'Rozmów telefonicznych'
+					},
+					{
+						title: 'Konsekutywne',
+						description: 'Po zakończeniu wypowiedzi, tłumacz odtwarza ją w całości w innym języku'
+					},
+					{
+						title: 'Symultaniczne kabinowe',
+						description: 'Uczestnicy konferencji słyszą tekst tłumaczenia w słuchawkach'
+					},
+					{
+						title: 'Symultaniczne szeptane',
+						description: 'łumacz przekłada treść wystąpienia szeptem dla jednej lub dwóch osób'
+					}
+				]
 			}
 		]
 	}
