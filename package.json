@@ -8,9 +8,10 @@
   "main": "server.js",
   "scripts": {
     "build": "rimraf build && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
-    "build-and-start": "npm run build && npm run start",
+    "build-and-start": "npm run build && npm run render-app-to-file && npm run start",
     "clear": "rimraf node_modules",
     "clean-build": "rimraf build",
+    "render-app-to-file": "./node_modules/.bin/babel-node render-app-to-file.js",
     "start": "./node_modules/.bin/babel-node server",
     "test": "jasmine JASMINE_CONFIG_PATH=test/jasmine.json",
     "eslint": "./node_modules/.bin/eslint .",

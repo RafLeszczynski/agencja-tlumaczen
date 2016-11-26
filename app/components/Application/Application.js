@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import Header from 'components/Header/Header';
-import Section from 'components/Section/Section';
-import Offices from 'components/Offices/Offices';
-import Offer from 'components/Offer/Offer';
-import Button from 'components/Button/Button';
-import Languages from 'components/Languages/Languages';
-import Prizes from 'components/Prizes/Prizes';
-import Contact from 'components/Contact/Contact';
-import Docs from 'components/Docs/Docs';
-import Modal from 'components/Modal/Modal';
-import ContactForm from 'components/ContactForm/ContactForm';
-import throttle from 'helpers/throttle';
-import messages from 'components/Application/Application.messages';
+import Header from '../Header/Header';
+import Section from '../Section/Section';
+import Offices from '../Offices/Offices';
+import Offer from '../Offer/Offer';
+import Languages from '../Languages/Languages';
+import Prizes from '../Prizes/Prizes';
+import Contact from '../Contact/Contact';
+import Docs from '../Docs/Docs';
+import Modal from '../Modal/Modal';
+import throttle from '../../helpers/throttle';
+import messages from './Application.messages';
 
 /**
  * @desc Main application componenet

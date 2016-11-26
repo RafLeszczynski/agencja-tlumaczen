@@ -1,7 +1,6 @@
-import 'components/Modal/Modal.scss';
 import React from 'react';
-import stopEventPropagation from 'helpers/stopPropagation';
-import CloseIcon from 'components/CloseIcon/CloseIcon';
+import stopEventPropagation from '../../helpers/stopPropagation';
+import CloseIcon from '../CloseIcon/CloseIcon';
 
 export default ({title, children, closeAction}) => {
 	return (

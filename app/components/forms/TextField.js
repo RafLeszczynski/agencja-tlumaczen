@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import TextareaAutosize from 'react-textarea-autosize';
-import InputGroup from 'components/forms/InputGroup';
-import Label from 'components/forms/Label';
-import Input from 'components/forms/Input';
-import ValidationErrorMsg from 'components/forms/ValidationErrorMsg';
+import InputGroup from './InputGroup';
+import Label from './Label';
+import Input from './Input';
+import ValidationErrorMsg from './ValidationErrorMsg';
 
 /**
  * @desc renders Input component

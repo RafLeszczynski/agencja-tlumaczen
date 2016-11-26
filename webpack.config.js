@@ -36,7 +36,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			inject: true,
-			template: 'app/index.html'
+			template: 'app/index.ejs'
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),

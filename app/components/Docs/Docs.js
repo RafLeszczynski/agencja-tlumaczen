@@ -1,9 +1,7 @@
-import 'components/Docs/Docs.scss';
-import 'components/forms/select.scss';
 import React from 'react';
-import Button from 'components/Button/Button';
+import Button from '../Button/Button';
 import Select from 'react-select';
-import * as massages from 'components/Docs/Docs.messages';
+import * as massages from './Docs.messages';
 
 /**
  * @desc Docs react component

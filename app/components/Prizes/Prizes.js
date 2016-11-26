@@ -1,10 +1,9 @@
-import 'components/Prizes/Prizes.scss';
 import React from 'react';
-import Button from 'components/Button/Button';
-import ContactForm from 'components/ContactForm/ContactForm';
-import PriceTable from 'components/PriceTable/PriceTable';
-import PriceTableCar from 'components/PriceTableCar/PriceTableCar';
-import sections from 'components/Prizes/Prizes.messages';
+import Button from '../Button/Button';
+import ContactForm from '../ContactForm/ContactForm';
+import PriceTable from '../PriceTable/PriceTable';
+import PriceTableCar from '../PriceTableCar/PriceTableCar';
+import sections from './Prizes.messages';
 
 /**
  * @desc triggers show modal method with appropriate params

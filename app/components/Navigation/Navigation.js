@@ -1,4 +1,3 @@
-import 'components/Navigation/Navigation.scss';
 import React from 'react';
 import {Link} from 'react-scroll';
 

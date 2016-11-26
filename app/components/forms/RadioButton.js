@@ -1,7 +1,7 @@
 import React from 'react';
-import InputGroup from 'components/forms/InputGroup';
-import Input from 'components/forms/Input';
-import Label from 'components/forms/Label';
+import InputGroup from './InputGroup';
+import Input from './Input';
+import Label from './Label';
 
 const RadioButton = ({id, value, isChecked, label, name, onClick}) => {
 	const inputClasses = {

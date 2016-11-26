@@ -1,8 +1,7 @@
-import 'components/Contact/Contact.scss';
 import React from 'react';
-import Button from 'components/Button/Button';
-import ContactForm from 'components/ContactForm/ContactForm';
-import * as messages from 'components/Contact/Contact.messages';
+import Button from '../Button/Button';
+import ContactForm from '../ContactForm/ContactForm';
+import * as messages from './Contact.messages';
 
 /**
  * @desc renders phone number

@@ -1,4 +1,3 @@
-import 'components/CloseIcon/CloseIcon.scss';
 import React from 'react';
 
 const CloseIcon = ({action}) => {
