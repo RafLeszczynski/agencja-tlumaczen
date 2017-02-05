@@ -27,6 +27,10 @@ $descriptionBottomMargin: 48px;
 	font-weight: normal;
 	text-transform: upperCase;
 
+	.prizes__section__description + & {
+		margin-top: 96px;
+	}
+
 	@media (min-width: $breakPointMedium) {
 		font-size: 18px
 	}
