@@ -49,5 +49,5 @@ export const docs = [
 	{
 		value: 'docs/umowa-polsko-wloska.pdf',
 		label: 'polsko - włoska'
-	},
+	}
 ];
