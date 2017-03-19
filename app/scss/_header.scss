@@ -91,12 +91,9 @@
 	}
 
 	.header--fixed.header--expanded & {
+		margin-left: 0;
 		position: static;
-		margin-left: 54px;
-
-		@media (min-width: $breakPointMedium) {
-			margin-left: 66px;
-		}
+		text-align: center;
 	}
 
 
@@ -163,6 +160,10 @@
 	display: block;
 	fill: $secondaryColor;
 	height: 24px;
-	margin: 60px auto 0;
+	margin: 35px auto 0;
 	width: 24px;
+
+	@media (min-width: $breakPointMedium) {
+		margin-top: 60px;
+	}
 }

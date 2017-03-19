@@ -206,7 +206,7 @@ export default class PriceTableCar extends React.Component {
 				<td>{item.languages}</td>
 				<td><span className='mobile-header'>Dowód rejestracyjny</span><span>{item.dr}</span></td>
 				<td><span className='mobile-header'>Umowa</span><span>{item.u}</span></td>
-				<td><span className='mobile-header'>Każdy kolejny document</span><span>{item.next}</span></td>
+				<td><span className='mobile-header'>Każdy kolejny dokument</span><span>{item.next}</span></td>
 			</tr>
 		);
 	}
@@ -244,7 +244,7 @@ export default class PriceTableCar extends React.Component {
 						<th>Język</th>
 						<th>Dowód rejestracyjny</th>
 						<th>Umowa</th>
-						<th>Każdy kolejny document</th>
+						<th>Każdy kolejny dokument</th>
 					</tr>
 					</thead>
 					<tbody>

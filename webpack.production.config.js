@@ -4,6 +4,7 @@ let path = require('path'),
 	webpack = require('webpack'),
 	HtmlWebpackPlugin = require('html-webpack-plugin'),
 	ExtractTextPlugin = require('extract-text-webpack-plugin'),
+	CopyWebpackPlugin = require('copy-webpack-plugin'),
 	StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
@@ -35,7 +36,13 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-		})
+		}),
+		new CopyWebpackPlugin([
+			{
+				from: 'docs',
+				to: path.join(__dirname, '/build/docs/')
+			}
+		])
 	],
 	module: {
 		loaders: [
