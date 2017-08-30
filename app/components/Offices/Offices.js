@@ -16,7 +16,7 @@ function renderOfficeItem(data, index) {
 				<span className='offices__location__working-days'>{data.days}</span>
 			</p>
 			<p>
-				<span>{data.street}</span>
+				<span dangerouslySetInnerHTML={{__html: data.street}} />
 				<span>{`${data.postalCode} ${data.city}`}</span>
 				<span>{data.details}</span>
 			</p>
