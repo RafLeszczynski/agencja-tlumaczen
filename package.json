@@ -38,7 +38,7 @@
   "dependencies": {
     "ajv": "^3.7.2",
     "autoprefixer-loader": "^3.2.0",
-    "babel-cli": "^6.26.0",
+    "babel-cli": "6.5.0",
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.0.0",
     "babel-jscs": "^2.0.5",
