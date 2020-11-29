@@ -247,7 +247,7 @@ const translationOptions = [
 const sliceIndex = 1;
 const sections = [
 	{
-		description: 'Oferujemy darmową wycenę Państwa dokumentów w 24 godziny. W odpowiedzi na wiadomość, otrzymają Państwo nie tylko dokładny koszt usługi tłumaczeniowej, ale także przybliżony termin realizacji.',
+		description: 'Oferujemy darmową wycenę Państwa dokumentów w 2 godziny. W odpowiedzi na wiadomość, otrzymają Państwo nie tylko dokładny koszt usługi tłumaczeniowej, ale także przybliżony termin realizacji.',
 		button: 'Zamów darmową wycenę',
 		modalTitle: 'Zamów darmową wycenę',
 		modalProps: {

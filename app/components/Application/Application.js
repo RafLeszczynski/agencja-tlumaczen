@@ -110,6 +110,11 @@ export default class Application extends React.Component {
 						hideMenu={this._hideMenu.bind(this)}
 					/>
 					{this._getSectionsData().map(Application._renderSection, this)}
+					<div className='section rodo'>
+						<p>Korzystanie z usług biura AGENCJI TŁUMACZEŃ jest równoznaczne z wyrażeniem zgody na przetwarzanie danych osobowych stosownie do przepisów Rozporządzenia Parlamentu Europejskiego i Rady(UE) 2016/679 z dnia 27 kwietnia 2016 r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych (ogólne rozporządzenie o ochronie danych, zwane także RODO).</p>
+						<p>Informujemy, że Administratorem Państwa danych osobowych jest Agencja Tłumaczeń Monika Suska-Perkowska, 1-go Maja 7a lok. 100, 09-402 Płock, tel. 693 348 565</p>
+						<p>Dane osobowe zostały przekazane dobrowolnie i będą przetwarzane wyłącznie  w celu wykonania usługi zleconej do biura Agencji Tłumaczeń. Bez zgody dane osobowe nie będą udostępniane innym odbiorcom danych. Prawo dostępu do swoich  danych oraz ich korygowania pod adresem mailowym: biuro@tlumaczenia-agencja.pl</p>
+					</div>
 				</div>
 				{this.state.isModalVisible && this._renderModal(
 					this.state.modalName, this.state.modalComponentName, this.state.modalComponentProps

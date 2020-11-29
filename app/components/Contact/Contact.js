@@ -5,15 +5,30 @@ import * as messages from './Contact.messages';
 
 /**
  * @desc renders phone number
- * @param {Number} number - phone number
+ * @param {Object} phoneObj - phone number
  * @param {Number} index - array index
  * @returns {XML} - jsx markup
  */
-function renderPhoneNumber(number, index) {
+function renderPhoneNumber(phoneObj, index) {
+	console.log(phoneObj);
 	return (
 		<span key={index} className='contact__phone'>
-			<a href={`tel:${number}`}>{number}</a>
+			{phoneObj.label}: <a href={`tel:${phoneObj.number}`}>{phoneObj.number}</a>
 		</span>
+	);
+}
+
+
+
+/**
+ * @desc renders email
+ * @param {String} email - phone number
+ * @param {Number} index - array index
+ * @returns {XML} - jsx markup
+ */
+function renderEmail(email, index) {
+	return (
+		<span key={index} className='contact__email'>{email}</span>
 	);
 }
 
@@ -31,8 +46,7 @@ const Contact = ({showModal}) => {
 	return (
 		<div className='contact'>
 			{messages.phones.map(renderPhoneNumber)}
-			<span className='contact__fax'>{messages.fax}</span>
-			<span className='contact__email'>{messages.email}</span>
+			{messages.emails.map(renderEmail)}
 			<Button name={messages.contactUs} action={showContactForm.bind(this, showModal, messages.contactUs)} />
 		</div>
 	);

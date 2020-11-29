@@ -38,6 +38,21 @@
 	}
 }
 
+.rodo {
+	margin: 0 auto;
+	text-align: center;
+	width: 290px;
+
+	@media (min-width: $breakPointMedium) {
+		padding-bottom: 72px;
+		width: 504px;
+	}
+
+	@media (min-width: $breakPointLarge) {
+		width: 664px
+	}
+}
+
 .section__header__title {
 	display: block;
 	font-size: 16px;

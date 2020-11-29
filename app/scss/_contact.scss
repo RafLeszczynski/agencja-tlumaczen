@@ -4,7 +4,8 @@
 	font-size: 16px;
 	text-align: center;
 
-	span {
+	.contact__email,
+	.contact__phone {
 		display: block;
 	}
 }
@@ -19,13 +20,23 @@
 	}
 }
 
-.contact__fax,
 .contact__email {
+	margin-bottom: 16px;
+	margin-top: 42px;
+}
+
+.contact__email:last-of-type {
 	margin-bottom: 42px;
+	margin-top: 0;
 }
 
 @media(min-width: $breakPointMedium) {
 	.contact__email {
+		margin-top: 72px;
+	}
+
+	.contact__email:last-of-type {
 		margin-bottom: 72px;
+		margin-top: 0;
 	}
 }

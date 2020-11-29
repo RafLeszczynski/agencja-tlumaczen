@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "5.6.0"
+    "node": "10.22.1"
   },
   "main": "server.js",
   "scripts": {

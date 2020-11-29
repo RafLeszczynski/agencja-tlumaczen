@@ -105,10 +105,7 @@ export default class Offer extends React.Component {
 						AKC-U</h3>
 					<h4>Sporządzenie deklaracji i pobranie potwierdzenia</h4>
 					<p className='akc-u'>Deklaracja wypełniana jest przez pracownika na miejscu lub w ciągu jednego dnia roboczego. Otrzymują Państwo sporządzoną deklarację i samodzielnie opłacają akcyzę. </p>
-					<p className='akc-u'>Koszt usługi: 25PLN</p>
-					<h4>Sporządzenie deklaracji wraz ze złożeniem UPL (upoważnienia),<br/> opłaceniem i pobraniem potwierdzenia</h4>
-					<p className='akc-u'>Usługa bardziej kompleksowa. Przy pierwszej deklaracji składanej dla Państwa, czas realizacji to ok. 7 dni ze względu na konieczność zarejestrowania UPL w US. Przy kolejnych deklaracjach dla tego samego klienta, czas oczekiwania skraca się do jednego dnia roboczego (przy złożeniu dokumentów do godziny 10:00).</p>
-					<p className='akc-u'>Koszt usługi: od 60PLN + zwrot kosztów akcyzy pokrytych uprzednio przez biuro</p>
+					<p className='akc-u'>Koszt usługi: 30PLN</p>
 				</article>
 			</div>
 		);
