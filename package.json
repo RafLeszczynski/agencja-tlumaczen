@@ -36,7 +36,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "ajv": "^3.7.2",
+    "ajv": "^6.12.3",
     "autoprefixer-loader": "^3.2.0",
     "babel-cli": "6.5.0",
     "babel-core": "^6.5.2",
